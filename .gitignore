@@ -1,0 +1,13 @@
+*.py[cod]
+.hgignore~
+.gitignore~
+.hg/
+
+example/db/
+example/tmp/
+build/
+builddocs/
+builddocs.zip
+dist/
+src/transliterate.egg-info
+
