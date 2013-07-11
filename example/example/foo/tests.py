@@ -2,8 +2,8 @@
 
 from transliterate import autodiscover
 from transliterate.utils import get_available_languages, translit
-from transliterate.decorators import transliterate_function
 
+# Autodiscover available language packs
 autodiscover()
 
 print '\nOriginal text\n---------------------------------------'
@@ -27,14 +27,26 @@ reversed_text = u'Лорем ипсум долор сит амет'
 print '\nReversed transliteration from Russian\n---------------------------------------'
 print translit(reversed_text, 'ru', reversed=True)
 
-print '\nTesting the decorator #1\n---------------------------------------'
+print '\nTesting the function decorator\n---------------------------------------'
+from transliterate.decorators import transliterate_function
+
 @transliterate_function(language_code='hy')
 def decorator_test_armenian(text):
     return text
 
 print decorator_test_armenian(u"Lorem ipsum dolor sit amet")
 
-print '\nTesting the decorator #2\n---------------------------------------'
+print '\nTesting the method decorator\n---------------------------------------'
+from transliterate.decorators import transliterate_method
+
+class DecoratorTest(object):
+    @transliterate_method(language_code='ru')
+    def decorator_test_russian(self, text):
+        return text
+
+print DecoratorTest().decorator_test_russian(u"Lorem ipsum dolor sit amet")
+
+print '\nTesting the decorator in reversed mode\n---------------------------------------'
 @transliterate_function(language_code='hy', reversed=True)
 def decorator_test_armenian_reversed(text):
     return text
@@ -62,3 +74,15 @@ print get_available_languages()
 
 print '\nTransliteration to Example\n---------------------------------------'
 print translit(text, 'example')
+
+print '\nTransliterated lorem ipsum generator \n---------------------------------------'
+from transliterate.contrib.apps.translipsum import TranslipsumGenerator
+g_am = TranslipsumGenerator(language_code='hy')
+
+print 'Generating paragraphs'
+print g_am.generate_paragraph()
+
+g_ru = TranslipsumGenerator(language_code='ru')
+
+print '\nGenerating sentenses'
+print g_ru.generate_sentence()

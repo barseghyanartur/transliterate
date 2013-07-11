@@ -6,7 +6,7 @@ try:
 except:
     readme = ''
 
-version = '0.1'
+version = '0.2'
 
 setup(
     name = 'transliterate',
@@ -25,4 +25,5 @@ setup(
     package_dir={'':'src'},
     packages=find_packages(where='./src'),
     license='GPL 2.0/LGPL 2.1',
+    install_requires=['lorem-ipsum-generator==0.3']
 )

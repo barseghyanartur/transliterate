@@ -11,6 +11,8 @@ Comes with language packs for the following languages (listed in alphabetical or
 - Armenian
 - Russian
 
+There's also a simple lorem ipsum generator included, which allows lorem ipsum generation in the language chosen.
+
 Installation
 ==================================
 Install with latest stable version from pypi:
@@ -29,10 +31,16 @@ That's all. See the `Usage and examples` section for more.
 
 Usage and examples
 ==================================
+Simple usage
+----------------------------------
 Required imports
 
 >>> from transliterate import autodiscover
 >>> from transliterate.utils import translit, get_available_languages
+
+Autodiscover installed available language packs
+
+>>> autodiscover()
 
 Original text
 
@@ -68,6 +76,7 @@ Lorеm ipsum dolor sit amеt
 Testing the decorator
 
 >>> from transliterate.decorators import transliterate_function
+>>>
 >>> @transliterate_function(language_code='hy')
 >>> def decorator_test(text):
 >>>     return text
@@ -76,7 +85,7 @@ Testing the decorator
 Լօրեմ իպսում դօլօր սիտ ամետ
 
 Registering a custom language pack
-
+----------------------------------
 >>> from transliterate.base import TranslitLanguagePack, registry
 >>>
 >>> class ExampleLanguagePack(TranslitLanguagePack):
@@ -94,6 +103,25 @@ Registering a custom language pack
 >>>
 >>> print translit(text, 'example')
 Lor5m 9psum 4olor s9t 1m5t
+
+Using the lorem ipsum generator
+----------------------------------
+Required imports
+
+>>> from transliterate.contrib.apps.translipsum import TranslipsumGenerator
+
+Generating paragraphs
+
+>>> g_am = TranslipsumGenerator(language_code='hy')
+>>> print g_am.generate_paragraph()
+Մագնա տրիստիքուե ֆաուցիբուս ֆամես նետուս նետուս օրցի մաուրիս, սուսցիպիտ. Դապիբուս րիսուս սեդ ադիպիսցինգ դիցտում.
+Ֆերմենտում ուրնա նատօքուե ատ. Uլտրիցես եգետ, տացիտի. Լիտօրա ցլասս ցօնուբիա պօսուերե մալեսուադա ին իպսում իդ պեր վե.
+
+Generating sentense
+
+>>> g_ru = TranslipsumGenerator(language_code='ru')
+>>> print g_ru.generate_sentence()
+Рисус cонсэcтэтуэр, фусcэ qуис лаорээт ат эрос пэдэ фэлис сэнэcтус, магна.
 
 Missing a language pack?
 ==================================
