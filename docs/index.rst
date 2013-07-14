@@ -40,7 +40,7 @@ Simple usage
 Required imports
 
 >>> from transliterate import autodiscover
->>> from transliterate.utils import translit, get_available_languages
+>>> from transliterate.utils import translit, get_available_language_codes
 
 Autodiscover registered language packs
 
@@ -62,7 +62,7 @@ Transliteration to Russian
 
 List of available (registered) languages
 
->>> print get_available_languages()
+>>> print get_available_language_codes()
 ['ru', 'hy']
 
 Reversed transliteration from Armenian
@@ -100,7 +100,7 @@ Registering a custom language pack
 >>>
 >>> registry.register(ExampleLanguagePack)
 >>>
->>> print get_available_languages()
+>>> print get_available_language_codes()
 ['ru', 'hy', 'example']
 >>>
 >>> print translit(text, 'example')
