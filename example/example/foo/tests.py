@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from transliterate import autodiscover
-from transliterate.utils import get_available_languages, translit
+from transliterate.utils import get_available_language_codes, translit
 
 # Autodiscover available language packs
 autodiscover()
@@ -17,15 +17,13 @@ print '\nTransliteration to Russian\n---------------------------------------'
 print translit(text, 'ru')
 
 print '\nList of available (registered) languages\n---------------------------------------'
-print get_available_languages()
+print get_available_language_codes()
 
-reversed_text = u'Լօրեմ իպսում դoլoր սիտ ամետ'
 print '\nReversed transliteration from Armenian\n---------------------------------------'
-print translit(reversed_text, 'hy', reversed=True)
+print translit(u'Լօրեմ իպսում դoլoր սիտ ամետ', 'hy', reversed=True)
 
-reversed_text = u'Лорем ипсум долор сит амет'
 print '\nReversed transliteration from Russian\n---------------------------------------'
-print translit(reversed_text, 'ru', reversed=True)
+print translit(u'Лорем ипсум долор сит амет', 'ru', reversed=True)
 
 print '\nTesting the function decorator\n---------------------------------------'
 from transliterate.decorators import transliterate_function
@@ -70,7 +68,7 @@ class ExampleLanguagePack(TranslitLanguagePack):
 registry.register(ExampleLanguagePack)
 
 print '\nList of available (registered) languages after registering a new language pack \n---------------------------------------'
-print get_available_languages()
+print get_available_language_codes()
 
 print '\nTransliteration to Example\n---------------------------------------'
 print translit(text, 'example')
@@ -86,3 +84,19 @@ g_ru = TranslipsumGenerator(language_code='ru')
 
 print '\nGenerating sentenses'
 print g_ru.generate_sentence()
+
+print '\nLanguage detection\n---------------------------------------'
+from transliterate.utils import detect_language
+
+print detect_language(u'Լօրեմ իպսում դօլօր սիտ ամետ')
+
+print detect_language(u'Лорем ипсум долор сит амет')
+
+print '\nSlugify\n---------------------------------------'
+from transliterate.utils import slugify
+
+print slugify(u'Լօրեմ իպսում դօլօր սիտ ամետ')
+
+print slugify(u'Лорем ипсум долор сит амет')
+
+print slugify(u'Lorem ipsum dolor sit amet')

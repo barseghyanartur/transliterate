@@ -11,7 +11,11 @@ Comes with language packs for the following languages (listed in alphabetical or
 - Armenian
 - Russian
 
-There's also a simple lorem ipsum generator included, which allows lorem ipsum generation in the language chosen.
+There are also a number of useful tools included, such as:
+
+- Simple lorem ipsum generator, which allows lorem ipsum generation in the language chosen.
+- Language detection for the text (if appropriate language pack is available).
+- Slugify function for non-latin texts.
 
 Installation
 ==================================
@@ -38,7 +42,7 @@ Required imports
 >>> from transliterate import autodiscover
 >>> from transliterate.utils import translit, get_available_languages
 
-Autodiscover installed available language packs
+Autodiscover registered language packs
 
 >>> autodiscover()
 
@@ -63,14 +67,12 @@ List of available (registered) languages
 
 Reversed transliteration from Armenian
 
->>> text = "Լօրեմ իպսում դօլօր սիտ ամետ"
->>> print translit(text, 'hy', reversed=True)
+>>> print translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", 'hy', reversed=True)
 Lorem ipsum dolor sit amet
 
 Reversed transliteration from Russian
 
->>> text = "Лорем ипсум долор сит амет"
->>> print translit(text, 'ru', reversed=True)
+>>> print translit(u"Лорем ипсум долор сит амет", 'ru', reversed=True)
 Lorеm ipsum dolor sit amеt
 
 Testing the decorator
@@ -123,6 +125,38 @@ Generating sentense
 >>> print g_ru.generate_sentence()
 Рисус cонсэcтэтуэр, фусcэ qуис лаорээт ат эрос пэдэ фэлис сэнэcтус, магна.
 
+Language detection
+----------------------------------
+Required imports
+
+>>> from transliterate.utils import detect_language
+
+Detect Armenian text
+
+>>> detect_language(u'Լօրեմ իպսում դօլօր սիտ ամետ')
+hy
+
+Detect Russian text
+
+>>> detect_language(u'Лорем ипсум долор сит амет')
+ru
+
+Slugify
+----------------------------------
+Required imports
+
+>>> from transliterate.utils import slugify
+
+Slugify Armenian text
+
+>>> slugify(u'Լօրեմ իպսում դօլօր սիտ ամետ')
+lorem-ipsum-dolor-sit-amet
+
+Slugify Russian text
+
+>>> slugify(u'Лорем ипсум долор сит амет')
+lorm-ipsum-dolor-sit-amt
+
 Missing a language pack?
 ==================================
 Missing a language pack for your own language? Contribute to the project by making one and it will appear in a new
@@ -131,13 +165,6 @@ version (which will be released very quickly).
 License
 ==================================
 GPL 2.0/LGPL 2.1
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
 Support
 ==================================

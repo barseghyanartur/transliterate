@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 __all__ = ('TranslitLanguagePack', 'registry')
 
+import unicodedata
 
 class TranslitLanguagePack(object):
     """
@@ -7,6 +10,8 @@ class TranslitLanguagePack(object):
 
     ``language_code``: Language code (obligatory). Example value: 'hy', 'ru'.
     ``language_name``: Language name (obligatory). Example value: 'Armenian', 'Russian'.
+    ``character_ranges``: Character ranges that are specific to the language. When making a pack, take a look at
+        (http://en.wikipedia.org/wiki/List_of_Unicode_characters) for the ranges.
     ``mapping``: Mapping  (obligatory). A tuple, consisting of two strings. Example value: (u'abc', u'աբց')
     ՝՝pre_processor_mapping՝՝: Pre processor mapping (optional). A dictionary mapping for letters that can't be
         represented by a single latin letter.
@@ -15,6 +20,7 @@ class TranslitLanguagePack(object):
 >>>    class ArmenianLanguagePack(TranslitLanguagePack):
 >>>    language_code = "hy"
 >>>    language_name = "Armenian"
+>>>    character_ranges = ((0x0530, 0x058F), (0xFB10, 0xFB1F))
 >>>    mapping = (
 >>>        u"abgdezilxkhmjnprsvtrcq&ofABGDEZILXKHMJNPRSVTRCQOF",
 >>>        u"աբգդեզիլխկհմյնպռսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՌՍՎՏՐՑՔՕՖ",
@@ -38,6 +44,7 @@ class TranslitLanguagePack(object):
     """
     language_code = None
     language_name = None
+    character_ranges = None
     mapping = None
     pre_processor_mapping = None
 
@@ -86,6 +93,22 @@ class TranslitLanguagePack(object):
                 value = value.replace(rule, self.pre_processor_mapping[rule])
         return value.translate(self.translation_table)
 
+    @classmethod
+    def contains(cls, character):
+        """
+        Checks if given character belongs to the language pack.
+
+        :return bool:
+        """
+        if cls.character_ranges:
+            char_num = unicodedata.normalize('NFC', character)
+            char_num = hex(ord(char_num))
+            for character_range in cls.character_ranges:
+                range_lower = hex(character_range[0])
+                range_upper = hex(character_range[1])
+                if char_num >= range_lower and char_num <= range_upper:
+                    return True
+        return False
 
 class TranslitRegistry(object):
     """

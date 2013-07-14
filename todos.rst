@@ -4,10 +4,10 @@ Based on MoSCoW principle
 
 Must haves
 --------------------------
+- Better docs.
 
 Should haves
 --------------------------
-- The `Lorem ipsum` contrib app with a working demo.
 
 Could haves
 --------------------------

@@ -8,6 +8,7 @@ class ArmenianLanguagePack(TranslitLanguagePack):
     """
     language_code = "hy"
     language_name = "Armenian"
+    character_ranges = ((0x0530, 0x058F), (0xFB10, 0xFB1F))
     mapping = (
         u"abgdezilxkhmjnprsvtrcq&ofABGDEZILXKHMJNPRSVTRCQOF",
         u"աբգդեզիլխկհմյնպռսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՌՍՎՏՐՑՔՕՖ",

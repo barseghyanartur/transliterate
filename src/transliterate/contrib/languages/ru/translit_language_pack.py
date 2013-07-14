@@ -8,6 +8,7 @@ class RussianLanguagePack(TranslitLanguagePack):
     """
     language_code = "ru"
     language_name = "Russian"
+    character_ranges = ((0x0400, 0x04FF), (0x0500, 0x052F))
     mapping = (
         u"abvgdeezijklmnoprstufh'y'eABVGDEEZIJKLMNOPRSTUFH'Y'E",
         u"абвгдеёзийклмнопрстуфхъыьэАБВГДЕЁЗИЙКЛМНОПРСТУФХЪЫЬЭ",
