@@ -6,7 +6,7 @@ try:
 except:
     readme = ''
 
-version = '0.3'
+version = '0.4'
 
 setup(
     name = 'transliterate',

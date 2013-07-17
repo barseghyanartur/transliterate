@@ -2,7 +2,11 @@ __all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
 
 import unicodedata
 import re
-from collections import Counter
+
+try:
+    from collections import Counter
+except ImportError:
+    from transliterate.backports.collections import Counter
 
 from transliterate import autodiscover
 from transliterate.base import registry
