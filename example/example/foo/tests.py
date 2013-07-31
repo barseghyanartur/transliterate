@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from transliterate import autodiscover
+from transliterate.conf import set_setting
 from transliterate.utils import get_available_language_codes, translit
+
+set_setting('DEBUG', True)
 
 # Autodiscover available language packs
 autodiscover()
@@ -100,3 +103,16 @@ print slugify(u'Լօրեմ իպսում դօլօր սիտ ամետ')
 print slugify(u'Лорем ипсум долор сит амет')
 
 print slugify(u'Lorem ipsum dolor sit amet')
+
+print '\nGeneral testing\n---------------------------------------'
+from transliterate.utils import get_available_language_packs
+
+for language_pack in get_available_language_packs():
+    print 'Testing language pack %s %s' % (language_pack.language_code, language_pack.language_name)
+    print 'Reversed test:'
+    for letter in language_pack.mapping[1]:
+        print letter, ' --> ', translit(letter, language_pack.language_code, reversed=True)
+
+    print 'Normal test:'
+    for letter in language_pack.mapping[0]:
+        print letter, ' --> ', translit(letter, language_pack.language_code)

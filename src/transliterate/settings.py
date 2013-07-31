@@ -1,4 +1,14 @@
-LANGUAGES_DIR = ('contrib', 'languages')
-CONTRIB_DIR =  ('contrib', 'apps')
-LANGUAGE_PACK_MODULE_NAME = 'translit_language_pack'
-LANGUAGE_DETECTION_MAX_NUM_KEYWORDS = 5
+__title__ = 'transliterate.settings'
+__version__ = '0.5'
+__build__ = 0x000005
+__author__ = 'Artur Barseghyan'
+__all__ = ('LANGUAGES_DIR', 'CONTRIB_DIR', 'LANGUAGE_PACK_MODULE_NAME', 'LANGUAGE_DETECTION_MAX_NUM_KEYWORDS', 'DEBUG')
+
+from transliterate.conf import get_setting
+
+LANGUAGES_DIR = get_setting('LANGUAGES_DIR')
+CONTRIB_DIR =  get_setting('CONTRIB_DIR')
+LANGUAGE_PACK_MODULE_NAME = get_setting('LANGUAGE_PACK_MODULE_NAME')
+LANGUAGE_DETECTION_MAX_NUM_KEYWORDS = get_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS')
+
+DEBUG = get_setting('DEBUG')

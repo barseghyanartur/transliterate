@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+__title__ = 'transliterate.contrib.languages.hy.translit_language_pack'
+__version__ = '0.5'
+__build__ = 0x000005
+__author__ = 'Artur Barseghyan'
+__all__ = ('ArmenianLanguagePack',)
+
 from transliterate.base import TranslitLanguagePack, registry
 
 class ArmenianLanguagePack(TranslitLanguagePack):

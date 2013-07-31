@@ -1,8 +1,17 @@
+__title__ = 'transliterate.contrib.apps.translipsum.__init__'
+__version__ = '0.5'
+__build__ = 0x000005
+__author__ = 'Artur Barseghyan'
+__all__ = ('TranslipsumGenerator',)
+
 from lipsum import Generator
 
 from transliterate.utils import translit
 
 class TranslipsumGenerator(Generator):
+    """
+    Lorem ipsum generator.
+    """
     def __init__(self, language_code, reversed=False, *args, **kwargs):
         self._language_code = language_code
         self._reversed = reversed

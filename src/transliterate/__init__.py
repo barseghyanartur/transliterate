@@ -1,3 +1,9 @@
+__title__ = 'transliterate.__init__'
+__version__ = '0.5'
+__build__ = 0x000005
+__author__ = 'Artur Barseghyan'
+__all__ = ('autodiscover',)
+
 import os
 
 try:
@@ -6,7 +12,7 @@ except ImportError:
     import_module = __import__
 
 from transliterate.helpers import PROJECT_DIR
-from transliterate.settings import LANGUAGES_DIR, LANGUAGE_PACK_MODULE_NAME
+from transliterate.settings import LANGUAGES_DIR, LANGUAGE_PACK_MODULE_NAME, DEBUG
 
 def autodiscover():
     """
@@ -21,8 +27,8 @@ def autodiscover():
                     "transliterate.%s.%s.%s" % ('.'.join(LANGUAGES_DIR), app_path, LANGUAGE_PACK_MODULE_NAME)
                     )
             except ImportError, e:
-                pass
+                if DEBUG: print e
             except Exception, e:
-                pass
+                if DEBUG: print e
         else:
             pass
