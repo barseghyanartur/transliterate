@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.hy.translit_language_pack'
-__version__ = '0.5'
-__build__ = 0x000005
+__version__ = '0.6'
+__build__ = 0x000006
 __author__ = 'Artur Barseghyan'
 __all__ = ('RussianLanguagePack',)
 
@@ -16,8 +16,12 @@ class RussianLanguagePack(TranslitLanguagePack):
     language_name = "Russian"
     character_ranges = ((0x0400, 0x04FF), (0x0500, 0x052F))
     mapping = (
-        u"abvgdeezijklmnoprstufh'y'eABVGDEEZIJKLMNOPRSTUFH'Y'E",
-        u"абвгдеёзийклмнопрстуфхъыьэАБВГДЕЁЗИЙКЛМНОПРСТУФХЪЫЬЭ",
+        u"abvgdezijklmnoprstufh'y'ABVGDEZIJKLMNOPRSTUFH'Y'",
+        u"абвгдезийклмнопрстуфхъыьАБВГДЕЗИЙКЛМНОПРСТУФХЪЫЬ",
+    )
+    reversed_specific_mapping = (
+        u"ёэЁЭ",
+        u"eeEE"
     )
     pre_processor_mapping = {
         u"zh": u"ж",

@@ -1,6 +1,6 @@
 __title__ = 'transliterate.__init__'
-__version__ = '0.5'
-__build__ = 0x000005
+__version__ = '0.6'
+__build__ = 0x000006
 __author__ = 'Artur Barseghyan'
 __all__ = ('autodiscover',)
 
@@ -12,12 +12,16 @@ except ImportError:
     import_module = __import__
 
 from transliterate.helpers import PROJECT_DIR
-from transliterate.settings import LANGUAGES_DIR, LANGUAGE_PACK_MODULE_NAME, DEBUG
+from transliterate.conf import get_setting
 
 def autodiscover():
     """
     Autodiscovers the language packs in contrib/apps.
     """
+    LANGUAGES_DIR = get_setting('LANGUAGES_DIR')
+    LANGUAGE_PACK_MODULE_NAME = get_setting('LANGUAGE_PACK_MODULE_NAME')
+    DEBUG = get_setting('DEBUG')
+
     for app_path in os.listdir(PROJECT_DIR(LANGUAGES_DIR)):
         full_app_path = list(LANGUAGES_DIR)
         full_app_path.append(app_path)

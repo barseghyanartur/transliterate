@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.hy.translit_language_pack'
-__version__ = '0.5'
-__build__ = 0x000005
+__version__ = '0.6'
+__build__ = 0x000006
 __author__ = 'Artur Barseghyan'
 __all__ = ('ArmenianLanguagePack',)
 
@@ -16,8 +16,12 @@ class ArmenianLanguagePack(TranslitLanguagePack):
     language_name = "Armenian"
     character_ranges = ((0x0530, 0x058F), (0xFB10, 0xFB1F))
     mapping = (
-        u"abgdezilxkhmjnprsvtrcq&ofABGDEZILXKHMJNPRSVTRCQOF",
-        u"աբգդեզիլխկհմյնպռսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՌՍՎՏՐՑՔՕՖ",
+        u"abgdezilxkhmjnpsvtrcq&ofABGDEZILXKHMJNPSVTRCQOF",
+        u"աբգդեզիլխկհմյնպսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՍՎՏՐՑՔՕՖ",
+    )
+    reversed_specific_mapping = (
+        u"ռՌ",
+        u"rR"
     )
     pre_processor_mapping = {
         u"e'": u"է",

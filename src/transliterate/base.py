@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '0.5'
-__build__ = 0x000005
+__version__ = '0.6'
+__build__ = 0x000006
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslitLanguagePack', 'registry')
 
@@ -26,8 +26,12 @@ class TranslitLanguagePack(object):
 >>>    language_name = "Armenian"
 >>>    character_ranges = ((0x0530, 0x058F), (0xFB10, 0xFB1F))
 >>>    mapping = (
->>>        u"abgdezilxkhmjnprsvtrcq&ofABGDEZILXKHMJNPRSVTRCQOF",
->>>        u"աբգդեզիլխկհմյնպռսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՌՍՎՏՐՑՔՕՖ",
+>>>        u"abgdezilxkhmjnpsvtrcq&ofABGDEZILXKHMJNPSVTRCQOF",
+>>>        u"աբգդեզիլխկհմյնպսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՍՎՏՐՑՔՕՖ",
+>>>    )
+>>>    reversed_specific_mapping = (
+>>>        u"ռՌ",
+>>>        u"rR"
 >>>    )
 >>>    pre_processor_mapping = {
 >>>        u"e'": u"է",
@@ -50,6 +54,7 @@ class TranslitLanguagePack(object):
     language_name = None
     character_ranges = None
     mapping = None
+    reversed_specific_mapping = None
     pre_processor_mapping = None
 
     def __init__(self):
@@ -77,6 +82,11 @@ class TranslitLanguagePack(object):
         else:
             self.reversed_pre_processor_mapping = None
 
+        if self.reversed_specific_mapping:
+            self.reversed_specific_translation_table = {}
+            [self.reversed_specific_translation_table.update({ord(a): ord(b)}) \
+             for a, b in zip(*self.reversed_specific_mapping)]
+
     def translit(self, value, reversed=False):
         """
         Transliterates the given value according to the rules set in the transliteration pack.
@@ -87,9 +97,15 @@ class TranslitLanguagePack(object):
         """
         value = unicode(value)
         if reversed:
+            # Handling pre-processor mappings.
             if self.reversed_pre_processor_mapping:
                 for rule in self.reversed_pre_processor_mapping.keys():
                     value = value.replace(rule, self.reversed_pre_processor_mapping[rule])
+
+            # Handling reversed specific translations (one side only).
+            if self.reversed_specific_mapping:
+                value = value.translate(self.reversed_specific_translation_table)
+
             return value.translate(self.reversed_translation_table)
 
         if self.pre_processor_mapping:

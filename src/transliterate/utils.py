@@ -1,6 +1,6 @@
 __title__ = 'transliterate.utils'
-__version__ = '0.5'
-__build__ = 0x000005
+__version__ = '0.6'
+__build__ = 0x000006
 __author__ = 'Artur Barseghyan'
 __all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
 
@@ -14,7 +14,7 @@ except ImportError:
 
 from transliterate import autodiscover
 from transliterate.base import registry
-from transliterate.settings import LANGUAGE_DETECTION_MAX_NUM_KEYWORDS
+from transliterate.conf import get_setting
 
 def ensure_autodiscover():
     """
@@ -62,7 +62,7 @@ def get_available_language_packs():
 # Strips numbers from unicode string.
 strip_numbers = lambda text: filter(lambda u: not u.isdigit(), text)
 
-def extract_most_common_words(text, num_words=LANGUAGE_DETECTION_MAX_NUM_KEYWORDS):
+def extract_most_common_words(text, num_words=None):
     """
     Extracts most common words.
 
@@ -70,6 +70,9 @@ def extract_most_common_words(text, num_words=LANGUAGE_DETECTION_MAX_NUM_KEYWORD
     :param int num_words:
     :return list:
     """
+    if num_words is None:
+        num_words = get_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS')
+
     text = strip_numbers(text)
     counter = Counter()
     for word in text.split(' '):
@@ -77,7 +80,7 @@ def extract_most_common_words(text, num_words=LANGUAGE_DETECTION_MAX_NUM_KEYWORD
             counter[word] += 1
     return counter.most_common(num_words)
 
-def detect_language(text, num_words=LANGUAGE_DETECTION_MAX_NUM_KEYWORDS):
+def detect_language(text, num_words=None):
     """
     Detects the language from the value given based on ranges defined in active language packs.
 
@@ -86,6 +89,9 @@ def detect_language(text, num_words=LANGUAGE_DETECTION_MAX_NUM_KEYWORDS):
     :return str: Language code.
     """
     ensure_autodiscover()
+
+    if num_words is None:
+        num_words = get_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS')
 
     most_common_words = extract_most_common_words(text, num_words=num_words)
 

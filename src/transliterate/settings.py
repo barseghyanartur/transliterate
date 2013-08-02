@@ -1,6 +1,6 @@
 __title__ = 'transliterate.settings'
-__version__ = '0.5'
-__build__ = 0x000005
+__version__ = '0.6'
+__build__ = 0x000006
 __author__ = 'Artur Barseghyan'
 __all__ = ('LANGUAGES_DIR', 'CONTRIB_DIR', 'LANGUAGE_PACK_MODULE_NAME', 'LANGUAGE_DETECTION_MAX_NUM_KEYWORDS', 'DEBUG')
 
