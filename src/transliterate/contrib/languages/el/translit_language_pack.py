@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.el.translit_language_pack'
-__version__ = '0.8'
-__build__ = 0x000008
+__version__ = '0.9'
+__build__ = 0x000009
 __author__ = 'Artur Barseghyan'
 __all__ = ('GreekLanguagePack',)
 
@@ -14,7 +14,7 @@ class GreekLanguagePack(TranslitLanguagePack):
     """
     language_code = "el"
     language_name = "Greek"
-    character_ranges = ((0x0400, 0x04FF), (0x0500, 0x052F))
+    character_ranges = ((0x0370, 0x03FF), (0x1F00, 0x1FFF))
     mapping = (
         u"abgdezhiklmnxoprstyfwuABGDEZHIKLMNXOPRSTYFWU",
         u"αβγδεζηικλμνξοπρστυφωθΑΒΓΔΕΖΗΙΚΛΜΝΞΟΠΡΣΤΥΦΩΘ",

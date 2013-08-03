@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '0.8'
-__build__ = 0x000008
+__version__ = '0.9'
+__build__ = 0x000009
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
@@ -11,7 +11,7 @@ import unittest
 #import simple_timer
 
 from transliterate import autodiscover
-from transliterate.conf import set_setting, get_setting
+from transliterate.conf import set_setting, get_setting, reset_to_defaults_settings
 from transliterate import defaults
 from transliterate.utils import get_available_language_codes, translit, detect_language, slugify
 from transliterate.utils import get_available_language_packs
@@ -51,11 +51,12 @@ class TransliterateTest(unittest.TestCase):
     Tests of ``transliterate.utils.translit``.
     """
     def setUp(self):
-        self.latin_text = "Lorem ipsum dolor sit amet"
+        self.latin_text = u"Lorem ipsum dolor sit amet"
         self.armenian_text = u'Լօրեմ իպսում դօլօր սիտ ամետ'
         self.cyrillic_text = u'Лорем ипсум долор сит амет'
         self.georgian_text = u'Ⴊორემ იფსუმ დოლორ სით ამეთ'
         self.greek_text = u'Λορεμ ιψθμ δολορ σιτ αμετ'
+        #reset_to_defaults_settings()
 
     @track_time
     def test_01_get_available_language_codes(self):
@@ -79,7 +80,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_02_translit_latin_to_georgian(self):
+    def test_03_translit_latin_to_georgian(self):
         """
         Test transliteration from Latin to Georgian.
         """
@@ -88,7 +89,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_02_translit_latin_to_greek(self):
+    def test_04_translit_latin_to_greek(self):
         """
         Test transliteration from Latin to Greek.
         """
@@ -97,7 +98,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_03_translit_latin_to_cyrillic(self):
+    def test_05_translit_latin_to_cyrillic(self):
         """
         Test transliteration from Latin to Cyrillic.
         """
@@ -106,7 +107,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_04_translit_armenian_to_latin(self):
+    def test_06_translit_armenian_to_latin(self):
         """
         Test transliteration from Armenian to Latin.
         """
@@ -115,7 +116,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_04_translit_georgian_to_latin(self):
+    def test_07_translit_georgian_to_latin(self):
         """
         Test transliteration from Georgian to Latin.
         """
@@ -124,7 +125,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_04_translit_greek_to_latin(self):
+    def test_08_translit_greek_to_latin(self):
         """
         Test transliteration from Greek to Latin.
         """
@@ -133,7 +134,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_05_translit_cyrillic_to_latin(self):
+    def test_09_translit_cyrillic_to_latin(self):
         """
         Test transliteration from Cyrillic to Latun.
         """
@@ -142,7 +143,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_06_function_decorator(self):
+    def test_10_function_decorator(self):
         """
         Testing the function decorator from Latin to Armenian.
         """
@@ -154,7 +155,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.armenian_text)
 
     @track_time
-    def test_07_method_decorator(self):
+    def test_11_method_decorator(self):
         """
         Testing the method decorator from Latin to Cyrillic.
         """
@@ -168,7 +169,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_08_function_decorator(self):
+    def test_12_function_decorator(self):
         """
         Testing the function decorator (reversed) from Armenian to Latin.
         """
@@ -181,7 +182,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_09_register_custom_language_pack(self):
+    def test_13_register_custom_language_pack(self):
         """
         Testing registering of a custom language pack.
         """
@@ -204,7 +205,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_10_translipsum_generator_armenian(self):
+    def test_14_translipsum_generator_armenian(self):
         """
         Testing the translipsum generator. Generating lorem ipsum paragraphs in Armenian.
         """
@@ -214,7 +215,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_11_translipsum_generator_georgian(self):
+    def test_15_translipsum_generator_georgian(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Georgian.
         """
@@ -224,7 +225,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_11_translipsum_generator_greek(self):
+    def test_16_translipsum_generator_greek(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Greek.
         """
@@ -234,7 +235,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_11_translipsum_generator_cyrillic(self):
+    def test_17_translipsum_generator_cyrillic(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Cyrillic.
         """
@@ -244,7 +245,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_12_language_detection_armenian(self):
+    def test_18_language_detection_armenian(self):
         """
         Testing language detection. Detecting Amenian.
         """
@@ -253,7 +254,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_12_language_detection_georgian(self):
+    def test_19_language_detection_georgian(self):
         """
         Testing language detection. Detecting Georgian.
         """
@@ -262,16 +263,18 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def __test_12_language_detection_greek(self):
+    def test_20_language_detection_greek(self):
         """
         Testing language detection. Detecting Greek.
         """
+        #set_setting('DEBUG', True)
         res = detect_language(self.greek_text)
+        #reset_to_defaults_settings()
         self.assertEqual(res, 'el')
         return res
 
     @track_time
-    def test_13_language_detection_cyrillic(self):
+    def test_21_language_detection_cyrillic(self):
         """
         Testing language detection. Detecting Russian (Cyrillic).
         """
@@ -280,7 +283,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_14_slugify_armenian(self):
+    def test_22_slugify_armenian(self):
         """
         Testing slugify from Armenian.
         """
@@ -289,7 +292,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_14_slugify_georgian(self):
+    def test_23_slugify_georgian(self):
         """
         Testing slugify from Georgian.
         """
@@ -298,7 +301,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def __test_14_slugify_greek(self):
+    def test_24_slugify_greek(self):
         """
         Testing slugify from Greek.
         """
@@ -307,7 +310,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_15_slugify_cyrillic(self):
+    def test_25_slugify_cyrillic(self):
         """
         Testing slugify from Cyrillic.
         """
@@ -316,7 +319,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_16_override_settings(self):
+    def test_26_override_settings(self):
         """
         Testing settings override.
         """
@@ -332,7 +335,7 @@ class TransliterateTest(unittest.TestCase):
         return override_settings()
 
     @track_time
-    def __test_17_mappings(self):
+    def __test_27_mappings(self):
         """
         Testing mappings.
         """

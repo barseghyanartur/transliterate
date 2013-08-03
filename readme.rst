@@ -11,7 +11,7 @@ Comes with language packs for the following languages (listed in alphabetical or
 
 - Armenian
 - Georgian (beta)
-- Greek (alpha)
+- Greek (beta)
 - Russian
 
 There are also a number of useful tools included, such as:
@@ -58,6 +58,16 @@ Transliteration to Armenian
 >>> print translit(text, 'hy')
 Լօրեմ իպսում դօլօր սիտ ամետ
 
+Transliteration to Georgian
+
+>>> print translit(text, 'ka')
+Ⴊორემ იფსუმ დოლორ სით ამეთ
+
+Transliteration to Greek
+
+>>> print translit(text, 'el')
+Λορεμ ιψθμ δολορ σιτ αμετ
+
 Transliteration to Russian
 
 >>> print translit(text, 'ru')
@@ -66,11 +76,21 @@ Transliteration to Russian
 List of available (registered) languages
 
 >>> print get_available_language_codes()
-['ru', 'hy']
+['el', 'hy', 'ka', 'ru']
 
 Reversed transliteration from Armenian
 
 >>> print translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", 'hy', reversed=True)
+Lorem ipsum dolor sit amet
+
+Reversed transliteration from Georgian
+
+>>> print translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", 'ka', reversed=True)
+Lorem ipsum dolor sit amet
+
+Reversed transliteration from Greek
+
+>>> print translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", 'el', reversed=True)
 Lorem ipsum dolor sit amet
 
 Reversed transliteration from Russian
@@ -104,7 +124,7 @@ Registering a custom language pack
 >>> registry.register(ExampleLanguagePack)
 >>>
 >>> print get_available_language_codes()
-['ru', 'hy', 'example']
+['el', 'hy', 'ka', 'ru', 'example']
 >>> 
 >>> print translit(text, 'example')
 Lor5m 9psum 4olor s9t 1m5t
@@ -115,14 +135,26 @@ Required imports
 
 >>> from transliterate.contrib.apps.translipsum import TranslipsumGenerator
 
-Generating paragraphs
+Generating paragraphs in Armenian
 
 >>> g_am = TranslipsumGenerator(language_code='hy')
 >>> print g_am.generate_paragraph()
 Մագնա տրիստիքուե ֆաուցիբուս ֆամես նետուս նետուս օրցի մաուրիս, սուսցիպիտ. Դապիբուս րիսուս սեդ ադիպիսցինգ դիցտում.
 Ֆերմենտում ուրնա նատօքուե ատ. Uլտրիցես եգետ, տացիտի. Լիտօրա ցլասս ցօնուբիա պօսուերե մալեսուադա ին իպսում իդ պեր վե. 
 
-Generating sentense
+Generating sentense in Georgian
+
+>>> g_ka = TranslipsumGenerator(language_code='ka')
+>>> print g_ka.generate_sentence()
+Ⴄგეთ ყუამ არcუ ვულფუთათე რუთრუმ აუcთორ.
+
+Generating sentense in Greek
+
+>>> g_el = TranslipsumGenerator(language_code='el')
+>>> print g_el.generate_sentence()
+Νεc cρασ αμετ, ελιτ vεστιβθλθμ εθ, αενεαν ναμ, τελλθσ vαριθσ.
+
+Generating sentense in Russian (Cyrillic)
 
 >>> g_ru = TranslipsumGenerator(language_code='ru')
 >>> print g_ru.generate_sentence()
@@ -139,7 +171,17 @@ Detect Armenian text
 >>> detect_language(u'Լօրեմ իպսում դօլօր սիտ ամետ')
 hy
 
-Detect Russian text
+Detect Georgian text
+
+>>> detect_language(u'Ⴊორემ იფსუმ დოლორ სით ამეთ')
+ka
+
+Detect Greek text
+
+>>> detect_language(u'Λορεμ ιψθμ δολορ σιτ αμετ')
+el
+
+Detect Russian (Cyrillic) text
 
 >>> detect_language(u'Лорем ипсум долор сит амет')
 ru
@@ -155,7 +197,17 @@ Slugify Armenian text
 >>> slugify(u'Լօրեմ իպսում դօլօր սիտ ամետ')
 lorem-ipsum-dolor-sit-amet
 
-Slugify Russian text
+Slugify Georgian text
+
+>>> slugify(u'Ⴊორემ იფსუმ დოლორ სით ამეთ')
+lorem-ipsum-dolor-sit-amet
+
+Slugify Greek text
+
+>>> slugify(u'Λορεμ ιψθμ δολορ σιτ αμετ')
+lorem-ipsum-dolor-sit-amet
+
+Slugify Russian (Cyrillic) text
 
 >>> slugify(u'Лорем ипсум долор сит амет')
 lorem-ipsum-dolor-sit-amet

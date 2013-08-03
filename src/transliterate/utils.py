@@ -1,6 +1,6 @@
 __title__ = 'transliterate.utils'
-__version__ = '0.8'
-__build__ = 0x000008
+__version__ = '0.9'
+__build__ = 0x000009
 __author__ = 'Artur Barseghyan'
 __all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
 
@@ -59,6 +59,16 @@ def get_available_language_packs():
 
     return registry._registry.values()
 
+def get_language_pack(language_code):
+    """
+    Get registered language pack by language code given.
+
+    :param str language_code:
+    :return transliterate.base.TranslitLanguagePack: Returns None on failure.
+    """
+    ensure_autodiscover()
+    return registry._registry.get(language_code, None)
+
 # Strips numbers from unicode string.
 strip_numbers = lambda text: filter(lambda u: not u.isdigit(), text)
 
@@ -97,16 +107,19 @@ def detect_language(text, num_words=None):
 
     counter = Counter()
 
+    available_language_packs = get_available_language_packs()
+
     for word, occurrencies in most_common_words:
         for letter in word:
-            for language_pack in get_available_language_packs():
+            for language_pack in available_language_packs:
                 if language_pack.contains(letter):
                     counter[language_pack.language_code] += 1
                     continue
     try:
         return counter.most_common(1)[0][0]
     except Exception, e:
-        pass
+        if get_setting('DEBUG'):
+            print e
 
 def slugify(text, language_code=None):
     """

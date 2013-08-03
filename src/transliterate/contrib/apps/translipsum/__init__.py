@@ -1,6 +1,6 @@
 __title__ = 'transliterate.contrib.apps.translipsum.__init__'
-__version__ = '0.8'
-__build__ = 0x000008
+__version__ = '0.9'
+__build__ = 0x000009
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslipsumGenerator',)
 

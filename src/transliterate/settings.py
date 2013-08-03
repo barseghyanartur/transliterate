@@ -1,8 +1,12 @@
 __title__ = 'transliterate.settings'
-__version__ = '0.8'
-__build__ = 0x000008
+__version__ = '0.9'
+__build__ = 0x000009
 __author__ = 'Artur Barseghyan'
 __all__ = ('LANGUAGES_DIR', 'CONTRIB_DIR', 'LANGUAGE_PACK_MODULE_NAME', 'LANGUAGE_DETECTION_MAX_NUM_KEYWORDS', 'DEBUG')
+
+import warnings
+warnings.warn("""transliterate.settings is deprecated; use transliterate.conf.get_setting function instead.""",
+              DeprecationWarning)
 
 from transliterate.conf import get_setting
 

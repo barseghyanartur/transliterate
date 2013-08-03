@@ -1,8 +1,8 @@
 __title__ = 'transliterate.conf'
-__version__ = '0.8'
-__build__ = 0x000008
+__version__ = '0.9'
+__build__ = 0x000009
 __author__ = 'Artur Barseghyan'
-__all__ = ('get_setting', 'set_setting', 'settings',)
+__all__ = ('get_setting', 'set_setting', 'settings', 'reset_to_defaults_settings')
 
 from transliterate import defaults
 
@@ -37,8 +37,16 @@ class Settings(object):
         else:
             return default
 
+    def reset_to_defaults(self):
+        """
+        Resets settings to defaults.
+        """
+        self._settings = {}
+
 settings = Settings()
 
 get_setting = settings.get
 
 set_setting = settings.set
+
+reset_to_defaults_settings = settings.reset_to_defaults
