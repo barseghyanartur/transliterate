@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '0.6'
-__build__ = 0x000006
+__version__ = '0.7'
+__build__ = 0x000007
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
@@ -54,6 +54,7 @@ class TransliterateTest(unittest.TestCase):
         self.latin_text = "Lorem ipsum dolor sit amet"
         self.armenian_text = u'Լօրեմ իպսում դoլoր սիտ ամետ'
         self.cyrillic_text = u'Лорем ипсум долор сит амет'
+        self.georgian_text = u''
 
     @track_time
     def test_01_get_available_language_codes(self):
@@ -61,7 +62,10 @@ class TransliterateTest(unittest.TestCase):
         Test ``autodiscover`` and ``get_available_language_codes``.
         """
         res = get_available_language_codes()
-        self.assertEqual(res, ['ru', 'hy'])
+        res.sort()
+        c = ['ru', 'ka', 'hy']
+        c.sort()
+        self.assertEqual(res, c)
         return res
 
     @track_time
@@ -71,6 +75,15 @@ class TransliterateTest(unittest.TestCase):
         """
         res = translit(self.latin_text, 'hy')
         self.assertEqual(res, u'Լօրեմ իպսում դօլօր սիտ ամետ')
+        return res
+
+    @track_time
+    def __test_02_translit_latin_to_georgian(self):
+        """
+        Test transliteration from Latin to Georgian.
+        """
+        res = translit(self.latin_text, 'ka')
+        self.assertEqual(res, u'')
         return res
 
     @track_time
@@ -88,6 +101,16 @@ class TransliterateTest(unittest.TestCase):
         Test transliteration from Armenian to Latin.
         """
         res = translit(self.armenian_text, 'hy', reversed=True)
+        self.assertEqual(res, 'Lorem ipsum dolor sit amet')
+        return res
+
+    @track_time
+    def __test_04_translit_georgian_to_latin(self):
+        """
+        Test transliteration from Georgian to Latin.
+        """
+        # TODO
+        res = translit(self.georgian_text, 'ka', reversed=True)
         self.assertEqual(res, 'Lorem ipsum dolor sit amet')
         return res
 

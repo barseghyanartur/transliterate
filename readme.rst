@@ -9,6 +9,7 @@ Transliterator for Python. Transliterates (unicode) strings according to the rul
 Comes with language packs for the following languages (listed in alphabetical order):
 
 - Armenian
+- Georgian (alpha)
 - Russian
 
 There are also a number of useful tools included, such as:
@@ -58,7 +59,7 @@ Transliteration to Armenian
 Transliteration to Russian
 
 >>> print translit(text, 'ru')
-Лорэм ипсум долор сит амэт
+Лорем ипсум долор сит амет
 
 List of available (registered) languages
 
@@ -123,7 +124,7 @@ Generating sentense
 
 >>> g_ru = TranslipsumGenerator(language_code='ru')
 >>> print g_ru.generate_sentence()
-Рисус cонсэcтэтуэр, фусcэ qуис лаорээт ат эрос пэдэ фэлис сэнэcтус, магна.
+Рисус cонсеcтетуер, фусcе qуис лаореет ат ерос пэдэ фелис сенеcтус, магна.
 
 Language detection
 ----------------------------------
@@ -155,7 +156,7 @@ lorem-ipsum-dolor-sit-amet
 Slugify Russian text
 
 >>> slugify(u'Лорем ипсум долор сит амет')
-lorm-ipsum-dolor-sit-amt
+lorem-ipsum-dolor-sit-amet
 
 Missing a language pack?
 ==================================

@@ -1,6 +1,6 @@
 __title__ = 'transliterate.__init__'
-__version__ = '0.6'
-__build__ = 0x000006
+__version__ = '0.7'
+__build__ = 0x000007
 __author__ = 'Artur Barseghyan'
 __all__ = ('autodiscover',)
 
