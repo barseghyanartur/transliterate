@@ -6,12 +6,12 @@ try:
 except:
     readme = ''
 
-version = '0.7'
+version = '0.8'
 
 setup(
     name = 'transliterate',
     version = version,
-    description = ("Transliteration app for Python"),
+    description = ("Bi-directional transliterator for Python"),
     long_description=readme,
     classifiers = [
         'Programming Language :: Python',

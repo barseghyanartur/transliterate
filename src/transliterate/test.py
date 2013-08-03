@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '0.7'
-__build__ = 0x000007
+__version__ = '0.8'
+__build__ = 0x000008
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
@@ -52,9 +52,10 @@ class TransliterateTest(unittest.TestCase):
     """
     def setUp(self):
         self.latin_text = "Lorem ipsum dolor sit amet"
-        self.armenian_text = u'Լօրեմ իպսում դoլoր սիտ ամետ'
+        self.armenian_text = u'Լօրեմ իպսում դօլօր սիտ ամետ'
         self.cyrillic_text = u'Лорем ипсум долор сит амет'
-        self.georgian_text = u''
+        self.georgian_text = u'Ⴊორემ იფსუმ დოლორ სით ამეთ'
+        self.greek_text = u'Λορεμ ιψθμ δολορ σιτ αμετ'
 
     @track_time
     def test_01_get_available_language_codes(self):
@@ -63,7 +64,7 @@ class TransliterateTest(unittest.TestCase):
         """
         res = get_available_language_codes()
         res.sort()
-        c = ['ru', 'ka', 'hy']
+        c = ['el', 'hy', 'ka', 'ru']
         c.sort()
         self.assertEqual(res, c)
         return res
@@ -74,16 +75,25 @@ class TransliterateTest(unittest.TestCase):
         Test transliteration from Latin to Armenian.
         """
         res = translit(self.latin_text, 'hy')
-        self.assertEqual(res, u'Լօրեմ իպսում դօլօր սիտ ամետ')
+        self.assertEqual(res, self.armenian_text)
         return res
 
     @track_time
-    def __test_02_translit_latin_to_georgian(self):
+    def test_02_translit_latin_to_georgian(self):
         """
         Test transliteration from Latin to Georgian.
         """
         res = translit(self.latin_text, 'ka')
-        self.assertEqual(res, u'')
+        self.assertEqual(res, self.georgian_text)
+        return res
+
+    @track_time
+    def test_02_translit_latin_to_greek(self):
+        """
+        Test transliteration from Latin to Greek.
+        """
+        res = translit(self.latin_text, 'el')
+        self.assertEqual(res, self.greek_text)
         return res
 
     @track_time
@@ -92,7 +102,7 @@ class TransliterateTest(unittest.TestCase):
         Test transliteration from Latin to Cyrillic.
         """
         res = translit(self.latin_text, 'ru')
-        self.assertEqual(res, u'Лорем ипсум долор сит амет')
+        self.assertEqual(res, self.cyrillic_text)
         return res
 
     @track_time
@@ -101,17 +111,25 @@ class TransliterateTest(unittest.TestCase):
         Test transliteration from Armenian to Latin.
         """
         res = translit(self.armenian_text, 'hy', reversed=True)
-        self.assertEqual(res, 'Lorem ipsum dolor sit amet')
+        self.assertEqual(res, self.latin_text)
         return res
 
     @track_time
-    def __test_04_translit_georgian_to_latin(self):
+    def test_04_translit_georgian_to_latin(self):
         """
         Test transliteration from Georgian to Latin.
         """
-        # TODO
         res = translit(self.georgian_text, 'ka', reversed=True)
-        self.assertEqual(res, 'Lorem ipsum dolor sit amet')
+        self.assertEqual(res, self.latin_text)
+        return res
+
+    @track_time
+    def test_04_translit_greek_to_latin(self):
+        """
+        Test transliteration from Greek to Latin.
+        """
+        res = translit(self.greek_text, 'el', reversed=True)
+        self.assertEqual(res, self.latin_text)
         return res
 
     @track_time
@@ -120,7 +138,7 @@ class TransliterateTest(unittest.TestCase):
         Test transliteration from Cyrillic to Latun.
         """
         res = translit(self.cyrillic_text, 'ru', reversed=True)
-        self.assertEqual(res, 'Lorem ipsum dolor sit amet')
+        self.assertEqual(res, self.latin_text)
         return res
 
     @track_time
@@ -133,7 +151,7 @@ class TransliterateTest(unittest.TestCase):
             return text
 
         res = decorator_test_armenian(self.latin_text)
-        self.assertEqual(res, u'Լօրեմ իպսում դօլօր սիտ ամետ')
+        self.assertEqual(res, self.armenian_text)
 
     @track_time
     def test_07_method_decorator(self):
@@ -146,7 +164,7 @@ class TransliterateTest(unittest.TestCase):
                 return text
 
         res = DecoratorTest().decorator_test_russian(self.latin_text)
-        self.assertEqual(res, u'Лорем ипсум долор сит амет')
+        self.assertEqual(res, self.cyrillic_text)
         return res
 
     @track_time
@@ -159,7 +177,7 @@ class TransliterateTest(unittest.TestCase):
             return text
 
         res = decorator_test_armenian_reversed(self.armenian_text)
-        self.assertEqual(res, 'Lorem ipsum dolor sit amet')
+        self.assertEqual(res, self.latin_text)
         return res
 
     @track_time
@@ -196,6 +214,26 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
+    def test_11_translipsum_generator_georgian(self):
+        """
+        Testing the translipsum generator. Generating lorem ipsum sentence in Georgian.
+        """
+        g_ge = TranslipsumGenerator(language_code='ka')
+        res = g_ge.generate_sentence()
+        assert res
+        return res
+
+    @track_time
+    def test_11_translipsum_generator_greek(self):
+        """
+        Testing the translipsum generator. Generating lorem ipsum sentence in Greek.
+        """
+        g_el = TranslipsumGenerator(language_code='el')
+        res = g_el.generate_sentence()
+        assert res
+        return res
+
+    @track_time
     def test_11_translipsum_generator_cyrillic(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Cyrillic.
@@ -212,6 +250,24 @@ class TransliterateTest(unittest.TestCase):
         """
         res = detect_language(self.armenian_text)
         self.assertEqual(res, 'hy')
+        return res
+
+    @track_time
+    def test_12_language_detection_georgian(self):
+        """
+        Testing language detection. Detecting Georgian.
+        """
+        res = detect_language(self.georgian_text)
+        self.assertEqual(res, 'ka')
+        return res
+
+    @track_time
+    def __test_12_language_detection_greek(self):
+        """
+        Testing language detection. Detecting Greek.
+        """
+        res = detect_language(self.greek_text)
+        self.assertEqual(res, 'el')
         return res
 
     @track_time
@@ -233,9 +289,27 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @track_time
-    def test_15_slugify_russian(self):
+    def test_14_slugify_georgian(self):
         """
-        Testing slugify from Russian.
+        Testing slugify from Georgian.
+        """
+        res = slugify(self.georgian_text)
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+
+    @track_time
+    def __test_14_slugify_greek(self):
+        """
+        Testing slugify from Greek.
+        """
+        res = slugify(self.greek_text)
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+
+    @track_time
+    def test_15_slugify_cyrillic(self):
+        """
+        Testing slugify from Cyrillic.
         """
         res = slugify(self.cyrillic_text)
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')

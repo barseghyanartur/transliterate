@@ -1,6 +1,6 @@
 __title__ = 'transliterate.utils'
-__version__ = '0.7'
-__build__ = 0x000007
+__version__ = '0.8'
+__build__ = 0x000008
 __author__ = 'Artur Barseghyan'
 __all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
 

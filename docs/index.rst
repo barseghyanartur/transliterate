@@ -4,12 +4,14 @@ transliterate
 
 Description
 ==================================
-Transliterator for Python. Transliterates (unicode) strings according to the rules specified in the language packs.
+Bi-directional transliterator for Python. Transliterates (unicode) strings according to the rules specified in the
+language packs.
 
 Comes with language packs for the following languages (listed in alphabetical order):
 
 - Armenian
-- Georgian (alpha)
+- Georgian (beta)
+- Greek (alpha)
 - Russian
 
 There are also a number of useful tools included, such as:

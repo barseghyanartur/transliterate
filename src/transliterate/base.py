@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '0.7'
-__build__ = 0x000007
+__version__ = '0.8'
+__build__ = 0x000008
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslitLanguagePack', 'registry')
 
@@ -97,14 +97,14 @@ class TranslitLanguagePack(object):
         """
         value = unicode(value)
         if reversed:
+            # Handling reversed specific translations (one side only).
+            if self.reversed_specific_mapping:
+                value = value.translate(self.reversed_specific_translation_table)
+
             # Handling pre-processor mappings.
             if self.reversed_pre_processor_mapping:
                 for rule in self.reversed_pre_processor_mapping.keys():
                     value = value.replace(rule, self.reversed_pre_processor_mapping[rule])
-
-            # Handling reversed specific translations (one side only).
-            if self.reversed_specific_mapping:
-                value = value.translate(self.reversed_specific_translation_table)
 
             return value.translate(self.reversed_translation_table)
 
