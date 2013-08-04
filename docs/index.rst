@@ -5,7 +5,7 @@ transliterate
 Description
 ==================================
 Bi-directional transliterator for Python. Transliterates (unicode) strings according to the rules specified in the
-language packs.
+language packs (source script <-> target script).
 
 Comes with language packs for the following languages (listed in alphabetical order):
 
@@ -78,9 +78,18 @@ List of available (registered) languages
 >>> print get_available_language_codes()
 ['el', 'hy', 'ka', 'ru']
 
+Reversed transliterations are transliterations made from target language to source language (in terms they are
+defined in language packs). In case of reversed transliterations, you may leave out the ``language_code`` attribute,
+although if you know it on beforehand, specify it since it works faster that way.
+
 Reversed transliteration from Armenian
 
 >>> print translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", 'hy', reversed=True)
+Lorem ipsum dolor sit amet
+
+Reversed transliteration from Armenian with ``language_code`` argument left out
+
+>>> print translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", reversed=True)
 Lorem ipsum dolor sit amet
 
 Reversed transliteration from Georgian
@@ -88,15 +97,30 @@ Reversed transliteration from Georgian
 >>> print translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", 'ka', reversed=True)
 Lorem ipsum dolor sit amet
 
+Reversed transliteration from Georgian with ``language_code`` argument left out
+
+>>> print translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", reversed=True)
+Lorem ipsum dolor sit amet
+
 Reversed transliteration from Greek
 
 >>> print translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", 'el', reversed=True)
 Lorem ipsum dolor sit amet
 
-Reversed transliteration from Russian
+Reversed transliteration from Greek with ``language_code`` argument left out
+
+>>> print translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", reversed=True)
+Lorem ipsum dolor sit amet
+
+Reversed transliteration from Russian (Cyrillic)
 
 >>> print translit(u"Лорем ипсум долор сит амет", 'ru', reversed=True)
 Lorеm ipsum dolor sit amеt
+
+Reversed transliteration from Russian (Cyrillic) with ``language_code`` argument left out
+
+>>> print translit(u"Лорем ипсум долор сит амет", reversed=True)
+Lorem ipsum dolor sit amet
 
 Testing the decorator
 

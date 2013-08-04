@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '0.9'
-__build__ = 0x000009
+__version__ = '1.0'
+__build__ = 0x000010
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslitLanguagePack', 'registry')
 
 import unicodedata
+
+from transliterate.exceptions import ImproperlyConfigured
 
 class TranslitLanguagePack(object):
     """
@@ -16,7 +18,10 @@ class TranslitLanguagePack(object):
     ``language_name``: Language name (obligatory). Example value: 'Armenian', 'Russian'.
     ``character_ranges``: Character ranges that are specific to the language. When making a pack, take a look at
         (http://en.wikipedia.org/wiki/List_of_Unicode_characters) for the ranges.
-    ``mapping``: Mapping  (obligatory). A tuple, consisting of two strings. Example value: (u'abc', u'աբց')
+    ``mapping``: Mapping  (obligatory). A tuple, consisting of two strings (source and target). Example value:
+        (u'abc', u'աբց').
+    ``reversed_specific_mapping``: Specific mapping (one direction only) used when transliterating from target script
+        to source script (reversed transliteration).
     ՝՝pre_processor_mapping՝՝: Pre processor mapping (optional). A dictionary mapping for letters that can't be
         represented by a single latin letter.
 
@@ -26,8 +31,8 @@ class TranslitLanguagePack(object):
 >>>    language_name = "Armenian"
 >>>    character_ranges = ((0x0530, 0x058F), (0xFB10, 0xFB1F))
 >>>    mapping = (
->>>        u"abgdezilxkhmjnpsvtrcq&ofABGDEZILXKHMJNPSVTRCQOF",
->>>        u"աբգդեզիլխկհմյնպսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՍՎՏՐՑՔՕՖ",
+>>>        u"abgdezilxkhmjnpsvtrcq&ofABGDEZILXKHMJNPSVTRCQOF", # Source script
+>>>        u"աբգդեզիլխկհմյնպսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՍՎՏՐՑՔՕՖ", # Target script
 >>>    )
 >>>    reversed_specific_mapping = (
 >>>        u"ռՌ",
@@ -63,8 +68,8 @@ class TranslitLanguagePack(object):
             assert self.language_name is not None
             assert self.mapping
         except Exception, e:
-            raise Exception("You should define ``language_code``, ``language_name`` and ``mapping`` properties in "
-                            "your subclassed ``TranslitLanguagePack`` class.")
+            raise ImproperlyConfigured("You should define ``language_code``, ``language_name`` and ``mapping`` "
+                                       "properties in your subclassed ``TranslitLanguagePack`` class.")
         super(TranslitLanguagePack, self).__init__()
 
         # Creating a translation table from the mapping set.
@@ -130,6 +135,7 @@ class TranslitLanguagePack(object):
                     return True
         return False
 
+
 class TranslitRegistry(object):
     """
     Language pack registry.
@@ -145,15 +151,14 @@ class TranslitRegistry(object):
         """
         self._registry[cls.language_code] = cls
 
-    def get(self, language_code):
+    def get(self, language_code, default=None):
         """
         Gets the given language pack from the registry.
 
         :param str language_code:
         :return transliterate.base.LanguagePack: Subclass of ``transliterate.base.LanguagePack``.
         """
-        if self._registry.has_key(language_code):
-            return self._registry[language_code]
+        return self._registry.get(language_code, default)
 
 
 # Register languages by calling registry.register()

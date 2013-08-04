@@ -1,6 +1,6 @@
 __title__ = 'transliterate.helpers'
-__version__ = '0.9'
-__build__ = 0x000009
+__version__ = '1.0'
+__build__ = 0x000010
 __author__ = 'Artur Barseghyan'
 __all__ = ('PROJECT_DIR',)
 

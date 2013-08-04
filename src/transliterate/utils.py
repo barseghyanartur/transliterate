@@ -1,6 +1,6 @@
 __title__ = 'transliterate.utils'
-__version__ = '0.9'
-__build__ = 0x000009
+__version__ = '1.0'
+__build__ = 0x000010
 __author__ = 'Artur Barseghyan'
 __all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
 
@@ -14,7 +14,10 @@ except ImportError:
 
 from transliterate import autodiscover
 from transliterate.base import registry
+from transliterate.exceptions import LanguageCodeError, LanguagePackNotFound, LanguageDetectionError
 from transliterate.conf import get_setting
+
+_ = lambda s: s
 
 def ensure_autodiscover():
     """
@@ -24,9 +27,10 @@ def ensure_autodiscover():
     if not registry._registry:
         autodiscover()
 
-def translit(value, language_code, reversed=False):
+def translit(value, language_code=None, reversed=False):
     """
-    Transliterates the text for the language given.
+    Transliterates the text for the language given. Language code is optional in case of reversed translations (from
+    some script to latin).
 
     :param str value:
     :param str language_code:
@@ -35,7 +39,17 @@ def translit(value, language_code, reversed=False):
     """
     ensure_autodiscover()
 
+    if language_code is None and reversed is False:
+        raise LanguageCodeError(_("``language_code`` is optional with ``reversed`` set to True only."))
+
+    if language_code is None:
+        language_code = detect_language(value, fail_silently=False)
+
     cls = registry.get(language_code)
+
+    if cls is None:
+        raise LanguagePackNotFound(_("Language pack for code %s is not found." % language_code))
+
     language_pack = cls()
     return language_pack.translit(value, reversed=reversed)
 
@@ -90,12 +104,13 @@ def extract_most_common_words(text, num_words=None):
             counter[word] += 1
     return counter.most_common(num_words)
 
-def detect_language(text, num_words=None):
+def detect_language(text, num_words=None, fail_silently=True):
     """
     Detects the language from the value given based on ranges defined in active language packs.
 
     :param unicode value: Input string.
     :param int num_words: Number of words to base decision on.
+    :param bool fail_silently:
     :return str: Language code.
     """
     ensure_autodiscover()
@@ -120,6 +135,9 @@ def detect_language(text, num_words=None):
     except Exception, e:
         if get_setting('DEBUG'):
             print e
+
+    if not fail_silently:
+        raise LanguageDetectionError(_("""Can't detect language for the text "%s" given.""") % text)
 
 def slugify(text, language_code=None):
     """

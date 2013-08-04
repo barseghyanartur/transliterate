@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '0.9'
-__build__ = 0x000009
+__version__ = '1.0'
+__build__ = 0x000010
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
@@ -335,7 +335,28 @@ class TransliterateTest(unittest.TestCase):
         return override_settings()
 
     @track_time
-    def __test_27_mappings(self):
+    def test_27_auto_translit_reversed(self):
+        """
+        Test automatic reversed translit (from target script to source script) for Armenian, Georgian, Greek and
+        Russian (Cyrillic).
+        """
+        res = []
+        texts = [
+            self.armenian_text,
+            self.georgian_text,
+            self.greek_text,
+            self.cyrillic_text
+        ]
+
+        for text in texts:
+            r = translit(text, reversed=True)
+            self.assertEqual(r, self.latin_text)
+            res.append(r)
+
+        return res
+
+    @track_time
+    def __test_28_mappings(self):
         """
         Testing mappings.
         """
