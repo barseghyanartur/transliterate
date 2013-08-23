@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '1.0'
-__build__ = 0x000010
+__version__ = '1.1'
+__build__ = 0x000011
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslitLanguagePack', 'registry')
 
 import unicodedata
 
-from transliterate.exceptions import ImproperlyConfigured
+from transliterate.exceptions import ImproperlyConfigured, InvalidRegistryItemType
 
 class TranslitLanguagePack(object):
     """
@@ -142,14 +142,53 @@ class TranslitRegistry(object):
     """
     def __init__(self):
         self._registry = {}
+        self._forced = []
 
-    def register(self, cls):
+    def register(self, cls, force=False):
         """
         Registers the language pack in the registry.
-        :param str language_code:
-        :param str path:
+
+        :param transliterate.base.LanguagePack cls: Subclass of ``transliterate.base.LanguagePack``.
+        :param bool force: If set to True, item stays forced. It's not possible to unregister a forced item.
+        :return bool: True if registered and False otherwise.
         """
-        self._registry[cls.language_code] = cls
+        if not issubclass(cls, TranslitLanguagePack):
+            raise InvalidRegistryItemType("Invalid item type `%s` for registry `%s`" % (cls, self.__class__))
+
+        # If item has not been forced yet, add/replace its' value in the registry
+        if force:
+
+            if not cls.language_code in self._forced:
+                self._registry[cls.language_code] = cls
+                self._forced.append(cls.language_code)
+                return True
+            else:
+                return False
+
+        else:
+
+            if self._registry.has_key(cls.language_code):
+                return False
+            else:
+                self._registry[cls.language_code] = cls
+                return True
+
+    def unregister(self, cls):
+        """
+        Unregisters an item from registry.
+
+        :param transliterate.base.LanguagePack cls: Subclass of ``transliterate.base.LanguagePack``.
+        :return bool: True if unregistered and False otherwise.
+        """
+        if not issubclass(cls, TranslitLanguagePack):
+            raise InvalidRegistryItemType("Invalid item type `%s` for registry `%s`" % (cls, self.__class__))
+
+        # Only non-forced items are allowed to be unregistered.
+        if self._registry.has_key(cls.language_code) and not cls.language_code in self._forced:
+            self._registry.pop(cls.language_code)
+            return True
+        else:
+            return False
 
     def get(self, language_code, default=None):
         """

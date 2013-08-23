@@ -1,8 +1,9 @@
 __title__ = 'transliterate.exceptions'
-__version__ = '1.0'
-__build__ = 0x000010
+__version__ = '1.1'
+__build__ = 0x000011
 __author__ = 'Artur Barseghyan'
-__all__ = ('LanguageCodeError', 'ImproperlyConfigured', 'LanguagePackNotFound', 'LanguageDetectionError')
+__all__ = ('LanguageCodeError', 'ImproperlyConfigured', 'LanguagePackNotFound', 'LanguageDetectionError', \
+           'InvalidRegistryItemType')
 
 class LanguageCodeError(Exception):
     """
@@ -22,4 +23,9 @@ class LanguagePackNotFound(Exception):
 class LanguageDetectionError(Exception):
     """
     Exception raised when language can't be detected for the text given.
+    """
+
+class InvalidRegistryItemType(ValueError):
+    """
+    Raised when an attempt is made to register an item in the registry which does not have a proper type.
     """

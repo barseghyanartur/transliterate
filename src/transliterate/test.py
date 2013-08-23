@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '1.0'
-__build__ = 0x000010
+__version__ = '1.1'
+__build__ = 0x000011
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
 import unittest
-
-#import simple_timer
 
 from transliterate import autodiscover
 from transliterate.conf import set_setting, get_setting, reset_to_defaults_settings
@@ -19,28 +17,33 @@ from transliterate.decorators import transliterate_function, transliterate_metho
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.apps.translipsum import TranslipsumGenerator
 
-TRACK_TIME = True
+PRINT_INFO = True
+TRACK_TIME = False
 
-def track_time(func):
+def print_info(func):
     """
     Prints some useful info.
     """
-    if not TRACK_TIME:
+    if not PRINT_INFO:
         return func
 
     def inner(self, *args, **kwargs):
-        #timer = simple_timer.Timer() # Start timer
+        if TRACK_TIME:
+            import simple_timer
+            timer = simple_timer.Timer() # Start timer
 
         result = func(self, *args, **kwargs)
 
-        #timer.stop() # Stop timer
+        if TRACK_TIME:
+            timer.stop() # Stop timer
 
         print '\n%s' % func.__name__
         print '============================'
         print '""" %s """' % func.__doc__.strip()
         print '----------------------------'
         if result is not None: print result
-        #print 'done in %s seconds' % timer.duration
+        if TRACK_TIME:
+            print 'done in %s seconds' % timer.duration
 
         return result
     return inner
@@ -58,7 +61,7 @@ class TransliterateTest(unittest.TestCase):
         self.greek_text = u'Λορεμ ιψθμ δολορ σιτ αμετ'
         #reset_to_defaults_settings()
 
-    @track_time
+    @print_info
     def test_01_get_available_language_codes(self):
         """
         Test ``autodiscover`` and ``get_available_language_codes``.
@@ -70,7 +73,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, c)
         return res
 
-    @track_time
+    @print_info
     def test_02_translit_latin_to_armenian(self):
         """
         Test transliteration from Latin to Armenian.
@@ -79,7 +82,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.armenian_text)
         return res
 
-    @track_time
+    @print_info
     def test_03_translit_latin_to_georgian(self):
         """
         Test transliteration from Latin to Georgian.
@@ -88,7 +91,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.georgian_text)
         return res
 
-    @track_time
+    @print_info
     def test_04_translit_latin_to_greek(self):
         """
         Test transliteration from Latin to Greek.
@@ -97,7 +100,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.greek_text)
         return res
 
-    @track_time
+    @print_info
     def test_05_translit_latin_to_cyrillic(self):
         """
         Test transliteration from Latin to Cyrillic.
@@ -106,7 +109,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.cyrillic_text)
         return res
 
-    @track_time
+    @print_info
     def test_06_translit_armenian_to_latin(self):
         """
         Test transliteration from Armenian to Latin.
@@ -115,7 +118,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.latin_text)
         return res
 
-    @track_time
+    @print_info
     def test_07_translit_georgian_to_latin(self):
         """
         Test transliteration from Georgian to Latin.
@@ -124,7 +127,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.latin_text)
         return res
 
-    @track_time
+    @print_info
     def test_08_translit_greek_to_latin(self):
         """
         Test transliteration from Greek to Latin.
@@ -133,7 +136,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.latin_text)
         return res
 
-    @track_time
+    @print_info
     def test_09_translit_cyrillic_to_latin(self):
         """
         Test transliteration from Cyrillic to Latun.
@@ -142,7 +145,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.latin_text)
         return res
 
-    @track_time
+    @print_info
     def test_10_function_decorator(self):
         """
         Testing the function decorator from Latin to Armenian.
@@ -154,7 +157,7 @@ class TransliterateTest(unittest.TestCase):
         res = decorator_test_armenian(self.latin_text)
         self.assertEqual(res, self.armenian_text)
 
-    @track_time
+    @print_info
     def test_11_method_decorator(self):
         """
         Testing the method decorator from Latin to Cyrillic.
@@ -168,7 +171,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.cyrillic_text)
         return res
 
-    @track_time
+    @print_info
     def test_12_function_decorator(self):
         """
         Testing the function decorator (reversed) from Armenian to Latin.
@@ -181,7 +184,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.latin_text)
         return res
 
-    @track_time
+    @print_info
     def test_13_register_custom_language_pack(self):
         """
         Testing registering of a custom language pack.
@@ -204,7 +207,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'Lor5m 9psum 4olor s9t 1m5t')
         return res
 
-    @track_time
+    @print_info
     def test_14_translipsum_generator_armenian(self):
         """
         Testing the translipsum generator. Generating lorem ipsum paragraphs in Armenian.
@@ -214,7 +217,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @track_time
+    @print_info
     def test_15_translipsum_generator_georgian(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Georgian.
@@ -224,7 +227,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @track_time
+    @print_info
     def test_16_translipsum_generator_greek(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Greek.
@@ -234,7 +237,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @track_time
+    @print_info
     def test_17_translipsum_generator_cyrillic(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Cyrillic.
@@ -244,7 +247,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @track_time
+    @print_info
     def test_18_language_detection_armenian(self):
         """
         Testing language detection. Detecting Amenian.
@@ -253,7 +256,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'hy')
         return res
 
-    @track_time
+    @print_info
     def test_19_language_detection_georgian(self):
         """
         Testing language detection. Detecting Georgian.
@@ -262,7 +265,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'ka')
         return res
 
-    @track_time
+    @print_info
     def test_20_language_detection_greek(self):
         """
         Testing language detection. Detecting Greek.
@@ -273,7 +276,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'el')
         return res
 
-    @track_time
+    @print_info
     def test_21_language_detection_cyrillic(self):
         """
         Testing language detection. Detecting Russian (Cyrillic).
@@ -282,7 +285,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'ru')
         return res
 
-    @track_time
+    @print_info
     def test_22_slugify_armenian(self):
         """
         Testing slugify from Armenian.
@@ -291,7 +294,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
-    @track_time
+    @print_info
     def test_23_slugify_georgian(self):
         """
         Testing slugify from Georgian.
@@ -300,7 +303,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
-    @track_time
+    @print_info
     def test_24_slugify_greek(self):
         """
         Testing slugify from Greek.
@@ -309,7 +312,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
-    @track_time
+    @print_info
     def test_25_slugify_cyrillic(self):
         """
         Testing slugify from Cyrillic.
@@ -318,7 +321,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
-    @track_time
+    @print_info
     def test_26_override_settings(self):
         """
         Testing settings override.
@@ -334,7 +337,7 @@ class TransliterateTest(unittest.TestCase):
 
         return override_settings()
 
-    @track_time
+    @print_info
     def test_27_auto_translit_reversed(self):
         """
         Test automatic reversed translit (from target script to source script) for Armenian, Georgian, Greek and
@@ -355,8 +358,41 @@ class TransliterateTest(unittest.TestCase):
 
         return res
 
-    @track_time
-    def __test_28_mappings(self):
+    @print_info
+    def test_28_register_unregister(self):
+        """
+        Testing register/unregister.
+        """
+        from transliterate.contrib.languages.hy.translit_language_pack import ArmenianLanguagePack
+
+        class A(TranslitLanguagePack):
+            language_code = "ru"
+            language_name = "Example"
+            mapping = (
+                u"abcdefghij",
+                u"1234567890",
+            )
+        # Since key `ru` already exists in the registry it can't be replaced (without force-register).
+        res = registry.register(A)
+        self.assertTrue(not res)
+
+        # Now with force-register it can.
+        res = registry.register(A, force=True)
+        self.assertTrue(res)
+
+        # Once we have it there and it's forced, we can't register another.
+        res = registry.register(A, force=True)
+        self.assertTrue(not res)
+
+        # Unregister non-forced language pack.
+        res = registry.unregister(ArmenianLanguagePack)
+        self.assertTrue(res and not ArmenianLanguagePack.language_code in get_available_language_codes())
+
+        res = registry.unregister(A)
+        self.assertTrue(not res and A.language_code in get_available_language_codes())
+
+    @print_info
+    def __test_29_mappings(self):
         """
         Testing mappings.
         """
