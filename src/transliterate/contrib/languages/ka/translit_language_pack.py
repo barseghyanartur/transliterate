@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.ka.translit_language_pack'
-__version__ = '1.1'
-__build__ = 0x000011
+__version__ = '1.2'
+__build__ = 0x000012
 __author__ = 'Artur Barseghyan'
 __all__ = ('GeorgianLanguagePack',)
 
@@ -34,16 +34,16 @@ class GeorgianLanguagePack(TranslitLanguagePack):
         u"kh": u"ხ",
         u"K'": u"Ⴉ",
         u"P'": u"Ⴎ",
-        u"ZH'": u"Ⴏ",
+        u"Zh'": u"Ⴏ",
         u"T'": u"Ⴒ",
-        u"GH": u"Ⴖ",
-        u"SH": u"Ⴘ",
-        u"CH": u"Ⴙ",
-        u"TS": u"Ⴚ",
-        u"DZ": u"Ⴛ",
-        u"TS'": u"Ⴜ",
-        u"CH'": u"Ⴝ",
-        u"KH": u"Ⴞ",
+        u"Gh": u"Ⴖ",
+        u"Sh": u"Ⴘ",
+        u"Ch": u"Ⴙ",
+        u"Ts": u"Ⴚ",
+        u"Dz": u"Ⴛ",
+        u"Ts'": u"Ⴜ",
+        u"Ch'": u"Ⴝ",
+        u"Kh": u"Ⴞ",
     }
 
 registry.register(GeorgianLanguagePack)

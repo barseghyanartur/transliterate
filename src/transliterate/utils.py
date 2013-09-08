@@ -1,11 +1,12 @@
 __title__ = 'transliterate.utils'
-__version__ = '1.1'
-__build__ = 0x000011
+__version__ = '1.2'
+__build__ = 0x000012
 __author__ = 'Artur Barseghyan'
 __all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
 
 import unicodedata
 import re
+from six import print_
 
 try:
     from collections import Counter
@@ -61,7 +62,7 @@ def get_available_language_codes():
     """
     ensure_autodiscover()
 
-    return registry._registry.keys()
+    return [k for k, v in registry._registry.items()]
 
 def get_available_language_packs():
     """
@@ -71,7 +72,7 @@ def get_available_language_packs():
     """
     ensure_autodiscover()
 
-    return registry._registry.values()
+    return [v for k, v in registry._registry.items()]
 
 def get_language_pack(language_code):
     """
@@ -84,7 +85,7 @@ def get_language_pack(language_code):
     return registry._registry.get(language_code, None)
 
 # Strips numbers from unicode string.
-strip_numbers = lambda text: filter(lambda u: not u.isdigit(), text)
+strip_numbers = lambda text: ''.join(filter(lambda u: not u.isdigit(), text))
 
 def extract_most_common_words(text, num_words=None):
     """
@@ -132,9 +133,9 @@ def detect_language(text, num_words=None, fail_silently=True):
                     continue
     try:
         return counter.most_common(1)[0][0]
-    except Exception, e:
+    except Exception as e:
         if get_setting('DEBUG'):
-            print e
+            print_(e)
 
     if not fail_silently:
         raise LanguageDetectionError(_("""Can't detect language for the text "%s" given.""") % text)

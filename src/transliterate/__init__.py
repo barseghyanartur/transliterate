@@ -1,10 +1,12 @@
 __title__ = 'transliterate.__init__'
-__version__ = '1.1'
-__build__ = 0x000011
+__version__ = '1.2'
+__build__ = 0x000012
 __author__ = 'Artur Barseghyan'
 __all__ = ('autodiscover',)
 
 import os
+
+from six import print_
 
 try:
     from importlib import import_module
@@ -30,9 +32,11 @@ def autodiscover():
                 import_module(
                     "transliterate.%s.%s.%s" % ('.'.join(LANGUAGES_DIR), app_path, LANGUAGE_PACK_MODULE_NAME)
                     )
-            except ImportError, e:
-                if DEBUG: print e
-            except Exception, e:
-                if DEBUG: print e
+            except ImportError as e:
+                if DEBUG:
+                    print_(e)
+            except Exception as e:
+                if DEBUG:
+                    print_(e)
         else:
             pass

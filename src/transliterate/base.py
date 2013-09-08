@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '1.1'
-__build__ = 0x000011
+__version__ = '1.2'
+__build__ = 0x000012
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslitLanguagePack', 'registry')
 
 import unicodedata
+import six
 
 from transliterate.exceptions import ImproperlyConfigured, InvalidRegistryItemType
 
@@ -54,20 +55,26 @@ class TranslitLanguagePack(object):
 >>>        u"ph": u"փ",
 >>>        u"u": u"ու",
 >>>    }
+
+    Note, thatn in Python 3 you won't be using u prefix before the strings.
     """
     language_code = None
     language_name = None
     character_ranges = None
     mapping = None
     reversed_specific_mapping = None
+    reversed_pre_processor_mapping_keys = []
+    reversed_specific_pre_processor_mapping = None
+    reversed_specific_pre_processor_mapping_keys = []
     pre_processor_mapping = None
+    pre_processor_mapping_keys = []
 
     def __init__(self):
         try:
             assert self.language_code is not None
             assert self.language_name is not None
             assert self.mapping
-        except Exception, e:
+        except Exception as e:
             raise ImproperlyConfigured("You should define ``language_code``, ``language_name`` and ``mapping`` "
                                        "properties in your subclassed ``TranslitLanguagePack`` class.")
         super(TranslitLanguagePack, self).__init__()
@@ -84,6 +91,9 @@ class TranslitLanguagePack(object):
             self.reversed_pre_processor_mapping = dict(
                 zip(self.pre_processor_mapping.values(), self.pre_processor_mapping.keys())
                 )
+            self.pre_processor_mapping_keys = self.pre_processor_mapping.keys()
+            self.reversed_pre_processor_mapping_keys = self.pre_processor_mapping.values()
+
         else:
             self.reversed_pre_processor_mapping = None
 
@@ -91,6 +101,9 @@ class TranslitLanguagePack(object):
             self.reversed_specific_translation_table = {}
             [self.reversed_specific_translation_table.update({ord(a): ord(b)}) \
              for a, b in zip(*self.reversed_specific_mapping)]
+
+        if self.reversed_specific_pre_processor_mapping:
+            self.reversed_specific_pre_processor_mapping_keys = self.reversed_specific_pre_processor_mapping.keys()
 
     def translit(self, value, reversed=False):
         """
@@ -100,21 +113,27 @@ class TranslitLanguagePack(object):
         :param bool reversed:
         :return str:
         """
-        value = unicode(value)
+        if six.PY2:
+            value = unicode(value)
+
         if reversed:
             # Handling reversed specific translations (one side only).
             if self.reversed_specific_mapping:
                 value = value.translate(self.reversed_specific_translation_table)
 
+            if self.reversed_specific_pre_processor_mapping:
+                for rule in self.reversed_specific_pre_processor_mapping_keys:
+                    value = value.replace(rule, self.reversed_specific_pre_processor_mapping[rule])
+
             # Handling pre-processor mappings.
             if self.reversed_pre_processor_mapping:
-                for rule in self.reversed_pre_processor_mapping.keys():
+                for rule in self.reversed_pre_processor_mapping_keys:
                     value = value.replace(rule, self.reversed_pre_processor_mapping[rule])
 
             return value.translate(self.reversed_translation_table)
 
         if self.pre_processor_mapping:
-            for rule in self.pre_processor_mapping.keys():
+            for rule in self.pre_processor_mapping_keys:
                 value = value.replace(rule, self.pre_processor_mapping[rule])
         return value.translate(self.translation_table)
 
@@ -167,7 +186,7 @@ class TranslitRegistry(object):
 
         else:
 
-            if self._registry.has_key(cls.language_code):
+            if cls.language_code in self._registry:
                 return False
             else:
                 self._registry[cls.language_code] = cls
@@ -184,7 +203,7 @@ class TranslitRegistry(object):
             raise InvalidRegistryItemType("Invalid item type `%s` for registry `%s`" % (cls, self.__class__))
 
         # Only non-forced items are allowed to be unregistered.
-        if self._registry.has_key(cls.language_code) and not cls.language_code in self._forced:
+        if cls.language_code in self._registry and not cls.language_code in self._forced:
             self._registry.pop(cls.language_code)
             return True
         else:

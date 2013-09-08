@@ -1,6 +1,6 @@
 __title__ = 'transliterate.conf'
-__version__ = '1.1'
-__build__ = 0x000011
+__version__ = '1.2'
+__build__ = 0x000012
 __author__ = 'Artur Barseghyan'
 __all__ = ('get_setting', 'set_setting', 'settings', 'reset_to_defaults_settings')
 
@@ -30,7 +30,7 @@ class Settings(object):
         :param mixed default: Default value.
         :return mixed:
         """
-        if self._settings.has_key(name):
+        if name in self._settings:
             return self._settings.get(name, default)
         elif hasattr(defaults, name):
             return getattr(defaults, name, default)

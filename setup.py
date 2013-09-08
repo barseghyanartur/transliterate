@@ -1,29 +1,47 @@
+import sys
 import os
 from setuptools import setup, find_packages
 
 try:
-    readme = open(os.path.join(os.path.dirname(__file__), 'readme.rst')).read()
+    readme = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 except:
     readme = ''
 
-version = '1.1'
+version = '1.2'
+
+install_requires = [
+    'six==1.4.1',
+]
+
+try:
+    PY2 = sys.version_info[0] == 2
+    PY3 = sys.version_info[0] == 3
+    if PY2:
+        install_requires.append('lorem-ipsum-generator==0.3')
+except:
+    pass
 
 setup(
     name = 'transliterate',
     version = version,
     description = ("Bi-directional transliterator for Python"),
-    long_description=readme,
+    long_description = readme,
     classifiers = [
-        'Programming Language :: Python',
-        'Intended Audience :: Developers',
-        'Operating System :: OS Independent',
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.3",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Development Status :: 4 - Beta",
     ],
     keywords = 'translit, transliteration',
-    author='Artur Barseghyan',
-    author_email='artur.barseghyan@gmail.com',
-    url='https://bitbucket.org/barseghyanartur/transliterate',
-    package_dir={'':'src'},
-    packages=find_packages(where='./src'),
-    license='GPL 2.0/LGPL 2.1',
-    install_requires=['lorem-ipsum-generator==0.3',]
+    author = 'Artur Barseghyan',
+    author_email = 'artur.barseghyan@gmail.com',
+    url = 'https://bitbucket.org/barseghyanartur/transliterate',
+    package_dir = {'':'src'},
+    packages = find_packages(where='./src'),
+    license = 'GPL 2.0/LGPL 2.1',
+    install_requires = install_requires
 )

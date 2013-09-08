@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.hy.translit_language_pack'
-__version__ = '1.1'
-__build__ = 0x000011
+__version__ = '1.2'
+__build__ = 0x000012
 __author__ = 'Artur Barseghyan'
 __all__ = ('ArmenianLanguagePack',)
 
@@ -23,7 +23,12 @@ class ArmenianLanguagePack(TranslitLanguagePack):
         u"ռՌ",
         u"rR"
     )
+    reversed_specific_pre_processor_mapping = {
+        u"ու": u"u",
+        u"Ու": u"U"
+    }
     pre_processor_mapping = {
+        # lowercase
         u"e'": u"է",
         u"y": u"ը",
         u"th": u"թ",
@@ -38,6 +43,22 @@ class ArmenianLanguagePack(TranslitLanguagePack):
         u"dj": u"ջ",
         u"ph": u"փ",
         u"u": u"ու",
+
+        # uppercase
+        u"E'": u"Է",
+        u"Y": u"Ը",
+        u"Th": u"Թ",
+        u"Jh": u"Ժ",
+        u"Ts": u"Ծ",
+        u"Dz": u"Ձ",
+        u"Gh": u"Ղ",
+        u"Tch": u"Ճ",
+        u"Sh": u"Շ",
+        u"Vo": u"Ո",
+        u"Ch": u"Չ",
+        u"Dj": u"Ջ",
+        u"Ph": u"Փ",
+        u"U": u"Ու"
     }
 
 registry.register(ArmenianLanguagePack)

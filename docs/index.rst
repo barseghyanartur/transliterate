@@ -12,6 +12,7 @@ Comes with language packs for the following languages (listed in alphabetical or
 - Armenian
 - Georgian (beta)
 - Greek (beta)
+- Hebrew (alpha)
 - Russian
 
 There are also a number of useful tools included, such as:

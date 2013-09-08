@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '1.1'
-__build__ = 0x000011
+__version__ = '1.2'
+__build__ = 0x000012
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
 import unittest
+import six
+from six import print_
 
 from transliterate import autodiscover
 from transliterate.conf import set_setting, get_setting, reset_to_defaults_settings
@@ -15,7 +17,9 @@ from transliterate.utils import get_available_language_codes, translit, detect_l
 from transliterate.utils import get_available_language_packs
 from transliterate.decorators import transliterate_function, transliterate_method
 from transliterate.base import TranslitLanguagePack, registry
-from transliterate.contrib.apps.translipsum import TranslipsumGenerator
+
+if six.PY2:
+    from transliterate.contrib.apps.translipsum import TranslipsumGenerator
 
 PRINT_INFO = True
 TRACK_TIME = False
@@ -37,16 +41,34 @@ def print_info(func):
         if TRACK_TIME:
             timer.stop() # Stop timer
 
-        print '\n%s' % func.__name__
-        print '============================'
-        print '""" %s """' % func.__doc__.strip()
-        print '----------------------------'
-        if result is not None: print result
+        print_('\n%s' % func.__name__)
+        print_('============================')
+        print_('""" %s """' % func.__doc__.strip())
+        print_('----------------------------')
+        if result is not None:
+            try:
+                print_(result)
+            except Exception as e:
+                print_(result.encode('utf8'))
+
         if TRACK_TIME:
-            print 'done in %s seconds' % timer.duration
+            print_('done in %s seconds' % timer.duration)
 
         return result
     return inner
+
+
+def py2only(func):
+    """
+    Skips the test on Python 3.
+    """
+    if six.PY2:
+        return func
+
+    def dummy(self, *args, **kwargs):
+        pass
+
+    return dummy
 
 
 class TransliterateTest(unittest.TestCase):
@@ -59,6 +81,7 @@ class TransliterateTest(unittest.TestCase):
         self.cyrillic_text = u'Лорем ипсум долор сит амет'
         self.georgian_text = u'Ⴊორემ იფსუმ დოლორ სით ამეთ'
         self.greek_text = u'Λορεμ ιψθμ δολορ σιτ αμετ'
+        self.hebrew_text = u'Lורeמ יpסuמ דולור סית אמeת'
         #reset_to_defaults_settings()
 
     @print_info
@@ -68,7 +91,7 @@ class TransliterateTest(unittest.TestCase):
         """
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'ru']
+        c = ['el', 'hy', 'ka', 'ru'] #'he', 
         c.sort()
         self.assertEqual(res, c)
         return res
@@ -101,7 +124,16 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_05_translit_latin_to_cyrillic(self):
+    def __test_05_translit_latin_to_hebrew(self):
+        """
+        Test transliteration from Latin to Hebrew.
+        """
+        res = translit(self.latin_text, 'he')
+        self.assertEqual(res, self.hebrew_text)
+        return res
+
+    @print_info
+    def test_06_translit_latin_to_cyrillic(self):
         """
         Test transliteration from Latin to Cyrillic.
         """
@@ -110,7 +142,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_06_translit_armenian_to_latin(self):
+    def test_07_translit_armenian_to_latin(self):
         """
         Test transliteration from Armenian to Latin.
         """
@@ -119,7 +151,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_07_translit_georgian_to_latin(self):
+    def test_08_translit_georgian_to_latin(self):
         """
         Test transliteration from Georgian to Latin.
         """
@@ -128,7 +160,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_08_translit_greek_to_latin(self):
+    def test_09_translit_greek_to_latin(self):
         """
         Test transliteration from Greek to Latin.
         """
@@ -137,7 +169,16 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_09_translit_cyrillic_to_latin(self):
+    def __test_10_translit_hebrew_to_latin(self):
+        """
+        Test transliteration from Hebrew to Latin.
+        """
+        res = translit(self.hebrew_text, 'he', reversed=True)
+        self.assertEqual(res, self.latin_text)
+        return res
+
+    @print_info
+    def test_11_translit_cyrillic_to_latin(self):
         """
         Test transliteration from Cyrillic to Latun.
         """
@@ -146,7 +187,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_10_function_decorator(self):
+    def test_12_function_decorator(self):
         """
         Testing the function decorator from Latin to Armenian.
         """
@@ -158,7 +199,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.armenian_text)
 
     @print_info
-    def test_11_method_decorator(self):
+    def test_13_method_decorator(self):
         """
         Testing the method decorator from Latin to Cyrillic.
         """
@@ -172,7 +213,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_12_function_decorator(self):
+    def test_14_function_decorator(self):
         """
         Testing the function decorator (reversed) from Armenian to Latin.
         """
@@ -185,7 +226,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_13_register_custom_language_pack(self):
+    def test_15_register_custom_language_pack(self):
         """
         Testing registering of a custom language pack.
         """
@@ -207,8 +248,9 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'Lor5m 9psum 4olor s9t 1m5t')
         return res
 
+    @py2only
     @print_info
-    def test_14_translipsum_generator_armenian(self):
+    def test_16_translipsum_generator_armenian(self):
         """
         Testing the translipsum generator. Generating lorem ipsum paragraphs in Armenian.
         """
@@ -217,8 +259,9 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
+    @py2only
     @print_info
-    def test_15_translipsum_generator_georgian(self):
+    def test_17_translipsum_generator_georgian(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Georgian.
         """
@@ -227,8 +270,9 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
+    @py2only
     @print_info
-    def test_16_translipsum_generator_greek(self):
+    def test_18_translipsum_generator_greek(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Greek.
         """
@@ -237,8 +281,20 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
+    @py2only
     @print_info
-    def test_17_translipsum_generator_cyrillic(self):
+    def __test_19_translipsum_generator_hebrew(self):
+        """
+        Testing the translipsum generator. Generating lorem ipsum sentence in Hebrew.
+        """
+        g_he = TranslipsumGenerator(language_code='he')
+        res = g_he.generate_sentence()
+        assert res
+        return res
+
+    @py2only
+    @print_info
+    def test_20_translipsum_generator_cyrillic(self):
         """
         Testing the translipsum generator. Generating lorem ipsum sentence in Cyrillic.
         """
@@ -248,7 +304,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_18_language_detection_armenian(self):
+    def test_21_language_detection_armenian(self):
         """
         Testing language detection. Detecting Amenian.
         """
@@ -257,7 +313,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_19_language_detection_georgian(self):
+    def test_22_language_detection_georgian(self):
         """
         Testing language detection. Detecting Georgian.
         """
@@ -266,7 +322,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_20_language_detection_greek(self):
+    def test_23_language_detection_greek(self):
         """
         Testing language detection. Detecting Greek.
         """
@@ -277,7 +333,16 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_21_language_detection_cyrillic(self):
+    def __test_24_language_detection_hebrew(self):
+        """
+        Testing language detection. Detecting Hebrew.
+        """
+        res = detect_language(self.hebrew_text)
+        self.assertEqual(res, 'he')
+        return res
+
+    @print_info
+    def test_25_language_detection_cyrillic(self):
         """
         Testing language detection. Detecting Russian (Cyrillic).
         """
@@ -286,7 +351,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_22_slugify_armenian(self):
+    def test_26_slugify_armenian(self):
         """
         Testing slugify from Armenian.
         """
@@ -295,7 +360,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_23_slugify_georgian(self):
+    def test_27_slugify_georgian(self):
         """
         Testing slugify from Georgian.
         """
@@ -304,7 +369,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_24_slugify_greek(self):
+    def test_28_slugify_greek(self):
         """
         Testing slugify from Greek.
         """
@@ -313,7 +378,16 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_25_slugify_cyrillic(self):
+    def __test_29_slugify_hebrew(self):
+        """
+        Testing slugify from Hebrew.
+        """
+        res = slugify(self.hebrew_text)
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+
+    @print_info
+    def test_30_slugify_cyrillic(self):
         """
         Testing slugify from Cyrillic.
         """
@@ -322,7 +396,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_26_override_settings(self):
+    def test_31_override_settings(self):
         """
         Testing settings override.
         """
@@ -338,16 +412,17 @@ class TransliterateTest(unittest.TestCase):
         return override_settings()
 
     @print_info
-    def test_27_auto_translit_reversed(self):
+    def test_32_auto_translit_reversed(self):
         """
-        Test automatic reversed translit (from target script to source script) for Armenian, Georgian, Greek and
-        Russian (Cyrillic).
+        Test automatic reversed translit (from target script to source script) for Armenian, Georgian, Greek,
+        Hebrew and Russian (Cyrillic).
         """
         res = []
         texts = [
             self.armenian_text,
             self.georgian_text,
             self.greek_text,
+            #self.hebrew_text,
             self.cyrillic_text
         ]
 
@@ -359,7 +434,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
-    def test_28_register_unregister(self):
+    def test_33_register_unregister(self):
         """
         Testing register/unregister.
         """
@@ -397,14 +472,14 @@ class TransliterateTest(unittest.TestCase):
         Testing mappings.
         """
         for language_pack in get_available_language_packs():
-            print 'Testing language pack %s %s' % (language_pack.language_code, language_pack.language_name)
-            print 'Reversed test:'
+            print_('Testing language pack %s %s' % (language_pack.language_code, language_pack.language_name))
+            print_('Reversed test:')
             for letter in language_pack.mapping[1]:
-                print letter, ' --> ', translit(letter, language_pack.language_code, reversed=True)
+                print_(letter, ' --> ', translit(letter, language_pack.language_code, reversed=True))
 
-            print 'Normal test:'
+            print_('Normal test:')
             for letter in language_pack.mapping[0]:
-                print letter, ' --> ', translit(letter, language_pack.language_code)
+                print_(letter, ' --> ', translit(letter, language_pack.language_code))
 
 
 if __name__ == '__main__':
