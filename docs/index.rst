@@ -12,7 +12,6 @@ Comes with language packs for the following languages (listed in alphabetical or
 - Armenian
 - Georgian (beta)
 - Greek (beta)
-- Hebrew (alpha)
 - Russian
 
 There are also a number of useful tools included, such as:
@@ -27,7 +26,7 @@ Install with latest stable version from pypi:
 
     $ pip install transliterate
 
-or install the latest stable version from source:
+or install the latest stable version from bitbucket:
 
     $ pip install -e hg+https://bitbucket.org/barseghyanartur/transliterate@stable#egg=transliterate
 
@@ -167,6 +166,9 @@ Forced language packs can't be replaced or unregistered.
 
 Using the lorem ipsum generator
 ----------------------------------
+Note, that at the moment lorem ipsum generator is not yet available for Python 3 due to incompatibility
+of the original `lorem-ipsum-generator` package with Python 3.
+
 Required imports
 
 >>> from transliterate.contrib.apps.translipsum import TranslipsumGenerator
