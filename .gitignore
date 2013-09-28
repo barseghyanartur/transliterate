@@ -2,6 +2,7 @@
 .hgignore~
 .gitignore~
 .hg/
+.tox
 
 example/db/
 example/tmp/

@@ -1,8 +1,9 @@
 syntax: regexp
 \.pyc$
 \.hgignore~
-\.git
+\.git/
 \.gitignore~
+\.tox
 
 ^example/db/
 ^example/tmp/

@@ -1,6 +1,6 @@
 __title__ = 'transliterate.utils'
-__version__ = '1.2'
-__build__ = 0x000012
+__version__ = '1.3'
+__build__ = 0x00000D
 __author__ = 'Artur Barseghyan'
 __all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
 
@@ -13,7 +13,7 @@ try:
 except ImportError:
     from transliterate.backports.collections import Counter
 
-from transliterate import autodiscover
+from transliterate.discover import autodiscover
 from transliterate.base import registry
 from transliterate.exceptions import LanguageCodeError, LanguagePackNotFound, LanguageDetectionError
 from transliterate.conf import get_setting

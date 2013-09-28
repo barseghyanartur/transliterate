@@ -42,12 +42,7 @@ Simple usage
 ----------------------------------
 Required imports
 
->>> from transliterate import autodiscover
 >>> from transliterate.utils import translit, get_available_language_codes
-
-Autodiscover registered language packs
-
->>> autodiscover()
 
 Original text
 

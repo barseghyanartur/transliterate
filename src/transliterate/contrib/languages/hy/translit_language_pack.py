@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.hy.translit_language_pack'
-__version__ = '1.2'
-__build__ = 0x000012
+__version__ = '1.3'
+__build__ = 0x00000D
 __author__ = 'Artur Barseghyan'
 __all__ = ('ArmenianLanguagePack',)
 

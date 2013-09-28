@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from transliterate import autodiscover
+from transliterate.discover import autodiscover
 from transliterate.conf import set_setting
-from transliterate.utils import get_available_language_codes, translit
+from transliterate import get_available_language_codes, translit
 
 set_setting('DEBUG', True)
 
 # Autodiscover available language packs
-autodiscover()
+#autodiscover()
 
 print '\nOriginal text\n---------------------------------------'
 text = "Lorem ipsum dolor sit amet"

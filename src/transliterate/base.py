@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '1.2'
-__build__ = 0x000012
+__version__ = '1.3'
+__build__ = 0x00000D
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslitLanguagePack', 'registry')
 
@@ -172,7 +172,7 @@ class TranslitRegistry(object):
         :return bool: True if registered and False otherwise.
         """
         if not issubclass(cls, TranslitLanguagePack):
-            raise InvalidRegistryItemType("Invalid item type `%s` for registry `%s`" % (cls, self.__class__))
+            raise InvalidRegistryItemType("Invalid item type `{0}` for registry `{1}`".format(cls, self.__class__))
 
         # If item has not been forced yet, add/replace its' value in the registry
         if force:
@@ -200,7 +200,7 @@ class TranslitRegistry(object):
         :return bool: True if unregistered and False otherwise.
         """
         if not issubclass(cls, TranslitLanguagePack):
-            raise InvalidRegistryItemType("Invalid item type `%s` for registry `%s`" % (cls, self.__class__))
+            raise InvalidRegistryItemType("Invalid item type `{0}` for registry `{1}`".format(cls, self.__class__))
 
         # Only non-forced items are allowed to be unregistered.
         if cls.language_code in self._registry and not cls.language_code in self._forced:

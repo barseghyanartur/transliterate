@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.he.translit_language_pack'
-__version__ = '1.2'
-__build__ = 0x000012
+__version__ = '1.3'
+__build__ = 0x00000D
 __author__ = 'Artur Barseghyan'
 __all__ = ('HebrewLanguagePack',)
 
@@ -10,18 +10,38 @@ from transliterate.base import TranslitLanguagePack, registry
 
 class HebrewLanguagePack(TranslitLanguagePack):
     """
-    Language pack for Hebrew language. See http://en.wikipedia.org/wiki/Hebrew_alphabet for details.
+    Language pack for Hebrew language. See http://en.wikipedia.org/wiki/Hebrew_alphabet for details. See
+    the http://en.wikipedia.org/wiki/Romanization_of_Hebrew#When_to_transliterate for transliteration details.
+    Note, that this language pack implements the new standares (2006) of Hebrew Academy.
+
+    Confirmed
+        a אּ
+        v ב
+        b בּּּ
+        ּg ג
+        gg ג
+        ּd ד
+        dd דּ
+        h ה
+        h הּ
+        v ו
+        vv וּ
+        z ז
+        zz זּ
+        
     """
     language_code = "he"
     language_name = "Hebrew"
     character_ranges = ((0x0530, 0x058F), (0xFB10, 0xFB1F))
     mapping = (
         u"abgdvzhilmnsfckrt",
+        # trkcfsnmlihzvdgbа
         u"אבגדוזחילמנספצקרת",
     )
     reversed_specific_mapping = (
-        u"כלמנפ",
-        u"klmnp"
+        u"פ",
+        # p
+        u"p"
     )
     pre_processor_mapping = {
         # lowercase

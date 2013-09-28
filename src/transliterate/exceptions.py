@@ -1,6 +1,6 @@
 __title__ = 'transliterate.exceptions'
-__version__ = '1.2'
-__build__ = 0x000012
+__version__ = '1.3'
+__build__ = 0x00000D
 __author__ = 'Artur Barseghyan'
 __all__ = ('LanguageCodeError', 'ImproperlyConfigured', 'LanguagePackNotFound', 'LanguageDetectionError', \
            'InvalidRegistryItemType')

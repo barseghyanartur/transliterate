@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '1.2'
-__build__ = 0x000012
+__version__ = '1.3'
+__build__ = 0x00000D
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
@@ -10,11 +10,13 @@ import unittest
 import six
 from six import print_
 
-from transliterate import autodiscover
+from transliterate.discover import autodiscover
 from transliterate.conf import set_setting, get_setting, reset_to_defaults_settings
 from transliterate import defaults
-from transliterate.utils import get_available_language_codes, translit, detect_language, slugify
-from transliterate.utils import get_available_language_packs
+#from transliterate.utils import get_available_language_codes, translit, detect_language, slugify
+from transliterate import get_available_language_codes, translit, detect_language, slugify
+#from transliterate.utils import get_available_language_packs
+from transliterate import get_available_language_packs
 from transliterate.decorators import transliterate_function, transliterate_method
 from transliterate.base import TranslitLanguagePack, registry
 
@@ -41,9 +43,9 @@ def print_info(func):
         if TRACK_TIME:
             timer.stop() # Stop timer
 
-        print_('\n%s' % func.__name__)
+        print_('\n{0}'.format(func.__name__))
         print_('============================')
-        print_('""" %s """' % func.__doc__.strip())
+        print_('""" {0} """'.format(func.__doc__.strip()))
         print_('----------------------------')
         if result is not None:
             try:
@@ -52,7 +54,7 @@ def print_info(func):
                 print_(result.encode('utf8'))
 
         if TRACK_TIME:
-            print_('done in %s seconds' % timer.duration)
+            print_('done in {0} seconds'.format(timer.duration))
 
         return result
     return inner
@@ -472,7 +474,7 @@ class TransliterateTest(unittest.TestCase):
         Testing mappings.
         """
         for language_pack in get_available_language_packs():
-            print_('Testing language pack %s %s' % (language_pack.language_code, language_pack.language_name))
+            print_('Testing language pack {0} {1}'.format(language_pack.language_code, language_pack.language_name))
             print_('Reversed test:')
             for letter in language_pack.mapping[1]:
                 print_(letter, ' --> ', translit(letter, language_pack.language_code, reversed=True))
