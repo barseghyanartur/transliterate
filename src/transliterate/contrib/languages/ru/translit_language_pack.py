@@ -20,8 +20,8 @@ class RussianLanguagePack(TranslitLanguagePack):
         u"абвгдезийклмнопрстуфхъыьАБВГДЕЗИЙКЛМНОПРСТУФХЪЫЬ",
     )
     reversed_specific_mapping = (
-        u"ёэЁЭ",
-        u"eeEE"
+        u"ёэЁЭъьЪЬ",
+        u"eeEE''''"
     )
     pre_processor_mapping = {
         u"zh": u"ж",

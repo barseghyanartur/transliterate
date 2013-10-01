@@ -22,7 +22,7 @@ There are also a number of useful tools included, such as:
 
 Installation
 ==================================
-Install with latest stable version from pypi:
+Install with latest stable version from PyPI:
 
     $ pip install transliterate
 
@@ -30,9 +30,9 @@ or install the latest stable version from bitbucket:
 
     $ pip install -e hg+https://bitbucket.org/barseghyanartur/transliterate@stable#egg=transliterate
 
-or install into python path:
+or install the latest stable version from github:
 
-    $ python setup.py install
+    $ pip install -e git+http://github.org/barseghyanartur/transliterate@stable#egg=transliterate
 
 That's all. See the `Usage and examples` section for more.
 
@@ -42,7 +42,7 @@ Simple usage
 ----------------------------------
 Required imports
 
->>> from transliterate.utils import translit, get_available_language_codes
+>>> from transliterate import translit, get_available_language_codes
 
 Original text
 
@@ -197,7 +197,7 @@ Language detection
 ----------------------------------
 Required imports
 
->>> from transliterate.utils import detect_language
+>>> from transliterate import detect_language
 
 Detect Armenian text
 
@@ -223,7 +223,7 @@ Slugify
 ----------------------------------
 Required imports
 
->>> from transliterate.utils import slugify
+>>> from transliterate import slugify
 
 Slugify Armenian text
 

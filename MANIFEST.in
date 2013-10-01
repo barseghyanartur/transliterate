@@ -1,0 +1,3 @@
+include README.rst
+include LICENSE_GPL2.0.txt
+include LICENSE_LGPL_2.1.txt
