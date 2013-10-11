@@ -1,10 +1,18 @@
 __title__ = 'transliterate.contrib.apps.translipsum.__init__'
-__version__ = '1.3'
+__version__ = '1.4'
 __build__ = 0x00000D
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslipsumGenerator',)
 
-from lipsum import Generator
+import logging
+logger = logging.getLogger(__name__)
+
+from six import PY2
+
+if PY2:
+    from lipsum import Generator
+else:
+    from transliterate.contrib.apps.translipsum.utils import Generator
 
 from transliterate.utils import translit
 

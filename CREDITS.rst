@@ -6,6 +6,7 @@ Authors
 
 Contributors
 ----------------------
+- Hindi language pack was made with help and by initiative of Paarth Batra.
 
 Bug reporters
 ~~~~~~~~~~~~~~~~~~~~~~

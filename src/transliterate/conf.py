@@ -1,6 +1,6 @@
 __title__ = 'transliterate.conf'
-__version__ = '1.3'
-__build__ = 0x00000D
+__version__ = '1.4'
+__build__ = 0x00000E
 __author__ = 'Artur Barseghyan'
 __all__ = ('get_setting', 'set_setting', 'settings', 'reset_to_defaults_settings')
 

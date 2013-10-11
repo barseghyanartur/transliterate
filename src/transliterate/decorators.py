@@ -1,6 +1,6 @@
 __title__ = 'transliterate.decorators'
-__version__ = '1.3'
-__build__ = 0x00000D
+__version__ = '1.4'
+__build__ = 0x00000E
 __author__ = 'Artur Barseghyan'
 __all__ = ('transliterate_function', 'transliterate_method')
 

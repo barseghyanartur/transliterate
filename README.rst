@@ -161,8 +161,8 @@ Forced language packs can't be replaced or unregistered.
 
 Using the lorem ipsum generator
 ----------------------------------
-Note, that at the moment lorem ipsum generator is not yet available for Python 3 due to incompatibility
-of the original `lorem-ipsum-generator` package with Python 3.
+Note, that due to incompatibility of the original `lorem-ipsum-generator` package with Python 3, when used
+with Python 3 `transliterate` uses its' own simplified fallback lorem ipsum generator (which still does the job).
 
 Required imports
 

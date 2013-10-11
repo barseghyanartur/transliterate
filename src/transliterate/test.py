@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '1.3'
-__build__ = 0x00000D
+__version__ = '1.4'
+__build__ = 0x00000E
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
@@ -20,8 +20,7 @@ from transliterate import get_available_language_packs
 from transliterate.decorators import transliterate_function, transliterate_method
 from transliterate.base import TranslitLanguagePack, registry
 
-if six.PY2:
-    from transliterate.contrib.apps.translipsum import TranslipsumGenerator
+from transliterate.contrib.apps.translipsum import TranslipsumGenerator
 
 PRINT_INFO = True
 TRACK_TIME = False
@@ -250,7 +249,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'Lor5m 9psum 4olor s9t 1m5t')
         return res
 
-    @py2only
+    #@py2only
     @print_info
     def test_16_translipsum_generator_armenian(self):
         """
@@ -261,7 +260,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @py2only
+    #@py2only
     @print_info
     def test_17_translipsum_generator_georgian(self):
         """
@@ -272,7 +271,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @py2only
+    #@py2only
     @print_info
     def test_18_translipsum_generator_greek(self):
         """
@@ -283,7 +282,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @py2only
+    #@py2only
     @print_info
     def __test_19_translipsum_generator_hebrew(self):
         """
@@ -294,7 +293,7 @@ class TransliterateTest(unittest.TestCase):
         assert res
         return res
 
-    @py2only
+    #@py2only
     @print_info
     def test_20_translipsum_generator_cyrillic(self):
         """
@@ -416,8 +415,8 @@ class TransliterateTest(unittest.TestCase):
     @print_info
     def test_32_auto_translit_reversed(self):
         """
-        Test automatic reversed translit (from target script to source script) for Armenian, Georgian, Greek,
-        Hebrew and Russian (Cyrillic).
+        Test automatic reversed translit (from target script to source script) for Armenian, Georgian, Greek
+        and Russian (Cyrillic).
         """
         res = []
         texts = [
