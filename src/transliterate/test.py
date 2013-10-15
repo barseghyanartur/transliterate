@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.tests'
-__version__ = '1.4'
-__build__ = 0x00000E
+__version__ = '1.5'
+__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
 __all__ = ('TransliterateTest',)
 
@@ -63,7 +63,7 @@ def py2only(func):
     """
     Skips the test on Python 3.
     """
-    if six.PY2:
+    if not six.PY3:
         return func
 
     def dummy(self, *args, **kwargs):

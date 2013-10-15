@@ -20,6 +20,10 @@ There are also a number of useful tools included, such as:
 - Language detection for the text (if appropriate language pack is available).
 - Slugify function for non-latin texts.
 
+Prerequisites
+==================================
+- Python 2.6.8+, 2.7.+, 3.3.+
+
 Installation
 ==================================
 Install with latest stable version from PyPI:

@@ -7,10 +7,12 @@ try:
 except:
     readme = ''
 
-version = '1.4'
+version = '1.5'
 
 install_requires = [
-    'six==1.4.1',
+    #'six==1.4.1',
+    #'six>=1.1.0,<=1.4.1',
+    'six>=1.1.0'
 ]
 
 try:

@@ -1,6 +1,6 @@
 __title__ = 'transliterate.decorators'
-__version__ = '1.4'
-__build__ = 0x00000E
+__version__ = '1.5'
+__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
 __all__ = ('transliterate_function', 'transliterate_method')
 
@@ -18,7 +18,7 @@ class TransliterateFunction(object):
 
     def __call__(self, func):
         def inner(*args, **kwargs):
-            if six.PY2:
+            if not six.PY3:
                 value = unicode(func(*args, **kwargs))
             else:
                 value = func(*args, **kwargs)
@@ -39,7 +39,7 @@ class TransliterateMethod(object):
 
     def __call__(self, func):
         def inner(this, *args, **kwargs):
-            if six.PY2:
+            if not six.PY3:
                 value = unicode(func(this, *args, **kwargs))
             else:
                 value = func(this, *args, **kwargs)

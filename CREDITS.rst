@@ -7,6 +7,7 @@ Authors
 Contributors
 ----------------------
 - Hindi language pack was made with help and by initiative of Paarth Batra.
+- hajdbo for idea of lowering the six version requirement by avoiding usage of ``PY2`` imports.
 
 Bug reporters
 ~~~~~~~~~~~~~~~~~~~~~~

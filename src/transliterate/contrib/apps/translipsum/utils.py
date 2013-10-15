@@ -1,16 +1,16 @@
 __title__ = 'transliterate.contrib.apps.translipsum.utils'
-__version__ = '1.4'
-__build__ = 0x00000E
+__version__ = '1.5'
+__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
 __all__ = ('Generator',)
 
 import re
 import random
 
-from six import PY2
+from six import PY3
 from six import text_type
 
-if PY2:
+if not PY3:
     from string import translate, maketrans, punctuation
 else:
     from string import punctuation
@@ -93,16 +93,26 @@ FACTORY = """
     dictum id.
     """
 
-if PY2:
+# Splits words
+if not PY3:
     split_words = lambda f: list(set(translate(f.lower(), maketrans(punctuation, ' ' * len(punctuation))).split()))
 else:
     split_words = lambda f: list(set(f.lower().translate(str.maketrans("", "", punctuation)).split()))
 
-def split(delimiters, value, maxsplit=0):
-    value = re.sub('\s+', ' ', value)
-    regexPattern = '|'.join(map(re.escape, delimiters))
-    return re.split(regexPattern, value, maxsplit)
+def split(delimiters, value, max_split=0):
+    """
+    Splits the value given by delimiters provided.
 
+    :param str delimiters:
+    :param str value:
+    :param int max_split:
+    :return list:
+    """
+    value = re.sub('\s+', ' ', value)
+    pattern = '|'.join(map(re.escape, delimiters))
+    return re.split(pattern, value, max_split)
+
+# Split sentences
 split_sentences = lambda f: split('!;?.', f)
 
 WORDS = split_words(FACTORY)

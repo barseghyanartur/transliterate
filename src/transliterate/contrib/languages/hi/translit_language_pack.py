@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.hi.translit_language_pack'
-__version__ = '1.4'
-__build__ = 0x00000E
+__version__ = '1.5'
+__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
 __all__ = ('HindiLanguagePack',)
 

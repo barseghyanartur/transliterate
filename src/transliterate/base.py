@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '1.4'
-__build__ = 0x00000E
+__version__ = '1.5'
+__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
 __all__ = ('TranslitLanguagePack', 'registry')
 
@@ -113,7 +113,7 @@ class TranslitLanguagePack(object):
         :param bool reversed:
         :return str:
         """
-        if six.PY2:
+        if not six.PY3:
             value = unicode(value)
 
         if reversed:
