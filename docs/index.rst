@@ -20,9 +20,13 @@ There are also a number of useful tools included, such as:
 - Language detection for the text (if appropriate language pack is available).
 - Slugify function for non-latin texts.
 
+Prerequisites
+==================================
+- Python 2.6.8+, 2.7.+, 3.3.+
+
 Installation
 ==================================
-Install with latest stable version from pypi:
+Install with latest stable version from PyPI:
 
     $ pip install transliterate
 
@@ -30,9 +34,9 @@ or install the latest stable version from bitbucket:
 
     $ pip install -e hg+https://bitbucket.org/barseghyanartur/transliterate@stable#egg=transliterate
 
-or install into python path:
+or install the latest stable version from github:
 
-    $ python setup.py install
+    $ pip install -e git+http://github.org/barseghyanartur/transliterate@stable#egg=transliterate
 
 That's all. See the `Usage and examples` section for more.
 
@@ -130,15 +134,23 @@ Testing the decorator
 
 Registering a custom language pack
 ----------------------------------
+Make sure to call the `autodiscover` function before registering your own language packs if you want to
+use the bundled language packs along with your own custom ones.
+
+>>> from transliterate.discover import autodiscover
+>>> autodiscover()
+
+Then the custom language pack part comes.
+
 >>> from transliterate.base import TranslitLanguagePack, registry
 >>>
 >>> class ExampleLanguagePack(TranslitLanguagePack):
 >>>     language_code = "example"
 >>>     language_name = "Example"
 >>>     mapping = (
-            u"abcdefghij",
-            u"1234567890",
-        )
+>>>         u"abcdefghij",
+>>>         u"1234567890",
+>>>     )
 >>>
 >>> registry.register(ExampleLanguagePack)
 >>>
@@ -161,8 +173,8 @@ Forced language packs can't be replaced or unregistered.
 
 Using the lorem ipsum generator
 ----------------------------------
-Note, that at the moment lorem ipsum generator is not yet available for Python 3 due to incompatibility
-of the original `lorem-ipsum-generator` package with Python 3.
+Note, that due to incompatibility of the original `lorem-ipsum-generator` package with Python 3, when used
+with Python 3 `transliterate` uses its' own simplified fallback lorem ipsum generator (which still does the job).
 
 Required imports
 
@@ -197,7 +209,7 @@ Language detection
 ----------------------------------
 Required imports
 
->>> from transliterate.utils import detect_language
+>>> from transliterate import detect_language
 
 Detect Armenian text
 
@@ -223,7 +235,7 @@ Slugify
 ----------------------------------
 Required imports
 
->>> from transliterate.utils import slugify
+>>> from transliterate import slugify
 
 Slugify Armenian text
 

@@ -134,15 +134,23 @@ Testing the decorator
 
 Registering a custom language pack
 ----------------------------------
+Make sure to call the `autodiscover` function before registering your own language packs if you want to
+use the bundled language packs along with your own custom ones.
+
+>>> from transliterate.discover import autodiscover
+>>> autodiscover()
+
+Then the custom language pack part comes.
+
 >>> from transliterate.base import TranslitLanguagePack, registry
 >>>
 >>> class ExampleLanguagePack(TranslitLanguagePack):
 >>>     language_code = "example"
 >>>     language_name = "Example"
 >>>     mapping = (
-            u"abcdefghij",
-            u"1234567890",
-        )
+>>>         u"abcdefghij",
+>>>         u"1234567890",
+>>>     )
 >>>
 >>> registry.register(ExampleLanguagePack)
 >>>
