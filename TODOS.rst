@@ -8,6 +8,7 @@ Must haves
 
 Should haves
 --------------------------
+- Japaneese support.
 
 Could haves
 --------------------------
