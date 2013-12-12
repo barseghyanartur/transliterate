@@ -4,7 +4,7 @@ Based on MoSCoW principle
 
 Must haves
 --------------------------
-- Better docs.
+- Prediction/auto-suggest feature.
 
 Should haves
 --------------------------

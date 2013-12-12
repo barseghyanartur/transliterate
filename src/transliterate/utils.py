@@ -1,12 +1,12 @@
 __title__ = 'transliterate.utils'
-__version__ = '1.5'
-__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
-__all__ = ('translit', 'get_available_languages', 'detect_language', 'slugify')
+__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('translit', 'get_available_languages', 'suggest', 'detect_language', 'slugify')
 
+import logging
 import unicodedata
 import re
-from six import print_
 
 try:
     from collections import Counter
@@ -17,6 +17,8 @@ from transliterate.discover import autodiscover
 from transliterate.base import registry
 from transliterate.exceptions import LanguageCodeError, LanguagePackNotFound, LanguageDetectionError
 from transliterate.conf import get_setting
+
+logger = logging.getLogger(__file__)
 
 _ = lambda s: s
 
@@ -53,6 +55,30 @@ def translit(value, language_code=None, reversed=False):
 
     language_pack = cls()
     return language_pack.translit(value, reversed=reversed)
+
+def suggest(value, language_code=None, reversed=False, limit=None):
+    """
+    Suggest possible variants.
+
+    :param str value:
+    :param str language_code:
+    :param bool reversed: If set to True, reversed translation is made.
+    :param int limit: Limit number of suggested variants.
+    :return list:
+    """
+    ensure_autodiscover()
+
+    if language_code is None and reversed is False:
+        raise LanguageCodeError(_("``language_code`` is optional with ``reversed`` set to True only."))
+
+    cls = registry.get(language_code)
+
+    if cls is None:
+        raise LanguagePackNotFound(_("Language pack for code %s is not found." % language_code))
+
+    language_pack = cls()
+
+    return language_pack.suggest(value, reversed=reversed, limit=limit)
 
 def get_available_language_codes():
     """
@@ -135,7 +161,7 @@ def detect_language(text, num_words=None, fail_silently=True):
         return counter.most_common(1)[0][0]
     except Exception as e:
         if get_setting('DEBUG'):
-            print_(e)
+            logger.debug(str(e))
 
     if not fail_silently:
         raise LanguageDetectionError(_("""Can't detect language for the text "%s" given.""") % text)

@@ -45,7 +45,7 @@ setup(
     keywords = 'translit, transliteration',
     author = 'Artur Barseghyan',
     author_email = 'artur.barseghyan@gmail.com',
-    url = 'https://bitbucket.org/barseghyanartur/transliterate',
+    url = 'https://github.com/barseghyanartur/transliterate',
     package_dir = {'':'src'},
     packages = find_packages(where='./src'),
     license = 'GPL 2.0/LGPL 2.1',

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.contrib.languages.hi.translit_language_pack'
-__version__ = '1.5'
-__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('HindiLanguagePack',)
 
 from transliterate.base import TranslitLanguagePack, registry

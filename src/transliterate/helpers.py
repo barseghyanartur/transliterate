@@ -1,11 +1,10 @@
 __title__ = 'transliterate.helpers'
-__version__ = '1.5'
-__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
-__all__ = ('PROJECT_DIR', 'PY2', 'PY3')
+__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('PROJECT_DIR',)
 
 import os
-import sys
 
 PROJECT_DIR = lambda base: os.path.abspath(
     os.path.join(

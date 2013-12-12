@@ -1,7 +1,7 @@
 __title__ = 'transliterate.defaults'
-__version__ = '1.5'
-__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('LANGUAGES_DIR', 'CONTRIB_DIR', 'LANGUAGE_PACK_MODULE_NAME', 'LANGUAGE_DETECTION_MAX_NUM_KEYWORDS', 'DEBUG')
 
 LANGUAGES_DIR = ('contrib', 'languages')

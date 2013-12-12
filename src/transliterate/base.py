@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'transliterate.base'
-__version__ = '1.5'
-__build__ = 0x00000F
 __author__ = 'Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('TranslitLanguagePack', 'registry')
 
 import unicodedata
@@ -153,6 +153,15 @@ class TranslitLanguagePack(object):
                 if char_num >= range_lower and char_num <= range_upper:
                     return True
         return False
+
+    def suggest(value, reversed=False, limit=None):
+        """
+        Suggest possible variants (some sort of auto-complete).
+
+        :param str value:
+        :param int limit: Limit number of suggested variants.
+        :return list:
+        """
 
 
 class TranslitRegistry(object):
