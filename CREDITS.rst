@@ -6,6 +6,7 @@ Authors
 
 Contributors
 ----------------------
+- Timofey Pchelintsev for making the Ukrainian language pack.
 - Paarth Batra for his efforts in starting works on Hindi language pack (still in development).
 - hajdbo for idea of lowering the six version requirement by avoiding usage of ``PY2`` imports.
 - Giorgos Georgiadis for pointing to a lack of documentation for registering custom language 

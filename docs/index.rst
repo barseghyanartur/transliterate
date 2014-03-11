@@ -13,6 +13,7 @@ Comes with language packs for the following languages (listed in alphabetical or
 - Georgian (beta)
 - Greek (beta)
 - Russian
+- Ukrainian (beta)
 
 There are also a number of useful tools included, such as:
 

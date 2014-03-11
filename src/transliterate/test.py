@@ -80,6 +80,7 @@ class TransliterateTest(unittest.TestCase):
         self.latin_text = u"Lorem ipsum dolor sit amet"
         self.armenian_text = u'Լօրեմ իպսում դօլօր սիտ ամետ'
         self.cyrillic_text = u'Лорем ипсум долор сит амет'
+        self.ukrainian_cyrillic_text = u'Лорем ипсум долор сит амет'
         self.georgian_text = u'Ⴊორემ იფსუმ დოლორ სით ამეთ'
         self.greek_text = u'Λορεμ ιψθμ δολορ σιτ αμετ'
         self.hebrew_text = u'Lורeמ יpסuמ דולור סית אמeת'
@@ -92,7 +93,7 @@ class TransliterateTest(unittest.TestCase):
         """
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'ru'] #'he', 
+        c = ['el', 'hy', 'ka', 'ru', 'uk'] #'he',
         c.sort()
         self.assertEqual(res, c)
         return res
@@ -143,6 +144,15 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
+    def test_06_translit_latin_to_ukrainian_cyrillic(self):
+        """
+        Test transliteration from Latin to Ukrainian Cyrillic.
+        """
+        res = translit(self.latin_text, 'uk')
+        self.assertEqual(res, self.ukrainian_cyrillic_text)
+        return res
+
+    @print_info
     def test_07_translit_armenian_to_latin(self):
         """
         Test transliteration from Armenian to Latin.
@@ -184,6 +194,15 @@ class TransliterateTest(unittest.TestCase):
         Test transliteration from Cyrillic to Latun.
         """
         res = translit(self.cyrillic_text, 'ru', reversed=True)
+        self.assertEqual(res, self.latin_text)
+        return res
+
+    @print_info
+    def test_11_translit_ukrainian_cyrillic_to_latin(self):
+        """
+        Test transliteration from Ukrainian Cyrillic to Latun.
+        """
+        res = translit(self.ukrainian_cyrillic_text, 'uk', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
@@ -305,6 +324,16 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
+    def test_20_translipsum_generator_ukrainian_cyrillic(self):
+        """
+        Testing the translipsum generator. Generating lorem ipsum sentence in Ukrainian Cyrillic.
+        """
+        g_uk = TranslipsumGenerator(language_code='uk')
+        res = g_uk.generate_sentence()
+        assert res
+        return res
+
+    @print_info
     def test_21_language_detection_armenian(self):
         """
         Testing language detection. Detecting Amenian.
@@ -393,6 +422,15 @@ class TransliterateTest(unittest.TestCase):
         Testing slugify from Cyrillic.
         """
         res = slugify(self.cyrillic_text)
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+
+    @print_info
+    def test_30_slugify_ukrainian_cyrillic(self):
+        """
+        Testing slugify from Ukrainian Cyrillic.
+        """
+        res = slugify(self.ukrainian_cyrillic_text)
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 

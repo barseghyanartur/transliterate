@@ -7,10 +7,9 @@ try:
 except:
     readme = ''
 
-version = '1.5'
+version = '1.6'
 
 install_requires = [
-    #'six==1.4.1',
     #'six>=1.1.0,<=1.4.1',
     'six>=1.1.0'
 ]
@@ -41,6 +40,7 @@ setup(
         #"Natural Language :: Georgian",
         "Natural Language :: Greek",
         "Natural Language :: Russian",
+        "Natural Language :: Ukranian",
     ],
     keywords = 'translit, transliteration',
     author = 'Artur Barseghyan',
