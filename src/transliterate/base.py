@@ -68,6 +68,7 @@ class TranslitLanguagePack(object):
     reversed_specific_pre_processor_mapping_keys = []
     pre_processor_mapping = None
     pre_processor_mapping_keys = []
+    detectable = False
 
     def __init__(self):
         try:
@@ -162,6 +163,17 @@ class TranslitLanguagePack(object):
         :param int limit: Limit number of suggested variants.
         :return list:
         """
+
+    def detect(text, num_words=None):
+        """
+        Heavy language detection, which is activated for languages that are harder
+        detect (like Russian Cyrillic and Ukrainina Cyrillic).
+
+        :param unicode value: Input string.
+        :param int num_words: Number of words to base decision on.
+        :return bool: True if detected and False otherwise.
+        """
+        # TODO
 
 
 class TranslitRegistry(object):

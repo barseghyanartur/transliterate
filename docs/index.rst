@@ -157,14 +157,14 @@ Then the custom language pack part comes.
 >>>
 >>> print get_available_language_codes()
 ['el', 'hy', 'ka', 'ru', 'example']
->>>
+>>> 
 >>> print translit(text, 'example')
 Lor5m 9psum 4olor s9t 1m5t
 
 It's possible to replace existing language packs with your own ones. By default, existing language packs are not
 force-installed.
 
-To force install a language pack, set the ``force`` argument to True when registering a language pack. In that
+To force install a language pack, set the ``force`` argument to True when registering a language pack. In that 
 case, if a language pack with same language code has already been registered, it will be replaced; otherwise, if
 language pack didn't exist in the registry, it will be just registered.
 
@@ -186,7 +186,7 @@ Generating paragraphs in Armenian
 >>> g_am = TranslipsumGenerator(language_code='hy')
 >>> print g_am.generate_paragraph()
 Մագնա տրիստիքուե ֆաուցիբուս ֆամես նետուս նետուս օրցի մաուրիս, սուսցիպիտ. Դապիբուս րիսուս սեդ ադիպիսցինգ դիցտում.
-Ֆերմենտում ուրնա նատօքուե ատ. Uլտրիցես եգետ, տացիտի. Լիտօրա ցլասս ցօնուբիա պօսուերե մալեսուադա ին իպսում իդ պեր վե.
+Ֆերմենտում ուրնա նատօքուե ատ. Uլտրիցես եգետ, տացիտի. Լիտօրա ցլասս ցօնուբիա պօսուերե մալեսուադա ին իպսում իդ պեր վե. 
 
 Generating sentense in Georgian
 

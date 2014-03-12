@@ -80,7 +80,7 @@ class TransliterateTest(unittest.TestCase):
         self.latin_text = u"Lorem ipsum dolor sit amet"
         self.armenian_text = u'Լօրեմ իպսում դօլօր սիտ ամետ'
         self.cyrillic_text = u'Лорем ипсум долор сит амет'
-        self.ukrainian_cyrillic_text = u'Лорем ипсум долор сит амет'
+        self.ukrainian_cyrillic_text = u'Лорем іпсум долор сіт амет'
         self.georgian_text = u'Ⴊორემ იფსუმ დოლორ სით ამეთ'
         self.greek_text = u'Λορεμ ιψθμ δολορ σιτ αμετ'
         self.hebrew_text = u'Lורeמ יpסuמ דולור סית אמeת'
@@ -381,6 +381,15 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
+    def __test_25_language_detection_ukrainian_cyrillic(self):
+        """
+        Testing language detection. Detecting Ukrainian (Cyrillic).
+        """
+        res = detect_language(self.ukrainian_cyrillic_text)
+        self.assertEqual(res, 'uk')
+        return res
+
+    @print_info
     def test_26_slugify_armenian(self):
         """
         Testing slugify from Armenian.
@@ -430,7 +439,7 @@ class TransliterateTest(unittest.TestCase):
         """
         Testing slugify from Ukrainian Cyrillic.
         """
-        res = slugify(self.ukrainian_cyrillic_text)
+        res = slugify(self.ukrainian_cyrillic_text, language_code='uk')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
@@ -445,7 +454,7 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(defaults.LANGUAGE_DETECTION_MAX_NUM_KEYWORDS, override_settings())
 
         set_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS', 10)
-        
+
         self.assertEqual(10, override_settings())
 
         return override_settings()

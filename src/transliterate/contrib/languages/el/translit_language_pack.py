@@ -31,5 +31,7 @@ class GreekLanguagePack(TranslitLanguagePack):
         u"CH": u"Χ",
         u"PS": u"Ψ",
     }
+    detectable = True
+
 
 registry.register(GreekLanguagePack)

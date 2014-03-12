@@ -56,5 +56,7 @@ class HebrewLanguagePack(TranslitLanguagePack):
         u"ns": u"ן",
         u"ks": u"ך",
     }
+    detectable = True
+
 
 #registry.register(HebrewLanguagePack)

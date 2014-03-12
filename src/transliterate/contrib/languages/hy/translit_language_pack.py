@@ -60,5 +60,7 @@ class ArmenianLanguagePack(TranslitLanguagePack):
         u"Ph": u"Փ",
         u"U": u"Ու"
     }
+    detectable = True
+
 
 registry.register(ArmenianLanguagePack)

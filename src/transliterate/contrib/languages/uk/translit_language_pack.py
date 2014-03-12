@@ -48,4 +48,5 @@ class UkrainianLanguagePack(TranslitLanguagePack):
         u"Ja": u"Я"
     }
 
+
 registry.register(UkrainianLanguagePack)

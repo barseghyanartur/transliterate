@@ -47,7 +47,8 @@ class HindiLanguagePack(TranslitLanguagePack):
         u"j": u"जे",
         u"q": u"क्यू",
         u"z": u"जड़",
-        
     }
+    detectable = True
+
 
 #registry.register(HindiLanguagePack)

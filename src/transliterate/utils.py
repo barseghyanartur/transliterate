@@ -131,13 +131,17 @@ def extract_most_common_words(text, num_words=None):
             counter[word] += 1
     return counter.most_common(num_words)
 
-def detect_language(text, num_words=None, fail_silently=True):
+def detect_language(text, num_words=None, fail_silently=True, heavy_check=False):
     """
     Detects the language from the value given based on ranges defined in active language packs.
 
     :param unicode value: Input string.
     :param int num_words: Number of words to base decision on.
     :param bool fail_silently:
+    :param bool heavy_check: If given, heavy checks would be applied when simple checks
+        don't give any results. Heavy checks are language specific and do not apply
+        to a common logic. Heavy language detection is defined in the ``detect``
+        method of each language pack.
     :return str: Language code.
     """
     ensure_autodiscover()
@@ -154,7 +158,7 @@ def detect_language(text, num_words=None, fail_silently=True):
     for word, occurrencies in most_common_words:
         for letter in word:
             for language_pack in available_language_packs:
-                if language_pack.contains(letter):
+                if language_pack.detectable and language_pack.contains(letter):
                     counter[language_pack.language_code] += 1
                     continue
     try:

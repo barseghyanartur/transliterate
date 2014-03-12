@@ -45,5 +45,7 @@ class GeorgianLanguagePack(TranslitLanguagePack):
         u"Ch'": u"Ⴝ",
         u"Kh": u"Ⴞ",
     }
+    detectable = True
+
 
 registry.register(GeorgianLanguagePack)

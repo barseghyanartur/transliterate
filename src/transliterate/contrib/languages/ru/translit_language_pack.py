@@ -38,5 +38,7 @@ class RussianLanguagePack(TranslitLanguagePack):
         u"Ju": u"Ю",
         u"Ja": u"Я"
     }
+    detectable = True
+
 
 registry.register(RussianLanguagePack)
