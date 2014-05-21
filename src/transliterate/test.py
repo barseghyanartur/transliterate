@@ -515,6 +515,30 @@ class TransliterateTest(unittest.TestCase):
         self.assertTrue(not res and A.language_code in get_available_language_codes())
 
     @print_info
+    def __test_34_latin_to_latin(self):
+
+        class LatinToLatinLanguagePack(TranslitLanguagePack):
+            """
+            Custom language pack which gets rid of accented characters in Greek but leaves other characters intact.
+            """
+            language_code = "l2l"
+            language_name = "Latin to Latin"
+            mapping = (
+                u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW",
+                u"zbgdeailxkhnjmpswtrcqv&ofZBGDEAILXKHNJMPSWTRCQOFV",
+            )
+            characters = u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+            reversed_characters = u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+
+        res = registry.register(LatinToLatinLanguagePack)
+        self.assertTrue(res)
+
+        text = u"Lorem ipsum dolor sit amet 123453254593485938"
+        pack = LatinToLatinLanguagePack()
+        res = pack.translit(text, strict=True, fail_silently=False)
+        #import ipdb; ipdb.set_trace()
+
+    @print_info
     def __test_29_mappings(self):
         """
         Testing mappings.

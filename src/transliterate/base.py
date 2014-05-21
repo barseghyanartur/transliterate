@@ -7,6 +7,8 @@ __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('TranslitLanguagePack', 'registry')
 
 import unicodedata
+import re
+
 import six
 
 from transliterate.exceptions import ImproperlyConfigured, InvalidRegistryItemType
@@ -69,6 +71,8 @@ class TranslitLanguagePack(object):
     pre_processor_mapping = None
     pre_processor_mapping_keys = []
     detectable = False
+    characters = None
+    reversed_characters = None
 
     def __init__(self):
         try:
@@ -106,12 +110,22 @@ class TranslitLanguagePack(object):
         if self.reversed_specific_pre_processor_mapping:
             self.reversed_specific_pre_processor_mapping_keys = self.reversed_specific_pre_processor_mapping.keys()
 
-    def translit(self, value, reversed=False):
+        self._characters = '[^]'
+
+        if self.characters is not None:
+            self._characters = '[^{0}]'.format('\\'.join(list(self.characters)))
+
+        self._reversed_characters = '[^]'
+        if self.reversed_characters is not None:
+            self._reversed_characters = '[^{0}]'.format('\\'.join(list(self.characters)))
+
+    def translit(self, value, reversed=False, strict=False, fail_silently=True):
         """
         Transliterates the given value according to the rules set in the transliteration pack.
 
         :param str value:
         :param bool reversed:
+        :param bool strict:
         :return str:
         """
         if not six.PY3:
@@ -136,7 +150,55 @@ class TranslitLanguagePack(object):
         if self.pre_processor_mapping:
             for rule in self.pre_processor_mapping_keys:
                 value = value.replace(rule, self.pre_processor_mapping[rule])
-        return value.translate(self.translation_table)
+        res = value.translate(self.translation_table)
+
+        if strict:
+            res = self._make_strict(value=res, reversed=reversed, fail_silently=fail_silently)
+
+        return res
+
+    def _make_strict(self, value, reversed=False, fail_silently=True):
+        """
+        Strips out unnecessary characters from the string.
+
+        :param string value:
+        :param bool reversed:
+        :param bool fail_silently:
+        :return string:
+        """
+        try:
+            return self.make_strict(value, reversed)
+        except Exception as e:
+            if fail_silently:
+                return value
+            else:
+                #import ipdb; ipdb.set_trace()
+                raise e
+
+    def make_strict(self, value, reversed=False):
+        """
+        Strips out unnecessary characters from the string.
+
+        :param string value:
+        :param bool reversed:
+        :return string:
+        """
+        if reversed:
+            if self.reversed_characters:
+                # Make strict based on the ``reversed_characters``.
+                value = re.sub(self._reversed_characters, '', value)
+            else:
+                # Make strict based on the ``character_ranges`` specified.
+                pass
+        else:
+            if self.characters:
+                # Make strict based on the ``characters``.
+                value = re.sub(self._characters, '', value)
+            else:
+                # Make strict based on the ``character_ranges`` specified.
+                pass
+
+        return value
 
     @classmethod
     def contains(cls, character):

@@ -34,6 +34,7 @@ class RussianLanguagePack(TranslitLanguagePack):
         u"Zh": u"Ж",
         u"Ts": u"Ц",
         u"Ch": u"Ч",
+        u"Sh": u"Ш",
         u"Sch": u"Щ",
         u"Ju": u"Ю",
         u"Ja": u"Я"
