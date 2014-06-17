@@ -29,5 +29,5 @@ install:
 
 # Command to run tests
 script: 
-  - python src/transliterate/test.py
+  - python src/transliterate/tests/__init__.py
 
