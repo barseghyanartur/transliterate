@@ -4,12 +4,7 @@ __copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('LANGUAGES_DIR', 'CONTRIB_DIR', 'LANGUAGE_PACK_MODULE_NAME', 'LANGUAGE_DETECTION_MAX_NUM_KEYWORDS', 'DEBUG')
 
-import sys
-
-try:
-    PY32 = (sys.version_info[0] == 3 and sys.version_info[1] == 2)
-except:
-    PY32 = False
+from transliterate.helpers import PY32
 
 if PY32:
     LANGUAGES_DIR = ('contrib', 'languages_python32')

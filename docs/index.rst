@@ -20,7 +20,7 @@ There are also a number of useful tools included, such as:
 
 Prerequisites
 ==================================
-- Python 2.6.8+, 2.7.+, 3.3.+
+- Python 2.6.8+, 2.7.+, 3.2.+, 3.3.+
 
 Installation
 ==================================

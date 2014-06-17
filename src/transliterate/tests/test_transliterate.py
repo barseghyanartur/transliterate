@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-__title__ = 'transliterate.tests'
+__title__ = 'transliterate.tests.test_transliterate'
 __author__ = 'Artur Barseghyan'
 __copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('TransliterateTest',)
 
 import unittest
-import six
-from six import print_
 
 from transliterate.discover import autodiscover
 from transliterate.conf import set_setting, get_setting, reset_to_defaults_settings
@@ -19,71 +17,25 @@ from transliterate import get_available_language_codes, translit, detect_languag
 from transliterate import get_available_language_packs
 from transliterate.decorators import transliterate_function, transliterate_method
 from transliterate.base import TranslitLanguagePack, registry
+from transliterate.helpers import PY32
 
 from transliterate.contrib.apps.translipsum import TranslipsumGenerator
 
-PRINT_INFO = True
-TRACK_TIME = False
-
-def print_info(func):
-    """
-    Prints some useful info.
-    """
-    if not PRINT_INFO:
-        return func
-
-    def inner(self, *args, **kwargs):
-        if TRACK_TIME:
-            import simple_timer
-            timer = simple_timer.Timer() # Start timer
-
-        result = func(self, *args, **kwargs)
-
-        if TRACK_TIME:
-            timer.stop() # Stop timer
-
-        print_('\n{0}'.format(func.__name__))
-        print_('============================')
-        print_('""" {0} """'.format(func.__doc__.strip()))
-        print_('----------------------------')
-        if result is not None:
-            try:
-                print_(result)
-            except Exception as e:
-                print_(result.encode('utf8'))
-
-        if TRACK_TIME:
-            print_('done in {0} seconds'.format(timer.duration))
-
-        return result
-    return inner
-
-
-def py2only(func):
-    """
-    Skips the test on Python 3.
-    """
-    if not six.PY3:
-        return func
-
-    def dummy(self, *args, **kwargs):
-        pass
-
-    return dummy
-
+from transliterate.tests.helpers import py2only, print_info
+from transliterate.tests import data
 
 class TransliterateTest(unittest.TestCase):
     """
     Tests of ``transliterate.utils.translit``.
     """
     def setUp(self):
-        self.latin_text = "Lorem ipsum dolor sit amet"
-        self.armenian_text = 'Լօրեմ իպսում դօլօր սիտ ամետ'
-        self.cyrillic_text = 'Лорем ипсум долор сит амет'
-        self.ukrainian_cyrillic_text = 'Лорем іпсум долор сіт амет'
-        self.georgian_text = 'Ⴊორემ იფსუმ დოლორ სით ამეთ'
-        self.greek_text = 'Λορεμ ιψθμ δολορ σιτ αμετ'
-        self.hebrew_text = 'Lורeמ יpסuמ דולור סית אמeת'
+        self.latin_text = data.latin_text
+        self.armenian_text = data.armenian_text
+        self.cyrillic_text = data.cyrillic_text
+        self.ukrainian_cyrillic_text = data.ukrainian_cyrillic_text
+        self.georgian_text = data.georgian_text
+        self.greek_text = data.greek_text
+        self.hebrew_text = data.hebrew_text
         #reset_to_defaults_settings()
 
     @print_info
@@ -256,10 +208,7 @@ class TransliterateTest(unittest.TestCase):
             """
             language_code = "example"
             language_name = "Example"
-            mapping = (
-                "abcdefghij",
-                "1234567890",
-            )
+            mapping = data.test_15_register_custom_language_pack_mapping
 
         registry.register(ExampleLanguagePack)
 
@@ -486,15 +435,15 @@ class TransliterateTest(unittest.TestCase):
         """
         Testing register/unregister.
         """
-        from transliterate.contrib.languages_python32.hy.translit_language_pack import ArmenianLanguagePack
+        if PY32:
+            from transliterate.contrib.languages_python32.hy.translit_language_pack import ArmenianLanguagePack
+        else:
+            from transliterate.contrib.languages.hy.translit_language_pack import ArmenianLanguagePack
 
         class A(TranslitLanguagePack):
             language_code = "ru"
             language_name = "Example"
-            mapping = (
-                "abcdefghij",
-                "1234567890",
-            )
+            mapping = data.test_33_register_unregister_mapping
         # Since key `ru` already exists in the registry it can't be replaced (without force-register).
         res = registry.register(A)
         self.assertTrue(not res)
@@ -523,17 +472,14 @@ class TransliterateTest(unittest.TestCase):
             """
             language_code = "l2l"
             language_name = "Latin to Latin"
-            mapping = (
-                "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW",
-                "zbgdeailxkhnjmpswtrcqv&ofZBGDEAILXKHNJMPSWTRCQOFV",
-            )
-            characters = "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
-            reversed_characters = "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+            mapping = data.test_34_latin_to_latin_mapping
+            characters = data.test_34_latin_to_latin_characters
+            reversed_characters = data.test_34_latin_to_latin_reversed_characters
 
         res = registry.register(LatinToLatinLanguagePack)
         self.assertTrue(res)
 
-        text = "Lorem ipsum dolor sit amet 123453254593485938"
+        text = data.test_34_latin_to_latin_text
         pack = LatinToLatinLanguagePack()
         res = pack.translit(text, strict=True, fail_silently=False)
         #import ipdb; ipdb.set_trace()
