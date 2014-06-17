@@ -1,8 +1,5 @@
-Package
 ==================================
 transliterate
-
-Description
 ==================================
 Bi-directional transliterator for Python. Transliterates (unicode) strings according to the rules specified in the
 language packs (source script <-> target script).
