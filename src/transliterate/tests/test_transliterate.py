@@ -17,7 +17,6 @@ from transliterate import get_available_language_codes, translit, detect_languag
 from transliterate import get_available_language_packs
 from transliterate.decorators import transliterate_function, transliterate_method
 from transliterate.base import TranslitLanguagePack, registry
-from transliterate.helpers import PY32
 
 from transliterate.contrib.apps.translipsum import TranslipsumGenerator
 
@@ -435,10 +434,7 @@ class TransliterateTest(unittest.TestCase):
         """
         Testing register/unregister.
         """
-        if PY32:
-            from transliterate.contrib.languages_python32.hy.translit_language_pack import ArmenianLanguagePack
-        else:
-            from transliterate.contrib.languages.hy.translit_language_pack import ArmenianLanguagePack
+        from transliterate.contrib.languages.hy.translit_language_pack import ArmenianLanguagePack
 
         class A(TranslitLanguagePack):
             language_code = "ru"
