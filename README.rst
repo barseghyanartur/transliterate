@@ -28,7 +28,7 @@ Prerequisites
 
 Installation
 ==================================
-Install with latest stable version from PyPI:
+Install with latest stable version from PyPI.
 
 .. code-block:: none
 
@@ -270,7 +270,7 @@ Mappings
 - ``reversed_specific_mapping`` (tuple): When making reversed translations,
   the ``mapping`` property is still used, but in some cases you need to provide
   additional rules. This property (``reversed_specific_mapping``) is meant for
-  such cases. Further, is alike the ``mapping`.`
+  such cases. Further, is alike the ``mapping``.
 
   Example (taken from the Greek language pack).
 
