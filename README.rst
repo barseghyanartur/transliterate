@@ -7,6 +7,7 @@ language packs (source script <-> target script).
 Comes with language packs for the following languages (listed in alphabetical order):
 
 - Armenian
+- Bulgarian (beta)
 - Georgian (beta)
 - Greek (beta)
 - Russian
