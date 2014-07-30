@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 mapping = (
-    u"abvgdeziyklmnoprstufhaABVGDEZIYKLMNOPRSTUFHA",
-    u"абвгдезийклмнопрстуфхъАБВГДЕЗИЙКЛМНОПРСТУФХЪ",
+    u"abvgdeziyklmnoprstufhABVGDEZIYKLMNOPRSTUFH",
+    u"абвгдезийклмнопрстуфхАБВГДЕЗИЙКЛМНОПРСТУФХ",
 )
 
 reversed_specific_mapping = (
-    u"ь",
-    u"y"
+    u"ьъЪ",
+    u"yaA"
 )
 
 pre_processor_mapping = {
