@@ -9,6 +9,7 @@ latin_text = "Lorem ipsum dolor sit amet"
 armenian_text = 'Լօրեմ իպսում դօլօր սիտ ամետ'
 cyrillic_text = 'Лорем ипсум долор сит амет'
 ukrainian_cyrillic_text = 'Лорем іпсум долор сіт амет'
+bulgarian_cyrillic_text = 'Лорем ипсум долор сит амет'
 georgian_text = 'Ⴊორემ იფსუმ დოლორ სით ამეთ'
 greek_text = 'Λορεμ ιψθμ δολορ σιτ αμετ'
 hebrew_text = 'Lורeמ יpסuמ דולור סית אמeת'

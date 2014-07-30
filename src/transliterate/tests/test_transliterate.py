@@ -32,6 +32,7 @@ class TransliterateTest(unittest.TestCase):
         self.armenian_text = data.armenian_text
         self.cyrillic_text = data.cyrillic_text
         self.ukrainian_cyrillic_text = data.ukrainian_cyrillic_text
+        self.bulgarian_cyrillic_text = data.bulgarian_cyrillic_text
         self.georgian_text = data.georgian_text
         self.greek_text = data.greek_text
         self.hebrew_text = data.hebrew_text
@@ -44,7 +45,7 @@ class TransliterateTest(unittest.TestCase):
         """
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'ru', 'uk'] #'he',
+        c = ['el', 'hy', 'ka', 'ru', 'uk', 'bg'] #'he',
         c.sort()
         self.assertEqual(res, c)
         return res
@@ -102,6 +103,15 @@ class TransliterateTest(unittest.TestCase):
         res = translit(self.latin_text, 'uk')
         self.assertEqual(res, self.ukrainian_cyrillic_text)
         return res
+      
+    @print_info
+    def test_06_translit_latin_to_bulgarian_cyrillic(self):
+        """
+        Test transliteration from Latin to Bulgarian Cyrillic.
+        """
+        res = translit(self.latin_text, 'bg')
+        self.assertEqual(res, self.bulgarian_cyrillic_text)
+        return res
 
     @print_info
     def test_07_translit_armenian_to_latin(self):
@@ -142,7 +152,7 @@ class TransliterateTest(unittest.TestCase):
     @print_info
     def test_11_translit_cyrillic_to_latin(self):
         """
-        Test transliteration from Cyrillic to Latun.
+        Test transliteration from Cyrillic to Latin.
         """
         res = translit(self.cyrillic_text, 'ru', reversed=True)
         self.assertEqual(res, self.latin_text)
@@ -151,9 +161,18 @@ class TransliterateTest(unittest.TestCase):
     @print_info
     def test_11_translit_ukrainian_cyrillic_to_latin(self):
         """
-        Test transliteration from Ukrainian Cyrillic to Latun.
+        Test transliteration from Ukrainian Cyrillic to Latin.
         """
         res = translit(self.ukrainian_cyrillic_text, 'uk', reversed=True)
+        self.assertEqual(res, self.latin_text)
+        return res
+      
+    @print_info
+    def test_11_translit_bulgarian_cyrillic_to_latin(self):
+        """
+        Test transliteration from Bulgarian Cyrillic to Latin.
+        """
+        res = translit(self.bulgarian_cyrillic_text, 'bg', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
@@ -280,6 +299,16 @@ class TransliterateTest(unittest.TestCase):
         res = g_uk.generate_sentence()
         assert res
         return res
+      
+    @print_info
+    def test_20_translipsum_generator_bulgarian_cyrillic(self):
+        """
+        Testing the translipsum generator. Generating lorem ipsum sentence in Bulgarian Cyrillic.
+        """
+        g_bg = TranslipsumGenerator(language_code='bg')
+        res = g_bg.generate_sentence()
+        assert res
+        return res
 
     @print_info
     def test_21_language_detection_armenian(self):
@@ -336,6 +365,15 @@ class TransliterateTest(unittest.TestCase):
         res = detect_language(self.ukrainian_cyrillic_text)
         self.assertEqual(res, 'uk')
         return res
+      
+    @print_info
+    def __test_25_language_detection_bulgarian_cyrillic(self):
+        """
+        Testing language detection. Detecting Bulgarian (Cyrillic).
+        """
+        res = detect_language(self.bulgarian_cyrillic_text)
+        self.assertEqual(res, 'bg')
+        return res
 
     @print_info
     def test_26_slugify_armenian(self):
@@ -388,6 +426,15 @@ class TransliterateTest(unittest.TestCase):
         Testing slugify from Ukrainian Cyrillic.
         """
         res = slugify(self.ukrainian_cyrillic_text, language_code='uk')
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+      
+    @print_info
+    def test_30_slugify_bulgarian_cyrillic(self):
+        """
+        Testing slugify from Bulgarian Cyrillic.
+        """
+        res = slugify(self.bulgarian_cyrillic_text, language_code='bg')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
