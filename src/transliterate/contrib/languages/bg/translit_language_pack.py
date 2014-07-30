@@ -11,7 +11,8 @@ from transliterate.contrib.languages.bg import data
 
 class BulgarianLanguagePack(TranslitLanguagePack):
     """
-    Language pack for Bulgarian language. See http://en.wikipedia.org/wiki/Romanization_of_Bulgarian for details.
+    Language pack for Bulgarian language.
+    See http://en.wikipedia.org/wiki/Romanization_of_Bulgarian for details.
     """
     language_code = "bg"
     language_name = "Bulgarian"

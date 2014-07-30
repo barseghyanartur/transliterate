@@ -27,6 +27,8 @@ class TranslitLanguagePack(object):
         to source script (reversed transliteration).
     ՝՝pre_processor_mapping՝՝: Pre processor mapping (optional). A dictionary mapping for letters that can't be
         represented by a single latin letter.
+    ՝՝reversed_specific_pre_processor_mapping՝՝: Pre processor mapping (optional). A dictionary mapping for letters
+        that can't be represented by a single latin letter (reversed transliteration).
 
     :example:
 >>>    class ArmenianLanguagePack(TranslitLanguagePack):
@@ -42,6 +44,7 @@ class TranslitLanguagePack(object):
 >>>        u"rR"
 >>>    )
 >>>    pre_processor_mapping = {
+>>>        # lowercase
 >>>        u"e'": u"է",
 >>>        u"y": u"ը",
 >>>        u"th": u"թ",
@@ -56,20 +59,43 @@ class TranslitLanguagePack(object):
 >>>        u"dj": u"ջ",
 >>>        u"ph": u"փ",
 >>>        u"u": u"ու",
+>>>
+>>>        # uppercase
+>>>        u"E'": u"Է",
+>>>        u"Y": u"Ը",
+>>>        u"Th": u"Թ",
+>>>        u"Jh": u"Ժ",
+>>>        u"Ts": u"Ծ",
+>>>        u"Dz": u"Ձ",
+>>>        u"Gh": u"Ղ",
+>>>        u"Tch": u"Ճ",
+>>>        u"Sh": u"Շ",
+>>>        u"Vo": u"Ո",
+>>>        u"Ch": u"Չ",
+>>>        u"Dj": u"Ջ",
+>>>        u"Ph": u"Փ",
+>>>        u"U": u"Ու"
 >>>    }
-
-    Note, thatn in Python 3 you won't be using u prefix before the strings.
+>>>    reversed_specific_pre_processor_mapping = {
+>>>        u"ու": u"u",
+>>>        u"Ու": u"U"
+>>>    }
+    Note, that in Python 3 you won't be using u prefix before the strings.
     """
     language_code = None
     language_name = None
     character_ranges = None
     mapping = None
     reversed_specific_mapping = None
+
     reversed_pre_processor_mapping_keys = []
+
     reversed_specific_pre_processor_mapping = None
     reversed_specific_pre_processor_mapping_keys = []
+
     pre_processor_mapping = None
     pre_processor_mapping_keys = []
+
     detectable = False
     characters = None
     reversed_characters = None
@@ -225,6 +251,7 @@ class TranslitLanguagePack(object):
         :param int limit: Limit number of suggested variants.
         :return list:
         """
+        # TODO
 
     def detect(text, num_words=None):
         """

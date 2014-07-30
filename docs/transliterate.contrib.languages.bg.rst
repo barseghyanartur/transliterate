@@ -1,4 +1,4 @@
-transliterate.contrib.languages.hy package
+transliterate.contrib.languages.bg package
 ==========================================
 
 Subpackages
@@ -6,15 +6,15 @@ Subpackages
 
 .. toctree::
 
-    transliterate.contrib.languages.hy.data
+    transliterate.contrib.languages.bg.data
 
 Submodules
 ----------
 
-transliterate.contrib.languages.hy.translit_language_pack module
+transliterate.contrib.languages.bg.translit_language_pack module
 ----------------------------------------------------------------
 
-.. automodule:: transliterate.contrib.languages.hy.translit_language_pack
+.. automodule:: transliterate.contrib.languages.bg.translit_language_pack
     :members:
     :undoc-members:
     :show-inheritance:
@@ -23,7 +23,7 @@ transliterate.contrib.languages.hy.translit_language_pack module
 Module contents
 ---------------
 
-.. automodule:: transliterate.contrib.languages.hy
+.. automodule:: transliterate.contrib.languages.bg
     :members:
     :undoc-members:
     :show-inheritance:
