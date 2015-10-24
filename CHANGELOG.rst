@@ -36,9 +36,9 @@ Release history
 2014-03-12
 
 - Ukrainian language pack added.
-- Each language pack got an extra properly ``detectable``, which is set to False by
-  default. Language packs with that properly set to False are excluded from language
-  auto-detection.
+- Each language pack got an extra properly ``detectable``, which is set to
+  False by default. Language packs with that properly set to False are excluded
+  from language auto-detection.
 - Improved tests.
 
 1.5
