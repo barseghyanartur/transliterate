@@ -10,7 +10,6 @@ except:
 version = '1.7.3'
 
 install_requires = [
-    #'six>=1.1.0,<=1.4.1',
     'six>=1.1.0'
 ]
 
@@ -47,7 +46,7 @@ setup(
     author = 'Artur Barseghyan',
     author_email = 'artur.barseghyan@gmail.com',
     url = 'https://github.com/barseghyanartur/transliterate',
-    package_dir = {'':'src'},
+    package_dir = {'': 'src'},
     packages = find_packages(where='./src'),
     license = 'GPL 2.0/LGPL 2.1',
     install_requires = install_requires
