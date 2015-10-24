@@ -2,7 +2,7 @@
 
 __title__ = 'transliterate.contrib.languages.ru.translit_language_pack'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('RussianLanguagePack',)
 
@@ -11,7 +11,8 @@ from transliterate.contrib.languages.ru import data
 
 class RussianLanguagePack(TranslitLanguagePack):
     """
-    Language pack for Russian language. See http://en.wikipedia.org/wiki/Russian_alphabet for details.
+    Language pack for Russian language. See
+    `http://en.wikipedia.org/wiki/Russian_alphabet` for details.
     """
     language_code = "ru"
     language_name = "Russian"

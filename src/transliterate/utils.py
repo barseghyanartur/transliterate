@@ -1,8 +1,11 @@
 __title__ = 'transliterate.utils'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('translit', 'get_available_languages', 'suggest', 'detect_language', 'slugify')
+__all__ = (
+    'translit', 'get_available_languages', 'suggest', 'detect_language',
+    'slugify',
+)
 
 import logging
 import unicodedata
@@ -15,7 +18,9 @@ except ImportError:
 
 from transliterate.discover import autodiscover
 from transliterate.base import registry
-from transliterate.exceptions import LanguageCodeError, LanguagePackNotFound, LanguageDetectionError
+from transliterate.exceptions import (
+    LanguageCodeError, LanguagePackNotFound, LanguageDetectionError
+)
 from transliterate.conf import get_setting
 
 logger = logging.getLogger(__file__)
@@ -32,20 +37,23 @@ def ensure_autodiscover():
 
 def translit(value, language_code=None, reversed=False, strict=False):
     """
-    Transliterates the text for the language given. Language code is optional in case of reversed translations (from
-    some script to latin).
+    Transliterates the text for the language given. Language code is optional
+    in case of reversed translations (from some script to latin).
 
     :param str value:
     :param str language_code:
     :param bool reversed: If set to True, reversed translation is made.
-    :param bool strict: If given, all that are not found in the transliteration pack, are
-        simply stripped out.
+    :param bool strict: If given, all that are not found in the transliteration
+        pack, are simply stripped out.
     :return str:
     """
     ensure_autodiscover()
 
     if language_code is None and reversed is False:
-        raise LanguageCodeError(_("``language_code`` is optional with ``reversed`` set to True only."))
+        raise LanguageCodeError(
+            _("``language_code`` is optional with ``reversed`` set to True "
+              "only.")
+        )
 
     if language_code is None:
         language_code = detect_language(value, fail_silently=False)
@@ -53,7 +61,9 @@ def translit(value, language_code=None, reversed=False, strict=False):
     cls = registry.get(language_code)
 
     if cls is None:
-        raise LanguagePackNotFound(_("Language pack for code %s is not found." % language_code))
+        raise LanguagePackNotFound(
+            _("Language pack for code %s is not found." % language_code)
+        )
 
     language_pack = cls()
     return language_pack.translit(value, reversed=reversed, strict=strict)
@@ -71,12 +81,17 @@ def suggest(value, language_code=None, reversed=False, limit=None):
     ensure_autodiscover()
 
     if language_code is None and reversed is False:
-        raise LanguageCodeError(_("``language_code`` is optional with ``reversed`` set to True only."))
+        raise LanguageCodeError(
+            _("``language_code`` is optional with ``reversed`` set to True "
+              "only.")
+        )
 
     cls = registry.get(language_code)
 
     if cls is None:
-        raise LanguagePackNotFound(_("Language pack for code %s is not found." % language_code))
+        raise LanguagePackNotFound(
+            _("Language pack for code %s is not found." % language_code)
+        )
 
     language_pack = cls()
 
@@ -135,15 +150,16 @@ def extract_most_common_words(text, num_words=None):
 
 def detect_language(text, num_words=None, fail_silently=True, heavy_check=False):
     """
-    Detects the language from the value given based on ranges defined in active language packs.
+    Detects the language from the value given based on ranges defined in active
+    language packs.
 
     :param unicode value: Input string.
     :param int num_words: Number of words to base decision on.
     :param bool fail_silently:
-    :param bool heavy_check: If given, heavy checks would be applied when simple checks
-        don't give any results. Heavy checks are language specific and do not apply
-        to a common logic. Heavy language detection is defined in the ``detect``
-        method of each language pack.
+    :param bool heavy_check: If given, heavy checks would be applied when
+        simple checks don't give any results. Heavy checks are language
+        specific and do not apply to a common logic. Heavy language detection
+        is defined in the ``detect`` method of each language pack.
     :return str: Language code.
     """
     ensure_autodiscover()
@@ -170,11 +186,14 @@ def detect_language(text, num_words=None, fail_silently=True, heavy_check=False)
             logger.debug(str(e))
 
     if not fail_silently:
-        raise LanguageDetectionError(_("""Can't detect language for the text "%s" given.""") % text)
+        raise LanguageDetectionError(
+            _("""Can't detect language for the text "%s" given.""") % text
+        )
 
 def slugify(text, language_code=None):
     """
-    Slugifies the given text. If no ``language_code`` is given, autodetects the language code from text given.
+    Slugifies the given text. If no ``language_code`` is given, auto-detects
+    the language code from text given.
 
     :param unicode text:
     :return str:
@@ -183,6 +202,8 @@ def slugify(text, language_code=None):
         language_code = detect_language(text)
     if language_code:
         transliterated_text = translit(text, language_code, reversed=True)
-        slug = unicodedata.normalize('NFKD', transliterated_text).encode('ascii', 'ignore').decode('ascii')
+        slug = unicodedata.normalize('NFKD', transliterated_text) \
+                          .encode('ascii', 'ignore') \
+                          .decode('ascii')
         slug = re.sub('[^\w\s-]', '', slug).strip().lower()
         return re.sub('[-\s]+', '-', slug)

@@ -4,31 +4,39 @@ __title__ = 'transliterate.base'
 __author__ = 'Artur Barseghyan'
 __copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('TranslitLanguagePack', 'registry')
+__all__ = ('TranslitLanguagePack', 'registry',)
 
 import unicodedata
 import re
 
 import six
 
-from transliterate.exceptions import ImproperlyConfigured, InvalidRegistryItemType
+from transliterate.exceptions import (
+    ImproperlyConfigured, InvalidRegistryItemType
+)
 
 class TranslitLanguagePack(object):
     """
-    Base language pack. The attributes below shall be defined in every language pack.
+    Base language pack. The attributes below shall be defined in every
+    language pack.
 
     ``language_code``: Language code (obligatory). Example value: 'hy', 'ru'.
-    ``language_name``: Language name (obligatory). Example value: 'Armenian', 'Russian'.
-    ``character_ranges``: Character ranges that are specific to the language. When making a pack, take a look at
-        (http://en.wikipedia.org/wiki/List_of_Unicode_characters) for the ranges.
-    ``mapping``: Mapping  (obligatory). A tuple, consisting of two strings (source and target). Example value:
-        (u'abc', u'աբց').
-    ``reversed_specific_mapping``: Specific mapping (one direction only) used when transliterating from target script
-        to source script (reversed transliteration).
-    ՝՝pre_processor_mapping՝՝: Pre processor mapping (optional). A dictionary mapping for letters that can't be
-        represented by a single latin letter.
-    ՝՝reversed_specific_pre_processor_mapping՝՝: Pre processor mapping (optional). A dictionary mapping for letters
-        that can't be represented by a single latin letter (reversed transliteration).
+    ``language_name``: Language name (obligatory). Example value: 'Armenian',
+        'Russian'.
+    ``character_ranges``: Character ranges that are specific to the language.
+        When making a pack, check `this
+        <http://en.wikipedia.org/wiki/List_of_Unicode_characters>`_ page for
+        the ranges.
+    ``mapping``: Mapping  (obligatory). A tuple, consisting of two strings
+        (source and target). Example value: (u'abc', u'աբց').
+    ``reversed_specific_mapping``: Specific mapping (one direction only) used
+        when transliterating from target script to source script (reversed
+        transliteration).
+    ՝՝pre_processor_mapping՝՝: Pre processor mapping (optional). A dictionary
+        mapping for letters that can't be represented by a single latin letter.
+    ՝՝reversed_specific_pre_processor_mapping՝՝: Pre processor mapping (
+        optional). A dictionary mapping for letters that can't be represented
+        by a single latin letter (reversed transliteration).
 
     :example:
 >>>    class ArmenianLanguagePack(TranslitLanguagePack):
@@ -106,35 +114,44 @@ class TranslitLanguagePack(object):
             assert self.language_name is not None
             assert self.mapping
         except Exception as e:
-            raise ImproperlyConfigured("You should define ``language_code``, ``language_name`` and ``mapping`` "
-                                       "properties in your subclassed ``TranslitLanguagePack`` class.")
+            raise ImproperlyConfigured(
+                "You should define ``language_code``, ``language_name`` and "
+                "``mapping`` properties in your subclassed "
+                "``TranslitLanguagePack`` class.")
         super(TranslitLanguagePack, self).__init__()
 
         # Creating a translation table from the mapping set.
         self.translation_table = {}
-        [self.translation_table.update({ord(a): ord(b)}) for a, b in zip(*self.mapping)]
+        [self.translation_table.update({ord(a): ord(b)})
+         for a, b in zip(*self.mapping)]
 
         # Creating a reversed translation table.
-        self.reversed_translation_table = dict(zip(self.translation_table.values(), self.translation_table.keys()))
+        self.reversed_translation_table = dict(
+            zip(self.translation_table.values(), self.translation_table.keys())
+        )
 
         # If any pre-processor rules defined, reversing them for later use.
         if self.pre_processor_mapping:
             self.reversed_pre_processor_mapping = dict(
-                zip(self.pre_processor_mapping.values(), self.pre_processor_mapping.keys())
+                zip(
+                    self.pre_processor_mapping.values(),
+                    self.pre_processor_mapping.keys())
                 )
             self.pre_processor_mapping_keys = self.pre_processor_mapping.keys()
-            self.reversed_pre_processor_mapping_keys = self.pre_processor_mapping.values()
+            self.reversed_pre_processor_mapping_keys = \
+                self.pre_processor_mapping.values()
 
         else:
             self.reversed_pre_processor_mapping = None
 
         if self.reversed_specific_mapping:
             self.reversed_specific_translation_table = {}
-            [self.reversed_specific_translation_table.update({ord(a): ord(b)}) \
+            [self.reversed_specific_translation_table.update({ord(a): ord(b)})
              for a, b in zip(*self.reversed_specific_mapping)]
 
         if self.reversed_specific_pre_processor_mapping:
-            self.reversed_specific_pre_processor_mapping_keys = self.reversed_specific_pre_processor_mapping.keys()
+            self.reversed_specific_pre_processor_mapping_keys = \
+                self.reversed_specific_pre_processor_mapping.keys()
 
         self._characters = '[^]'
 
@@ -143,11 +160,13 @@ class TranslitLanguagePack(object):
 
         self._reversed_characters = '[^]'
         if self.reversed_characters is not None:
-            self._reversed_characters = '[^{0}]'.format('\\'.join(list(self.characters)))
+            self._reversed_characters = \
+                '[^{0}]'.format('\\'.join(list(self.characters)))
 
     def translit(self, value, reversed=False, strict=False, fail_silently=True):
         """
-        Transliterates the given value according to the rules set in the transliteration pack.
+        Transliterates the given value according to the rules set in the
+        transliteration pack.
 
         :param str value:
         :param bool reversed:
@@ -160,16 +179,24 @@ class TranslitLanguagePack(object):
         if reversed:
             # Handling reversed specific translations (one side only).
             if self.reversed_specific_mapping:
-                value = value.translate(self.reversed_specific_translation_table)
+                value = value.translate(
+                    self.reversed_specific_translation_table
+                )
 
             if self.reversed_specific_pre_processor_mapping:
                 for rule in self.reversed_specific_pre_processor_mapping_keys:
-                    value = value.replace(rule, self.reversed_specific_pre_processor_mapping[rule])
+                    value = value.replace(
+                        rule,
+                        self.reversed_specific_pre_processor_mapping[rule]
+                    )
 
             # Handling pre-processor mappings.
             if self.reversed_pre_processor_mapping:
                 for rule in self.reversed_pre_processor_mapping_keys:
-                    value = value.replace(rule, self.reversed_pre_processor_mapping[rule])
+                    value = value.replace(
+                        rule,
+                        self.reversed_pre_processor_mapping[rule]
+                    )
 
             return value.translate(self.reversed_translation_table)
 
@@ -179,7 +206,9 @@ class TranslitLanguagePack(object):
         res = value.translate(self.translation_table)
 
         if strict:
-            res = self._make_strict(value=res, reversed=reversed, fail_silently=fail_silently)
+            res = self._make_strict(value=res,
+                                    reversed=reversed,
+                                    fail_silently=fail_silently)
 
         return res
 
@@ -255,8 +284,8 @@ class TranslitLanguagePack(object):
 
     def detect(text, num_words=None):
         """
-        Heavy language detection, which is activated for languages that are harder
-        detect (like Russian Cyrillic and Ukrainina Cyrillic).
+        Heavy language detection, which is activated for languages that are
+        harder detect (like Russian Cyrillic and Ukrainian Cyrillic).
 
         :param unicode value: Input string.
         :param int num_words: Number of words to base decision on.
@@ -277,14 +306,20 @@ class TranslitRegistry(object):
         """
         Registers the language pack in the registry.
 
-        :param transliterate.base.LanguagePack cls: Subclass of ``transliterate.base.LanguagePack``.
-        :param bool force: If set to True, item stays forced. It's not possible to unregister a forced item.
+        :param transliterate.base.LanguagePack cls: Subclass of
+            ``transliterate.base.LanguagePack``.
+        :param bool force: If set to True, item stays forced. It's not possible
+            to unregister a forced item.
         :return bool: True if registered and False otherwise.
         """
         if not issubclass(cls, TranslitLanguagePack):
-            raise InvalidRegistryItemType("Invalid item type `{0}` for registry `{1}`".format(cls, self.__class__))
+            raise InvalidRegistryItemType(
+                "Invalid item type `{0}` for registry "
+                "`{1}`".format(cls, self.__class__)
+            )
 
-        # If item has not been forced yet, add/replace its' value in the registry
+        # If item has not been forced yet, add/replace its' value in the
+        # registry.
         if force:
 
             if not cls.language_code in self._forced:
@@ -306,14 +341,20 @@ class TranslitRegistry(object):
         """
         Unregisters an item from registry.
 
-        :param transliterate.base.LanguagePack cls: Subclass of ``transliterate.base.LanguagePack``.
+        :param transliterate.base.LanguagePack cls: Subclass of
+            ``transliterate.base.LanguagePack``.
         :return bool: True if unregistered and False otherwise.
         """
         if not issubclass(cls, TranslitLanguagePack):
-            raise InvalidRegistryItemType("Invalid item type `{0}` for registry `{1}`".format(cls, self.__class__))
+            raise InvalidRegistryItemType(
+                "Invalid item type `{0}` for registry "
+                "`{1}`".format(cls, self.__class__)
+            )
 
         # Only non-forced items are allowed to be unregistered.
-        if cls.language_code in self._registry and not cls.language_code in self._forced:
+        if cls.language_code in self._registry \
+                and not cls.language_code in self._forced:
+
             self._registry.pop(cls.language_code)
             return True
         else:
@@ -324,7 +365,8 @@ class TranslitRegistry(object):
         Gets the given language pack from the registry.
 
         :param str language_code:
-        :return transliterate.base.LanguagePack: Subclass of ``transliterate.base.LanguagePack``.
+        :return transliterate.base.LanguagePack: Subclass of
+            ``transliterate.base.LanguagePack``.
         """
         return self._registry.get(language_code, default)
 

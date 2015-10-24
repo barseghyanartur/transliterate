@@ -1,6 +1,6 @@
 __title__ = 'transliterate.contrib.apps.translipsum.__init__'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('TranslipsumGenerator',)
 
@@ -26,9 +26,17 @@ class TranslipsumGenerator(Generator):
         super(TranslipsumGenerator, self).__init__(*args, **kwargs)
 
     def generate_sentence(self, *args, **kwargs):
-        value = super(TranslipsumGenerator, self).generate_sentence(*args, **kwargs)
-        return translit(value, language_code=self._language_code, reversed=self._reversed)
+        value = super(TranslipsumGenerator, self).generate_sentence(
+            *args, **kwargs
+        )
+        return translit(value,
+                        language_code=self._language_code,
+                        reversed=self._reversed)
 
     def generate_paragraph(self, *args, **kwargs):
-        value = super(TranslipsumGenerator, self).generate_paragraph(*args, **kwargs)
-        return translit(value, language_code=self._language_code, reversed=self._reversed)
+        value = super(TranslipsumGenerator, self).generate_paragraph(
+            *args, **kwargs
+        )
+        return translit(value,
+                        language_code=self._language_code,
+                        reversed=self._reversed)

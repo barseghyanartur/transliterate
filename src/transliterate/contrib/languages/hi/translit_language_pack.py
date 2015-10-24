@@ -10,7 +10,8 @@ from transliterate.base import TranslitLanguagePack, registry
 
 class HindiLanguagePack(TranslitLanguagePack):
     """
-    Language pack for Hindi language. See http://en.wikipedia.org/wiki/Hindi for details.
+    Language pack for Hindi language. See
+    `http://en.wikipedia.org/wiki/Hindi` for details.
     """
     language_code = "hi"
     language_name = "Hindi"

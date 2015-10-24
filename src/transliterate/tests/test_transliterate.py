@@ -2,25 +2,29 @@
 
 __title__ = 'transliterate.tests.test_transliterate'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('TransliterateTest',)
 
 import unittest
 
 from transliterate.discover import autodiscover
-from transliterate.conf import set_setting, get_setting, reset_to_defaults_settings
+from transliterate.conf import (
+    set_setting, get_setting, reset_to_defaults_settings
+)
 from transliterate import defaults
-#from transliterate.utils import get_available_language_codes, translit, detect_language, slugify
-from transliterate import get_available_language_codes, translit, detect_language, slugify
-#from transliterate.utils import get_available_language_packs
+from transliterate import (
+    get_available_language_codes, translit, detect_language, slugify
+)
 from transliterate import get_available_language_packs
-from transliterate.decorators import transliterate_function, transliterate_method
+from transliterate.decorators import (
+    transliterate_function, transliterate_method
+)
 from transliterate.base import TranslitLanguagePack, registry
 
 from transliterate.contrib.apps.translipsum import TranslipsumGenerator
 
-from transliterate.tests.helpers import py2only, print_info
+from transliterate.tests.helpers import print_info
 from transliterate.tests import data
 
 class TransliterateTest(unittest.TestCase):
@@ -235,55 +239,55 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, 'Lor5m 9psum 4olor s9t 1m5t')
         return res
 
-    #@py2only
     @print_info
     def test_16_translipsum_generator_armenian(self):
         """
-        Testing the translipsum generator. Generating lorem ipsum paragraphs in Armenian.
+        Testing the translipsum generator. Generating lorem ipsum paragraphs
+        in Armenian.
         """
         g_am = TranslipsumGenerator(language_code='hy')
         res = g_am.generate_paragraph()
         assert res
         return res
 
-    #@py2only
     @print_info
     def test_17_translipsum_generator_georgian(self):
         """
-        Testing the translipsum generator. Generating lorem ipsum sentence in Georgian.
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Georgian.
         """
         g_ge = TranslipsumGenerator(language_code='ka')
         res = g_ge.generate_sentence()
         assert res
         return res
 
-    #@py2only
     @print_info
     def test_18_translipsum_generator_greek(self):
         """
-        Testing the translipsum generator. Generating lorem ipsum sentence in Greek.
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Greek.
         """
         g_el = TranslipsumGenerator(language_code='el')
         res = g_el.generate_sentence()
         assert res
         return res
 
-    #@py2only
     @print_info
     def __test_19_translipsum_generator_hebrew(self):
         """
-        Testing the translipsum generator. Generating lorem ipsum sentence in Hebrew.
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Hebrew.
         """
         g_he = TranslipsumGenerator(language_code='he')
         res = g_he.generate_sentence()
         assert res
         return res
 
-    #@py2only
     @print_info
     def test_20_translipsum_generator_cyrillic(self):
         """
-        Testing the translipsum generator. Generating lorem ipsum sentence in Cyrillic.
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Cyrillic.
         """
         g_ru = TranslipsumGenerator(language_code='ru')
         res = g_ru.generate_sentence()
@@ -293,7 +297,8 @@ class TransliterateTest(unittest.TestCase):
     @print_info
     def test_20_translipsum_generator_ukrainian_cyrillic(self):
         """
-        Testing the translipsum generator. Generating lorem ipsum sentence in Ukrainian Cyrillic.
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Ukrainian Cyrillic.
         """
         g_uk = TranslipsumGenerator(language_code='uk')
         res = g_uk.generate_sentence()
@@ -303,7 +308,8 @@ class TransliterateTest(unittest.TestCase):
     @print_info
     def test_20_translipsum_generator_bulgarian_cyrillic(self):
         """
-        Testing the translipsum generator. Generating lorem ipsum sentence in Bulgarian Cyrillic.
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Bulgarian Cyrillic.
         """
         g_bg = TranslipsumGenerator(language_code='bg')
         res = g_bg.generate_sentence()
@@ -446,7 +452,8 @@ class TransliterateTest(unittest.TestCase):
         def override_settings():
             return get_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS')
 
-        self.assertEqual(defaults.LANGUAGE_DETECTION_MAX_NUM_KEYWORDS, override_settings())
+        self.assertEqual(defaults.LANGUAGE_DETECTION_MAX_NUM_KEYWORDS,
+                         override_settings())
 
         set_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS', 10)
 
@@ -457,8 +464,8 @@ class TransliterateTest(unittest.TestCase):
     @print_info
     def test_32_auto_translit_reversed(self):
         """
-        Test automatic reversed translit (from target script to source script) for Armenian, Georgian, Greek
-        and Russian (Cyrillic).
+        Test automatic reversed translit (from target script to source script)
+        for Armenian, Georgian, Greek and Russian (Cyrillic).
         """
         res = []
         texts = [
@@ -481,13 +488,16 @@ class TransliterateTest(unittest.TestCase):
         """
         Testing register/unregister.
         """
-        from transliterate.contrib.languages.hy.translit_language_pack import ArmenianLanguagePack
+        from transliterate.contrib.languages.hy.translit_language_pack import (
+            ArmenianLanguagePack
+        )
 
         class A(TranslitLanguagePack):
             language_code = "ru"
             language_name = "Example"
             mapping = data.test_33_register_unregister_mapping
-        # Since key `ru` already exists in the registry it can't be replaced (without force-register).
+        # Since key `ru` already exists in the registry it can't be replaced
+        # (without force-register).
         res = registry.register(A)
         self.assertTrue(not res)
 
@@ -501,23 +511,30 @@ class TransliterateTest(unittest.TestCase):
 
         # Unregister non-forced language pack.
         res = registry.unregister(ArmenianLanguagePack)
-        self.assertTrue(res and not ArmenianLanguagePack.language_code in get_available_language_codes())
+        self.assertTrue(
+            res and not ArmenianLanguagePack.language_code in
+                        get_available_language_codes()
+        )
 
         res = registry.unregister(A)
-        self.assertTrue(not res and A.language_code in get_available_language_codes())
+        self.assertTrue(
+            not res and A.language_code in get_available_language_codes()
+        )
 
     @print_info
     def __test_34_latin_to_latin(self):
 
         class LatinToLatinLanguagePack(TranslitLanguagePack):
             """
-            Custom language pack which gets rid of accented characters in Greek but leaves other characters intact.
+            Custom language pack which gets rid of accented characters in Greek
+            but leaves other characters intact.
             """
             language_code = "l2l"
             language_name = "Latin to Latin"
             mapping = data.test_34_latin_to_latin_mapping
             characters = data.test_34_latin_to_latin_characters
-            reversed_characters = data.test_34_latin_to_latin_reversed_characters
+            reversed_characters = \
+                data.test_34_latin_to_latin_reversed_characters
 
         res = registry.register(LatinToLatinLanguagePack)
         self.assertTrue(res)
@@ -525,7 +542,6 @@ class TransliterateTest(unittest.TestCase):
         text = data.test_34_latin_to_latin_text
         pack = LatinToLatinLanguagePack()
         res = pack.translit(text, strict=True, fail_silently=False)
-        #import ipdb; ipdb.set_trace()
 
     @print_info
     def __test_29_mappings(self):
@@ -533,14 +549,19 @@ class TransliterateTest(unittest.TestCase):
         Testing mappings.
         """
         for language_pack in get_available_language_packs():
-            print_('Testing language pack {0} {1}'.format(language_pack.language_code, language_pack.language_name))
+            print_('Testing language '
+                   'pack {0} {1}'.format(language_pack.language_code,
+                                         language_pack.language_name))
             print_('Reversed test:')
             for letter in language_pack.mapping[1]:
-                print_(letter, ' --> ', translit(letter, language_pack.language_code, reversed=True))
+                print_(letter, ' --> ', translit(letter,
+                                                 language_pack.language_code,
+                                                 reversed=True))
 
             print_('Normal test:')
             for letter in language_pack.mapping[0]:
-                print_(letter, ' --> ', translit(letter, language_pack.language_code))
+                print_(letter, ' --> ', translit(letter,
+                                                 language_pack.language_code))
 
 
 if __name__ == '__main__':

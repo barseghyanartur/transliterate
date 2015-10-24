@@ -1,6 +1,6 @@
 __title__ = 'transliterate.discover'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('autodiscover',)
 
@@ -18,7 +18,7 @@ from transliterate.conf import get_setting
 
 def autodiscover():
     """
-    Autodiscovers the language packs in contrib/apps.
+    Auto-discovers the language packs in contrib/apps.
     """
     LANGUAGES_DIR = get_setting('LANGUAGES_DIR')
     LANGUAGE_PACK_MODULE_NAME = get_setting('LANGUAGE_PACK_MODULE_NAME')
@@ -30,8 +30,12 @@ def autodiscover():
         if os.path.isdir(PROJECT_DIR(full_app_path)):
             try:
                 import_module(
-                    "transliterate.{0}.{1}.{2}".format('.'.join(LANGUAGES_DIR), app_path, LANGUAGE_PACK_MODULE_NAME)
+                    "transliterate.{0}.{1}.{2}".format(
+                        '.'.join(LANGUAGES_DIR),
+                        app_path,
+                        LANGUAGE_PACK_MODULE_NAME
                     )
+                )
             except ImportError as e:
                 if DEBUG:
                     print_(e)

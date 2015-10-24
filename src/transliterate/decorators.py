@@ -1,8 +1,8 @@
 __title__ = 'transliterate.decorators'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('transliterate_function', 'transliterate_method')
+__all__ = ('transliterate_function', 'transliterate_method',)
 
 import six
 
@@ -23,7 +23,9 @@ class TransliterateFunction(object):
             else:
                 value = func(*args, **kwargs)
 
-            return translit(value, language_code=self.language_code, reversed=self.reversed)
+            return translit(value,
+                            language_code=self.language_code,
+                            reversed=self.reversed)
         return inner
 
 transliterate_function = TransliterateFunction
@@ -44,7 +46,9 @@ class TransliterateMethod(object):
             else:
                 value = func(this, *args, **kwargs)
 
-            return translit(value, language_code=self.language_code, reversed=self.reversed)
+            return translit(value,
+                            language_code=self.language_code,
+                            reversed=self.reversed)
         return inner
 
 transliterate_method = TransliterateMethod
