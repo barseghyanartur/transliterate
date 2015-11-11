@@ -11,7 +11,7 @@ cyrillic_text = u'Лорем ипсум долор сит амет'
 ukrainian_cyrillic_text = u'Лорем іпсум долор сіт амет'
 bulgarian_cyrillic_text = u'Лорем ипсум долор сит амет'
 georgian_text = u'Ⴊორემ იფსუმ დოლორ სით ამეთ'
-greek_text = u'Λορεμ ιψθμ δολορ σιτ αμετ'
+greek_text = u'Λορεμ ιψυμ δολορ σιτ αμετ'
 hebrew_text = u'Lורeמ יpסuמ דולור סית אמeת'
 
 test_15_register_custom_language_pack_mapping = (
