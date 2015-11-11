@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 mapping = (
-    "abgdezhiklmnxoprstyfwuABGDEZHIKLMNXOPRSTYFWU",
+    "abgdeziiklmnxoprstyfouABGDEZIIKLMNXOPRSTYFO",
     "αβγδεζηικλμνξοπρστυφωθΑΒΓΔΕΖΗΙΚΛΜΝΞΟΠΡΣΤΥΦΩΘ",
 )
 reversed_specific_mapping = (
-    "θΘ",
-    "uU"
+    "ςάέήίύόώϊϋΐΰ",
+    "saeiiyooiyiy"
 )
 pre_processor_mapping = {
     "th": "θ",
+    "Th": "θ",
     "ch": "χ",
+    "Ch": "Χ",
     "ps": "ψ",
-    "TH": "Θ",
-    "CH": "Χ",
-    "PS": "Ψ",
+    "Ps": "Ψ",
 }
