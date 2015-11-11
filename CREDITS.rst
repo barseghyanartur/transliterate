@@ -14,6 +14,7 @@ Contributors
   of accented characters in Greek, having other characters left intact (see
   example/example/foo/greekunaccented.py).
 - Petar Chakarov (@petarchakarov) for Bulgarian language pack.
+- George Karakostas (@Romamo) for fixes in Greek language pack.
 
 Bug reporters
 ~~~~~~~~~~~~~
