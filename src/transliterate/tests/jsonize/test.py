@@ -1,9 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
 Created on Mar 23, 2015
 
 @author: schernikov
 '''
-import pkgutil, json, os, re
+import pkgutil, json, os, re, six
 import transliterate
 import codecs
 import transliterate.contrib.languages as langs
@@ -16,18 +18,14 @@ reslash = re.compile(r'(?P<ctrl>\\{1,1}[^\\])', re.UNICODE)
 pycontrols = (r'\A', r'\b', r'\B', r'\Z')
 
 def main():
-    ru = translator('ru')
-    codec = ru.codec()
-    codec.show()
-    #===========================================================================
-    # for shorts in ru['latin']['shortcuts']:
-    #     name = shorts['name']
-    #     for nm in shorts.keys():
-    #         if nm == 'name': continue
-    #         print "%s: %s -> %s"%(name, nm, shorts[nm])
-    #===========================================================================
-    
-    #pprint.pprint(ru['latin']['shortcuts'])
+    ru_latin = translator('ru')
+    print ru_latin
+
+    print ru_latin.encoder
+
+    s = u'Tра-ля-ля'
+    print "%s -> %s"%(s, ru_latin.encode(s))
+    #print ru_latin.decode(u'bla-bla')
     
     #test(loc)
 
@@ -55,7 +53,7 @@ def translator(language_code, script_name='latin', variant_name=None):
     
     variant.uncontrol()
 
-    return variant
+    return variant.codec()
 
 
 def findmatches(variant, chars, script_name):
@@ -102,6 +100,14 @@ class Script(object):
     @property
     def name(self):
         return "%s[%s]"%(self._lang.name, self._name)
+
+    @property
+    def id(self):
+        return self._name
+    
+    @property
+    def language(self):
+        return self._lang
         
     def variant(self, vname):
         if not vname:
@@ -233,65 +239,117 @@ class Variant(object):
                     raise InvalidFormat("Warning: uncontrolled order of options %s or %s for %s in %s"%(nv, v, nk, self._script.name))
                 
     def codec(self):
-        mp = {}
-        for k, v in self._var.items():
+        return Codec(self._var, self._script.language.name, self._script.id, self.name)
+
+
+class Codec(object):
+    
+    def __init__(self, vdict, lname, sname, vname):
+        self._lname = lname
+        self._sname = sname
+        self._vname = vname
+
+        emp = {}
+        for k, v in vdict.items():
             if type(v) == list: v = v[0]
             subs = set(reslash.findall(v))
             if subs: # clean-out all escaped controls from target script
                 for s in subs:
                     v = v.replace(s, '')
-            mp[k] = v
+            emp[k] = v
+        
+        self._encoder = Translit(emp)
+        
+        
+        
+        #self._decoder = Translit()
+        
+    def __str__(self):
+        return "%s.%s.%s"%(self._lname, self._sname, self._vname)
+        
+    def encode(self, msg):
+        return self._encoder.translit(msg)
+    
+    def decode(self, msg):
+        return self._decoder.translit(msg)
 
-        return Codec(mp)
+    @property
+    def encoder(self):
+        return self._encoder
+    
+    @property
+    def decoder(self):
+        return self._decoder
 
 
-class Codec(object):
+class Translit(object):
 
     def __init__(self, mp):
         regs = []
         orders = {}
         singles = {}
         for k, v in mp.items():
-            if reslash.search(k): # has regex controls
+            if reslash.search(k): # check if it has regex controls
+                if k[0] == '\\' and len(k) > 2:
+                    uk = k[:2]+k[2].upper()+k[3:]
+                    regs.append((re.compile(uk, re.UNICODE), v.capitalize()))
                 regs.append((re.compile(k, re.UNICODE), v))
                 continue
-            if len(k) == 1:
-                singles[k] = v
+            if len(k) == 1 and len(v) == 1:
+                singles[ord(k)] = ord(v)
+                up = k.upper()
+                if up != k: singles[ord(up)] = ord(v.upper())
                 continue
             ordr = orders.get(len(k), None)
             if ordr is None:
                 ordr = {}
                 orders[len(k)] = ordr
+            cap = k.capitalize()
+            if k != cap: ordr[cap] = v.capitalize()
             ordr[k] = v
         maps = [orders[sz] for sz in sorted(orders.keys(), reverse=True)]
         self._regs = tuple(regs)
         self._subs = tuple(maps)
         self._trans = singles
 
-    def transcode(self, msg):
-        #TODO finish
-        return msg
-    
-    def show(self):
+    def translit(self, msg):
+        if type(msg) != six.text_type: raise UnicodeError("Unicode is expected. Got %s"%(type(msg)))
+
+        for reg, v in self._regs:
+            msg = reg.sub(v, msg)
+        
+        for order in self._subs:
+            for k, v in order.items():
+                msg = msg.replace(k, v)
+
+        return msg.translate(self._trans)
+
+    def __unicode__(self):
+        res = u''
         if self._regs:
-            print "Regexes:"
+            res += "Regexes:\n"
             for rr, v in self._regs:
-                print "  %s -> %s"%(rr.pattern, v)
-            print
+                res += "  %s -> %s\n"%(rr.pattern, v)
+            res += '\n'
         if self._subs:
-            print "Substitutes:"
+            res += "Substitutes:\n"
             for sub in self._subs:
                 kk = sub.keys()
-                print "  size %d:"%(len(kk[0]))
+                res += "  size %d:\n"%(len(kk[0]))
                 for k in sorted(kk):
-                    print "    %s -> %s"%(k, sub[k])
-                print
+                    res += "    %s -> %s\n"%(k, sub[k])
+                res += '\n'
 
         if self._trans:
-            print "Translates:"
+            res += "Translates:\n"
             for k in sorted(self._trans.keys()):
-                print "  %s -> %s"%(k, self._trans[k])
-            print 
+                res += "  %s -> %s\n"%(unichr(k), unichr(self._trans[k]))
+            res += '\n'
+
+        return res
+    
+    def __str__(self, *args, **kwargs):
+        return unicode(self).encode('utf-8')
 
 
 class Group(object):
@@ -337,6 +395,7 @@ class InvalidFormat(Exception):
     
     def __init__(self, msg):
         super(InvalidFormat, self).__init__(msg)
+
     
 if __name__ == '__main__':
     main()
