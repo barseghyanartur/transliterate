@@ -6,6 +6,7 @@ Created on Mar 23, 2015
 @author: schernikov
 '''
 import pkgutil, json, os, re, six
+from collections import OrderedDict
 import transliterate
 import codecs
 import transliterate.contrib.languages as langs
@@ -19,7 +20,13 @@ pycontrols = (r'\A', r'\b', r'\B', r'\Z')
 
 def main():
     ru_latin = translator('ru')
-    print ru_latin
+    
+    print "Testing %s"%(ru_latin)
+    tsts = ru_latin.tests()
+    for ru, latin in tsts:
+        r = ru_latin.decode(latin)
+        print ' %s %s -- %s  %s'%(' ' if r == ru else '-', ru, r, '%s'%(latin))
+    print
 
     #print ru_latin.encoder
     #print ru_latin.decoder
@@ -81,7 +88,7 @@ class Language(object):
     def script(self, sname):
         try:
             with open(os.path.join(self.location, '%s.json'%(self.name))) as f:
-                tr = json.load(f)
+                tr = json.load(f, object_pairs_hook=OrderedDict)
         except:
             raise LanguagePackNotFound("Language pack for code %s is not found." % self.name)
     
@@ -130,6 +137,9 @@ class Script(object):
     
     def shorts(self):
         return self._script.get('shortcuts', {})
+    
+    def tests(self):
+        return self._script.get('tests', [])
         
 
 class Variant(object):
@@ -150,7 +160,7 @@ class Variant(object):
         shorts = self._script.shorts()
         if not shorts: return
 
-        newvar = {}
+        newvar = OrderedDict()
         for k, v in self._var.items():
             nk = self._reshort(shorts, k)
             if type(v) == list:
@@ -177,7 +187,7 @@ class Variant(object):
 
         
     def ungroup(self):
-        newvars = {}
+        newvars = OrderedDict()
         for k, v in self._var.items():
             kgs = ungroup(k)
             if type(v) == list:
@@ -241,15 +251,16 @@ class Variant(object):
                     raise InvalidFormat("Warning: uncontrolled order of options %s or %s for %s in %s"%(nv, v, nk, self._script.name))
                 
     def codec(self):
-        return Codec(self._var, self._script.language.name, self._script.id, self.name)
+        return Codec(self._var, self._script.language.name, self._script.id, self.name, self._script)
 
 
 class Codec(object):
     
-    def __init__(self, vdict, lname, sname, vname, debug=False):
+    def __init__(self, vdict, lname, sname, vname, script, debug=False):
         self._lname = lname
         self._sname = sname
         self._vname = vname
+        self._script = script
 
         edups = {}
         ddups = {}
@@ -294,8 +305,8 @@ class Codec(object):
                 d.add(mp[k])
                 dups[k] = d
             d.add(v)
-
-        mp[k] = v
+        else:
+            mp[k] = v
         
     def __str__(self):
         return "%s.%s.%s"%(self._lname, self._sname, self._vname)
@@ -313,6 +324,9 @@ class Codec(object):
     @property
     def decoder(self):
         return self._decoder
+    
+    def tests(self):
+        return self._script.tests()
 
 
 class Translit(object):
