@@ -21,11 +21,13 @@ def main():
     ru_latin = translator('ru')
     print ru_latin
 
-    print ru_latin.encoder
+    #print ru_latin.encoder
+    #print ru_latin.decoder
 
-    s = u'Tра-ля-ля'
-    print "%s -> %s"%(s, ru_latin.encode(s))
-    #print ru_latin.decode(u'bla-bla')
+    s1 = u'Tра-ля-ля'
+    print "%s -> %s"%(s1, ru_latin.encode(s1))
+    s2 = u'bla-bla'
+    print "%s -> %s"%(s2, ru_latin.decode(s2))
     
     #test(loc)
 
@@ -244,25 +246,56 @@ class Variant(object):
 
 class Codec(object):
     
-    def __init__(self, vdict, lname, sname, vname):
+    def __init__(self, vdict, lname, sname, vname, debug=False):
         self._lname = lname
         self._sname = sname
         self._vname = vname
 
+        edups = {}
+        ddups = {}
         emp = {}
+        dec = {}
         for k, v in vdict.items():
-            if type(v) == list: v = v[0]
-            subs = set(reslash.findall(v))
-            if subs: # clean-out all escaped controls from target script
-                for s in subs:
-                    v = v.replace(s, '')
-            emp[k] = v
+            if type(v) == list: 
+                for i in v:
+                    self._apply(dec, ddups, i, k)
+                self._apply(emp, edups, k, v[0])
+            else:
+                self._apply(dec, ddups, v, k)
+                self._apply(emp, edups, k, v)
+
+        if debug:
+            nm = '%s.%s.%s'%(lname, sname, vname)
+            self._showdups(nm, 'encoder', edups)
+            self._showdups(nm, 'decoder', ddups)
         
-        self._encoder = Translit(emp)
-        
-        
-        
-        #self._decoder = Translit()
+        self._encoder = Translit(emp, 'encoder')
+        self._decoder = Translit(dec, 'decoder')
+
+
+    def _showdups(self, nm, tp, dups):
+        if not dups: return
+        print "%s: duplicate %s entries:"%(nm, tp)
+
+        for k, lst in dups.items():
+            print u'  %s->[%s]'%(k, ','.join(lst))
+        print
+
+
+    def _apply(self, mp, dups, k, v):
+        subs = set(reslash.findall(v))
+        if subs: # clean-out all escaped controls from target script
+            for s in subs:
+                v = v.replace(s, '')
+        if mp.has_key(k):
+            d = dups.get(k, None)
+            if d is None:
+                d = set()
+                d.add(mp[k])
+                dups[k] = d
+            d.add(v)
+
+        mp[k] = v
         
     def __str__(self):
         return "%s.%s.%s"%(self._lname, self._sname, self._vname)
@@ -284,7 +317,8 @@ class Codec(object):
 
 class Translit(object):
 
-    def __init__(self, mp):
+    def __init__(self, mp, nm):
+        self._name = nm
         regs = []
         orders = {}
         singles = {}
@@ -325,14 +359,14 @@ class Translit(object):
         return msg.translate(self._trans)
 
     def __unicode__(self):
-        res = u''
+        res = u'%s\n'%(self._name.capitalize())
         if self._regs:
-            res += "Regexes:\n"
+            res += " Regexes:\n"
             for rr, v in self._regs:
                 res += "  %s -> %s\n"%(rr.pattern, v)
             res += '\n'
         if self._subs:
-            res += "Substitutes:\n"
+            res += " Substitutes:\n"
             for sub in self._subs:
                 kk = sub.keys()
                 res += "  size %d:\n"%(len(kk[0]))
@@ -341,7 +375,7 @@ class Translit(object):
                 res += '\n'
 
         if self._trans:
-            res += "Translates:\n"
+            res += " Translates:\n"
             for k in sorted(self._trans.keys()):
                 res += "  %s -> %s\n"%(unichr(k), unichr(self._trans[k]))
             res += '\n'
