@@ -264,10 +264,10 @@ class TranslitLanguagePack(object):
         """
         if cls.character_ranges:
             char_num = unicodedata.normalize('NFC', character)
-            char_num = hex(ord(char_num))
+            char_num = ord(char_num)
             for character_range in cls.character_ranges:
-                range_lower = hex(character_range[0])
-                range_upper = hex(character_range[1])
+                range_lower = character_range[0]
+                range_upper = character_range[1]
                 if char_num >= range_lower and char_num <= range_upper:
                     return True
         return False
