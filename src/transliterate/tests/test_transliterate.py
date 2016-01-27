@@ -364,6 +364,15 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
+    def test_25_false_language_detection_cyrillic(self):
+        """
+        Testing language detection. Detecting is not Russian (Cyrillic).
+        """
+        res = detect_language(self.latin_text)
+        self.assertNotEqual(res, 'ru')
+        return res
+
+    @print_info
     def __test_25_language_detection_ukrainian_cyrillic(self):
         """
         Testing language detection. Detecting Ukrainian (Cyrillic).
