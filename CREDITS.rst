@@ -13,8 +13,13 @@ Contributors
   custom language packs and a nice example of using `transliterate` to get rid
   of accented characters in Greek, having other characters left intact (see
   example/example/foo/greekunaccented.py).
-- Petar Chakarov (@petarchakarov) for Bulgarian language pack.
-- George Karakostas (@Romamo) for fixes in Greek language pack.
+- `Petar Chakarov
+  <https://github.com/barseghyanartur/transliterate/commits?author=petarchakarov>`_
+  for Bulgarian language pack.
+- `George Karakostas
+  <https://github.com/barseghyanartur/transliterate/commits?author=Romamo>`_
+  for fixes in Greek language pack.
+- Sergey Kovalev for fixes in language detection.
 
 Bug reporters
 ~~~~~~~~~~~~~
