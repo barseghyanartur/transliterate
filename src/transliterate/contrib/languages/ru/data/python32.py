@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 mapping = (
-    "abvgdezijklmnoprstufh'y'ABVGDEZIJKLMNOPRSTUFH'Y'",
-    "абвгдезийклмнопрстуфхъыьАБВГДЕЗИЙКЛМНОПРСТУФХЪЫЬ",
+    "abvgdezijkqlmnoprstuwfh'y'ABVGDEZIJKQLMNOPRSTUWFH'Y'",
+    "абвгдезийкклмнопрстууфхъыьАБВГДЕЗИЙККЛМНОПРСТУУФХЪЫЬ",
 )
 reversed_specific_mapping = (
     "ёэЁЭъьЪЬ",
@@ -41,8 +41,8 @@ pre_processor_mapping = {
     "cx": "кс",
     "cy": "си",
     "cz": "кз",
-    "q": "к",
-    "w": "у",
+    "qu": "кв",
+    "wh": "в",
     "x": "кс",
     "Zh": "Ж",
     "Ts": "Ц",
@@ -76,7 +76,7 @@ pre_processor_mapping = {
     "Cx": "Кс",
     "Cy": "Си",
     "Cz": "Кз",
-    "Q": "К",
-    "W": "У",
+    "Qu": "Кв",
+    "Wh": "В",
     "X": "Кс",
 }
