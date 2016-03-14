@@ -1,4 +1,5 @@
 *.py[cod]
+*.sw[po]
 .hgignore~
 .gitignore~
 .travis.yml~
