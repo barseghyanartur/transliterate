@@ -49,7 +49,7 @@ class TransliterateTest(unittest.TestCase):
         """
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'ru', 'uk', 'bg'] #'he',
+        c = ['el', 'hy', 'ka', 'ru', 'uk', 'bg','mk'] #'he',
         c.sort()
         self.assertEqual(res, c)
         return res
