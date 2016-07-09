@@ -49,7 +49,7 @@ class TransliterateTest(unittest.TestCase):
         """
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'ru', 'uk', 'bg','mk'] #'he',
+        c = ['el', 'hy', 'ka', 'ru', 'uk', 'bg','mk', 'mn'] #'he',
         c.sort()
         self.assertEqual(res, c)
         return res
@@ -107,7 +107,7 @@ class TransliterateTest(unittest.TestCase):
         res = translit(self.latin_text, 'uk')
         self.assertEqual(res, self.ukrainian_cyrillic_text)
         return res
-      
+
     @print_info
     def test_06_translit_latin_to_bulgarian_cyrillic(self):
         """
@@ -170,7 +170,7 @@ class TransliterateTest(unittest.TestCase):
         res = translit(self.ukrainian_cyrillic_text, 'uk', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
-      
+
     @print_info
     def test_11_translit_bulgarian_cyrillic_to_latin(self):
         """
@@ -304,7 +304,7 @@ class TransliterateTest(unittest.TestCase):
         res = g_uk.generate_sentence()
         assert res
         return res
-      
+
     @print_info
     def test_20_translipsum_generator_bulgarian_cyrillic(self):
         """
@@ -380,7 +380,7 @@ class TransliterateTest(unittest.TestCase):
         res = detect_language(self.ukrainian_cyrillic_text)
         self.assertEqual(res, 'uk')
         return res
-      
+
     @print_info
     def __test_25_language_detection_bulgarian_cyrillic(self):
         """
@@ -443,7 +443,7 @@ class TransliterateTest(unittest.TestCase):
         res = slugify(self.ukrainian_cyrillic_text, language_code='uk')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
-      
+
     @print_info
     def test_30_slugify_bulgarian_cyrillic(self):
         """
