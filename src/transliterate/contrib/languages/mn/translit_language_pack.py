@@ -20,7 +20,7 @@ class MongolianLanguagePack(TranslitLanguagePack):
     mapping = data.mapping
     reversed_specific_mapping = data.reversed_specific_mapping
     pre_processor_mapping = data.pre_processor_mapping
-    detectable = True
+    detectable = False
 
 
 registry.register(MongolianLanguagePack)

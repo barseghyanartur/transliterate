@@ -1,6 +1,14 @@
 ===============
 Release history
 ===============
+1.8
+---
+2016-07-09
+
+- Added Macedonian language pack.
+- Added Mongolian language pack.
+- Drop support for Python 3.2.
+
 1.7.6
 -----
 2016-01-29

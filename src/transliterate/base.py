@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-__title__ = 'transliterate.base'
-__author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('TranslitLanguagePack', 'registry',)
-
 import unicodedata
 import re
 
@@ -14,6 +8,12 @@ import six
 from transliterate.exceptions import (
     ImproperlyConfigured, InvalidRegistryItemType
 )
+
+__title__ = 'transliterate.base'
+__author__ = 'Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013-2016 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('TranslitLanguagePack', 'registry',)
 
 class TranslitLanguagePack(object):
     """

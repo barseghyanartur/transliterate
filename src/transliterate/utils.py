@@ -1,12 +1,3 @@
-__title__ = 'transliterate.utils'
-__author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2015 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = (
-    'translit', 'get_available_languages', 'suggest', 'detect_language',
-    'slugify',
-)
-
 import logging
 import unicodedata
 import re
@@ -26,6 +17,15 @@ from transliterate.conf import get_setting
 logger = logging.getLogger(__file__)
 
 _ = lambda s: s
+
+__title__ = 'transliterate.utils'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = (
+    'translit', 'get_available_languages', 'suggest', 'detect_language',
+    'slugify',
+)
 
 def ensure_autodiscover():
     """

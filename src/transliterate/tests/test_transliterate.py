@@ -40,7 +40,7 @@ class TransliterateTest(unittest.TestCase):
         self.georgian_text = data.georgian_text
         self.greek_text = data.greek_text
         self.hebrew_text = data.hebrew_text
-        self.mongolian_text = data.mongolian_text
+        self.mongolian_cyrillic_text = data.mongolian_cyrillic_text
         #reset_to_defaults_settings()
 
     @print_info

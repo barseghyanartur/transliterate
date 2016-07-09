@@ -20,6 +20,12 @@ Contributors
   <https://github.com/barseghyanartur/transliterate/commits?author=Romamo>`_
   for fixes in Greek language pack.
 - Sergey Kovalev for fixes in language detection.
+- `Enkhbold Bataa
+  <https://github.com/barseghyanartur/transliterate/commits?author=enod>`_
+  for Mongolian language pack.
+- `Igor Stamatovski
+  <https://github.com/barseghyanartur/transliterate/commits?author=igorstama>`_
+  for Macedonian language pack.
 
 Bug reporters
 ~~~~~~~~~~~~~
