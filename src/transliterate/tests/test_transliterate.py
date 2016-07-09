@@ -40,6 +40,7 @@ class TransliterateTest(unittest.TestCase):
         self.georgian_text = data.georgian_text
         self.greek_text = data.greek_text
         self.hebrew_text = data.hebrew_text
+        self.mongolian_text = data.mongolian_text
         #reset_to_defaults_settings()
 
     @print_info
@@ -49,7 +50,7 @@ class TransliterateTest(unittest.TestCase):
         """
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'ru', 'uk', 'bg','mk'] #'he',
+        c = ['el', 'hy', 'ka', 'ru', 'uk', 'bg','mk', 'mn'] #'he',
         c.sort()
         self.assertEqual(res, c)
         return res
@@ -107,7 +108,7 @@ class TransliterateTest(unittest.TestCase):
         res = translit(self.latin_text, 'uk')
         self.assertEqual(res, self.ukrainian_cyrillic_text)
         return res
-      
+
     @print_info
     def test_06_translit_latin_to_bulgarian_cyrillic(self):
         """
@@ -115,6 +116,15 @@ class TransliterateTest(unittest.TestCase):
         """
         res = translit(self.latin_text, 'bg')
         self.assertEqual(res, self.bulgarian_cyrillic_text)
+        return res
+
+    @print_info
+    def test_06_translit_latin_to_mongolian_cyrillic(self):
+        """
+        Test transliteration from Latin to Mongolian Cyrillic.
+        """
+        res = translit(self.latin_text, 'mn')
+        self.assertEqual(res, self.mongolian_cyrillic_text)
         return res
 
     @print_info
@@ -170,13 +180,22 @@ class TransliterateTest(unittest.TestCase):
         res = translit(self.ukrainian_cyrillic_text, 'uk', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
-      
+
     @print_info
     def test_11_translit_bulgarian_cyrillic_to_latin(self):
         """
         Test transliteration from Bulgarian Cyrillic to Latin.
         """
         res = translit(self.bulgarian_cyrillic_text, 'bg', reversed=True)
+        self.assertEqual(res, self.latin_text)
+        return res
+
+    @print_info
+    def test_11_translit_mongolian_cyrillic_to_latin(self):
+        """
+        Test transliteration from Mongolian Cyrillic to Latin.
+        """
+        res = translit(self.mongolian_cyrillic_text, 'mn', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
@@ -304,7 +323,7 @@ class TransliterateTest(unittest.TestCase):
         res = g_uk.generate_sentence()
         assert res
         return res
-      
+
     @print_info
     def test_20_translipsum_generator_bulgarian_cyrillic(self):
         """
@@ -312,6 +331,17 @@ class TransliterateTest(unittest.TestCase):
         in Bulgarian Cyrillic.
         """
         g_bg = TranslipsumGenerator(language_code='bg')
+        res = g_bg.generate_sentence()
+        assert res
+        return res
+
+    @print_info
+    def test_20_translipsum_generator_mongolian_cyrillic(self):
+        """
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Mongolian Cyrillic.
+        """
+        g_bg = TranslipsumGenerator(language_code='mn')
         res = g_bg.generate_sentence()
         assert res
         return res
@@ -380,7 +410,7 @@ class TransliterateTest(unittest.TestCase):
         res = detect_language(self.ukrainian_cyrillic_text)
         self.assertEqual(res, 'uk')
         return res
-      
+
     @print_info
     def __test_25_language_detection_bulgarian_cyrillic(self):
         """
@@ -388,6 +418,15 @@ class TransliterateTest(unittest.TestCase):
         """
         res = detect_language(self.bulgarian_cyrillic_text)
         self.assertEqual(res, 'bg')
+        return res
+
+    @print_info
+    def __test_25_language_detection_mongolian_cyrillic(self):
+        """
+        Testing language detection. Detecting Mongolian (Cyrillic).
+        """
+        res = detect_language(self.mongolian_cyrillic_text)
+        self.assertEqual(res, 'mn')
         return res
 
     @print_info
@@ -443,13 +482,22 @@ class TransliterateTest(unittest.TestCase):
         res = slugify(self.ukrainian_cyrillic_text, language_code='uk')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
-      
+
     @print_info
     def test_30_slugify_bulgarian_cyrillic(self):
         """
         Testing slugify from Bulgarian Cyrillic.
         """
         res = slugify(self.bulgarian_cyrillic_text, language_code='bg')
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+
+    @print_info
+    def test_30_slugify_mongolian_cyrillic(self):
+        """
+        Testing slugify from Mongolian Cyrillic.
+        """
+        res = slugify(self.mongolian_cyrillic_text, language_code='mn')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
