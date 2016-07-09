@@ -13,6 +13,7 @@ bulgarian_cyrillic_text = 'Лорем ипсум долор сит амет'
 georgian_text = 'Ⴊორემ იფსუმ დოლორ სით ამეთ'
 greek_text = 'Λορεμ ιψυμ δολορ σιτ αμετ'
 hebrew_text = 'Lורeמ יpסuמ דולור סית אמeת'
+mongolian_text = u'Лорэм ипсүм долор сит амет'
 
 test_15_register_custom_language_pack_mapping = (
     "abcdefghij",

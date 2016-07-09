@@ -40,6 +40,7 @@ class TransliterateTest(unittest.TestCase):
         self.georgian_text = data.georgian_text
         self.greek_text = data.greek_text
         self.hebrew_text = data.hebrew_text
+        self.mongolian_text = data.mongolian_text
         #reset_to_defaults_settings()
 
     @print_info
@@ -118,6 +119,15 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
+    def test_06_translit_latin_to_mongolian_cyrillic(self):
+        """
+        Test transliteration from Latin to Mongolian Cyrillic.
+        """
+        res = translit(self.latin_text, 'mn')
+        self.assertEqual(res, self.mongolian_cyrillic_text)
+        return res
+
+    @print_info
     def test_07_translit_armenian_to_latin(self):
         """
         Test transliteration from Armenian to Latin.
@@ -177,6 +187,15 @@ class TransliterateTest(unittest.TestCase):
         Test transliteration from Bulgarian Cyrillic to Latin.
         """
         res = translit(self.bulgarian_cyrillic_text, 'bg', reversed=True)
+        self.assertEqual(res, self.latin_text)
+        return res
+
+    @print_info
+    def test_11_translit_mongolian_cyrillic_to_latin(self):
+        """
+        Test transliteration from Mongolian Cyrillic to Latin.
+        """
+        res = translit(self.mongolian_cyrillic_text, 'mn', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
@@ -317,6 +336,17 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
+    def test_20_translipsum_generator_mongolian_cyrillic(self):
+        """
+        Testing the translipsum generator. Generating lorem ipsum sentence
+        in Mongolian Cyrillic.
+        """
+        g_bg = TranslipsumGenerator(language_code='mn')
+        res = g_bg.generate_sentence()
+        assert res
+        return res
+
+    @print_info
     def test_21_language_detection_armenian(self):
         """
         Testing language detection. Detecting Amenian.
@@ -391,6 +421,15 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @print_info
+    def __test_25_language_detection_mongolian_cyrillic(self):
+        """
+        Testing language detection. Detecting Mongolian (Cyrillic).
+        """
+        res = detect_language(self.mongolian_cyrillic_text)
+        self.assertEqual(res, 'mn')
+        return res
+
+    @print_info
     def test_26_slugify_armenian(self):
         """
         Testing slugify from Armenian.
@@ -450,6 +489,15 @@ class TransliterateTest(unittest.TestCase):
         Testing slugify from Bulgarian Cyrillic.
         """
         res = slugify(self.bulgarian_cyrillic_text, language_code='bg')
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+
+    @print_info
+    def test_30_slugify_mongolian_cyrillic(self):
+        """
+        Testing slugify from Mongolian Cyrillic.
+        """
+        res = slugify(self.mongolian_cyrillic_text, language_code='mn')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
