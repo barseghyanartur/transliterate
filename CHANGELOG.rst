@@ -1,6 +1,12 @@
 ===============
 Release history
 ===============
+1.8.1
+-----
+2016-07-11
+
+- Fixes in Mongolia language pack.
+
 1.8
 ---
 2016-07-09

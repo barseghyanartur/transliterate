@@ -3,6 +3,7 @@
 .gitignore~
 .travis.yml~
 .hg/
+.hgtags
 .tox
 
 example/db/
