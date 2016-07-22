@@ -9,8 +9,8 @@ reversed_specific_mapping = (
     u"saeiiyooiyiyooiier"
 )
 pre_processor_mapping = {
-    u"th": u"ϑ",
-    u"Th": u"θ",
+    u"th": u"θ",
+    u"Th": u"Θ",
     u"ch": u"χ",
     u"Ch": u"Χ",
     u"ps": u"ψ",
