@@ -2,7 +2,7 @@
 
 __title__ = 'transliterate.tests.data.python32'
 __author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2015 Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 
 latin_text = "Lorem ipsum dolor sit amet"
@@ -30,8 +30,10 @@ test_34_latin_to_latin_mapping = (
     "zbgdeailxkhnjmpswtrcqv&ofZBGDEAILXKHNJMPSWTRCQOFV",
 )
 
-test_34_latin_to_latin_characters = "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+test_34_latin_to_latin_characters = "abgdezilxkhmjnpsvtrcqw&of" \
+                                    "ABGDEZILXKHMJNPSVTRCQOFW"
 
-test_34_latin_to_latin_reversed_characters = "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+test_34_latin_to_latin_reversed_characters = "abgdezilxkhmjnpsvtrcqw&of" \
+                                             "ABGDEZILXKHMJNPSVTRCQOFW"
 
 test_34_latin_to_latin_text = "Lorem ipsum dolor sit amet 123453254593485938"

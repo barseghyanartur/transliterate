@@ -5,6 +5,7 @@
 .hg/
 .hgtags
 .tox
+.coverage
 
 example/db/
 example/tmp/

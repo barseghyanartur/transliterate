@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
 
+from transliterate.base import TranslitLanguagePack, registry
+
 __title__ = 'transliterate.contrib.languages.he.translit_language_pack'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('HebrewLanguagePack',)
 
-from transliterate.base import TranslitLanguagePack, registry
 
 class HebrewLanguagePack(TranslitLanguagePack):
-    """
-    Language pack for Hebrew language. See http://en.wikipedia.org/wiki/Hebrew_alphabet for details. See
-    the http://en.wikipedia.org/wiki/Romanization_of_Hebrew#When_to_transliterate for transliteration details.
-    Note, that this language pack implements the new standares (2006) of Hebrew Academy.
+    """Language pack for Hebrew language.
+
+    See http://en.wikipedia.org/wiki/Hebrew_alphabet for details. See the
+    http://en.wikipedia.org/wiki/Romanization_of_Hebrew#When_to_transliterate
+    for transliteration details. Note, that this language pack implements the
+    new standards (2006) of Hebrew Academy.
 
     Confirmed
         a אּ
@@ -28,7 +31,6 @@ class HebrewLanguagePack(TranslitLanguagePack):
         vv וּ
         z ז
         zz זּ
-        
     """
     language_code = "he"
     language_name = "Hebrew"
@@ -59,4 +61,4 @@ class HebrewLanguagePack(TranslitLanguagePack):
     detectable = True
 
 
-#registry.register(HebrewLanguagePack)
+# registry.register(HebrewLanguagePack)

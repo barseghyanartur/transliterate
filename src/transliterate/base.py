@@ -1,24 +1,29 @@
 # -*- coding: utf-8 -*-
 
-import unicodedata
 import re
+import unicodedata
 
 import six
 
-from transliterate.exceptions import (
-    ImproperlyConfigured, InvalidRegistryItemType
+from .exceptions import (
+    ImproperlyConfigured,
+    InvalidRegistryItemType
 )
 
 __title__ = 'transliterate.base'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013-2016 Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('TranslitLanguagePack', 'registry',)
+__all__ = (
+    'TranslitLanguagePack',
+    'registry',
+)
+
 
 class TranslitLanguagePack(object):
-    """
-    Base language pack. The attributes below shall be defined in every
-    language pack.
+    """Base language pack.
+
+    The attributes below shall be defined in every language pack.
 
     ``language_code``: Language code (obligatory). Example value: 'hy', 'ru'.
     ``language_name``: Language name (obligatory). Example value: 'Armenian',
@@ -90,6 +95,7 @@ class TranslitLanguagePack(object):
 >>>    }
     Note, that in Python 3 you won't be using u prefix before the strings.
     """
+
     language_code = None
     language_name = None
     character_ranges = None
@@ -156,21 +162,25 @@ class TranslitLanguagePack(object):
         self._characters = '[^]'
 
         if self.characters is not None:
-            self._characters = '[^{0}]'.format('\\'.join(list(self.characters)))
+            self._characters = '[^{0}]'.format(
+                '\\'.join(list(self.characters))
+            )
 
         self._reversed_characters = '[^]'
         if self.reversed_characters is not None:
             self._reversed_characters = \
                 '[^{0}]'.format('\\'.join(list(self.characters)))
 
-    def translit(self, value, reversed=False, strict=False, fail_silently=True):
-        """
-        Transliterates the given value according to the rules set in the
-        transliteration pack.
+    def translit(self, value, reversed=False, strict=False,
+                 fail_silently=True):
+        """Transliterate the given value according to the rules.
+
+        Rules are set in the transliteration pack.
 
         :param str value:
         :param bool reversed:
         :param bool strict:
+        :param bool fail_silently:
         :return str:
         """
         if not six.PY3:
@@ -213,8 +223,7 @@ class TranslitLanguagePack(object):
         return res
 
     def _make_strict(self, value, reversed=False, fail_silently=True):
-        """
-        Strips out unnecessary characters from the string.
+        """Strip out unnecessary characters from the string.
 
         :param string value:
         :param bool reversed:
@@ -223,16 +232,14 @@ class TranslitLanguagePack(object):
         """
         try:
             return self.make_strict(value, reversed)
-        except Exception as e:
+        except Exception as err:
             if fail_silently:
                 return value
             else:
-                #import ipdb; ipdb.set_trace()
-                raise e
+                raise err
 
     def make_strict(self, value, reversed=False):
-        """
-        Strips out unnecessary characters from the string.
+        """Strip out unnecessary characters from the string.
 
         :param string value:
         :param bool reversed:
@@ -257,8 +264,7 @@ class TranslitLanguagePack(object):
 
     @classmethod
     def contains(cls, character):
-        """
-        Checks if given character belongs to the language pack.
+        """Check if given character belongs to the language pack.
 
         :return bool:
         """
@@ -273,8 +279,7 @@ class TranslitLanguagePack(object):
         return False
 
     def suggest(value, reversed=False, limit=None):
-        """
-        Suggest possible variants (some sort of auto-complete).
+        """Suggest possible variants (some sort of auto-complete).
 
         :param str value:
         :param int limit: Limit number of suggested variants.
@@ -283,7 +288,8 @@ class TranslitLanguagePack(object):
         # TODO
 
     def detect(text, num_words=None):
-        """
+        """Detect the language.
+
         Heavy language detection, which is activated for languages that are
         harder detect (like Russian Cyrillic and Ukrainian Cyrillic).
 
@@ -295,21 +301,24 @@ class TranslitLanguagePack(object):
 
 
 class TranslitRegistry(object):
-    """
-    Language pack registry.
-    """
+    """Language pack registry."""
+
     def __init__(self):
         self._registry = {}
         self._forced = []
 
+    @property
+    def registry(self):
+        """Registry."""
+        return self._registry
+
     def register(self, cls, force=False):
-        """
-        Registers the language pack in the registry.
+        """Register the language pack in the registry.
 
         :param transliterate.base.LanguagePack cls: Subclass of
             ``transliterate.base.LanguagePack``.
         :param bool force: If set to True, item stays forced. It's not possible
-            to unregister a forced item.
+            to un-register a forced item.
         :return bool: True if registered and False otherwise.
         """
         if not issubclass(cls, TranslitLanguagePack):
@@ -322,7 +331,7 @@ class TranslitRegistry(object):
         # registry.
         if force:
 
-            if not cls.language_code in self._forced:
+            if cls.language_code not in self._forced:
                 self._registry[cls.language_code] = cls
                 self._forced.append(cls.language_code)
                 return True
@@ -338,8 +347,7 @@ class TranslitRegistry(object):
                 return True
 
     def unregister(self, cls):
-        """
-        Unregisters an item from registry.
+        """Un-registers an item from registry.
 
         :param transliterate.base.LanguagePack cls: Subclass of
             ``transliterate.base.LanguagePack``.
@@ -353,7 +361,7 @@ class TranslitRegistry(object):
 
         # Only non-forced items are allowed to be unregistered.
         if cls.language_code in self._registry \
-                and not cls.language_code in self._forced:
+                and cls.language_code not in self._forced:
 
             self._registry.pop(cls.language_code)
             return True
@@ -361,8 +369,7 @@ class TranslitRegistry(object):
             return False
 
     def get(self, language_code, default=None):
-        """
-        Gets the given language pack from the registry.
+        """Get the given language pack from the registry.
 
         :param str language_code:
         :return transliterate.base.LanguagePack: Subclass of

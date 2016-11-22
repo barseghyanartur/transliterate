@@ -5,6 +5,7 @@ syntax: regexp
 \.gitignore~
 \.travis.yml~
 \.tox
+\.coverage
 
 ^example/db/
 ^example/tmp/

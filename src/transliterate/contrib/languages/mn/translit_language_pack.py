@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 
+from transliterate.base import TranslitLanguagePack, registry
+from transliterate.contrib.languages.mn import data
+
 __title__ = 'transliterate.contrib.languages.mn.translit_language_pack'
 __author__ = 'Enkhbold Bataa'
 __copyright__ = '2016 Enkhbold Bataa'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('MongolianLanguagePack',)
 
-from transliterate.base import TranslitLanguagePack, registry
-from transliterate.contrib.languages.mn import data
 
 class MongolianLanguagePack(TranslitLanguagePack):
-    """
-    Language pack for Mongolian language. See
-    `https://en.wikipedia.org/wiki/Mongolian_Cyrillic_alphabet` for details.
+    """Language pack for Mongolian language.
+
+    See `https://en.wikipedia.org/wiki/Mongolian_Cyrillic_alphabet` for
+    details.
     """
     language_code = "mn"
     language_name = "Mongolian"

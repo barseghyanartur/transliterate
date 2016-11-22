@@ -1,22 +1,22 @@
 import logging
-import unicodedata
 import re
+import unicodedata
 
 try:
     from collections import Counter
 except ImportError:
     from transliterate.backports.collections import Counter
 
-from transliterate.discover import autodiscover
-from transliterate.base import registry
-from transliterate.exceptions import (
-    LanguageCodeError, LanguagePackNotFound, LanguageDetectionError
+from .base import registry
+from .conf import get_setting
+from .discover import autodiscover
+from .exceptions import (
+    LanguageCodeError,
+    LanguageDetectionError,
+    LanguagePackNotFound
 )
-from transliterate.conf import get_setting
 
-logger = logging.getLogger(__file__)
-
-_ = lambda s: s
+LOGGER = logging.getLogger(__file__)
 
 __title__ = 'transliterate.utils'
 __author__ = 'Artur Barseghyan'
@@ -27,24 +27,30 @@ __all__ = (
     'slugify',
 )
 
+
+def _(s):
+    """Fake translation wrapper."""
+    return s
+
+
 def ensure_autodiscover():
-    """
-    Ensure autodiscover.
-    """
+    """Ensure autodiscover."""
     # Running autodiscover if registry is empty
-    if not registry._registry:
+    if not registry.registry:
         autodiscover()
 
+
 def translit(value, language_code=None, reversed=False, strict=False):
-    """
-    Transliterates the text for the language given. Language code is optional
-    in case of reversed translations (from some script to latin).
+    """Transliterate the text for the language given.
+
+    Language code is optional in case of reversed translations (from some
+    script to latin).
 
     :param str value:
     :param str language_code:
     :param bool reversed: If set to True, reversed translation is made.
-    :param bool strict: If given, all that are not found in the transliteration
-        pack, are simply stripped out.
+    :param bool strict: If given, all that are not found in the
+        transliteration pack, are simply stripped out.
     :return str:
     """
     ensure_autodiscover()
@@ -68,9 +74,9 @@ def translit(value, language_code=None, reversed=False, strict=False):
     language_pack = cls()
     return language_pack.translit(value, reversed=reversed, strict=strict)
 
+
 def suggest(value, language_code=None, reversed=False, limit=None):
-    """
-    Suggest possible variants.
+    """Suggest possible variants.
 
     :param str value:
     :param str language_code:
@@ -97,42 +103,45 @@ def suggest(value, language_code=None, reversed=False, limit=None):
 
     return language_pack.suggest(value, reversed=reversed, limit=limit)
 
+
 def get_available_language_codes():
-    """
-    Gets list of language codes for registered language packs.
+    """Get list of language codes for registered language packs.
 
     :return list:
     """
     ensure_autodiscover()
 
-    return [k for k, v in registry._registry.items()]
+    return [k for k, v in registry.registry.items()]
+
 
 def get_available_language_packs():
-    """
-    Gets list of registered language packs.
+    """Get list of registered language packs.
 
     :return list:
     """
     ensure_autodiscover()
 
-    return [v for k, v in registry._registry.items()]
+    return [v for k, v in registry.registry.items()]
+
 
 def get_language_pack(language_code):
-    """
-    Get registered language pack by language code given.
+    """Get registered language pack by language code given.
 
     :param str language_code:
     :return transliterate.base.TranslitLanguagePack: Returns None on failure.
     """
     ensure_autodiscover()
-    return registry._registry.get(language_code, None)
+    return registry.registry.get(language_code, None)
+
 
 # Strips numbers from unicode string.
-strip_numbers = lambda text: ''.join(filter(lambda u: not u.isdigit(), text))
+def strip_numbers(text):
+    """Strip numbers from text."""
+    return ''.join(filter(lambda u: not u.isdigit(), text))
+
 
 def extract_most_common_words(text, num_words=None):
-    """
-    Extracts most common words.
+    """Extract most common words.
 
     :param unicode text:
     :param int num_words:
@@ -148,9 +157,12 @@ def extract_most_common_words(text, num_words=None):
             counter[word] += 1
     return counter.most_common(num_words)
 
-def detect_language(text, num_words=None, fail_silently=True, heavy_check=False):
-    """
-    Detects the language from the value given based on ranges defined in active
+
+def detect_language(text, num_words=None, fail_silently=True,
+                    heavy_check=False):
+    """Detect the language from the value given.
+
+    Detect the language from the value given based on ranges defined in active
     language packs.
 
     :param unicode value: Input string.
@@ -173,7 +185,7 @@ def detect_language(text, num_words=None, fail_silently=True, heavy_check=False)
 
     available_language_packs = get_available_language_packs()
 
-    for word, occurrencies in most_common_words:
+    for word, occurrences in most_common_words:
         for letter in word:
             for language_pack in available_language_packs:
                 if language_pack.detectable and language_pack.contains(letter):
@@ -183,19 +195,22 @@ def detect_language(text, num_words=None, fail_silently=True, heavy_check=False)
         return counter.most_common(1)[0][0]
     except Exception as e:
         if get_setting('DEBUG'):
-            logger.debug(str(e))
+            LOGGER.debug(str(e))
 
     if not fail_silently:
         raise LanguageDetectionError(
             _("""Can't detect language for the text "%s" given.""") % text
         )
 
-def slugify(text, language_code=None):
-    """
-    Slugifies the given text. If no ``language_code`` is given, auto-detects
-    the language code from text given.
 
-    :param unicode text:
+def slugify(text, language_code=None):
+    """Slugify the given text.
+
+    If no ``language_code`` is given, auto-detect the language code from
+    text given.
+
+    :param str text:
+    :param str language_code:
     :return str:
     """
     if not language_code:

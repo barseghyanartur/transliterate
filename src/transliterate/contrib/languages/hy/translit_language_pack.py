@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 
-__title__ = 'transliterate.contrib.languages.hy.translit_language_pack'
-__author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2015 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('ArmenianLanguagePack',)
-
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.hy import data
 
+__title__ = 'transliterate.contrib.languages.hy.translit_language_pack'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('ArmenianLanguagePack',)
+
+
 class ArmenianLanguagePack(TranslitLanguagePack):
-    """
-    Language pack for Armenian language. See
-    `https://en.wikipedia.org/wiki/Armenian_alphabet` for details.
+    """Language pack for Armenian language.
+
+    See `https://en.wikipedia.org/wiki/Armenian_alphabet` for details.
     """
     language_code = "hy"
     language_name = "Armenian"

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from transliterate.base import TranslitLanguagePack, registry
+from transliterate.contrib.languages.uk import data
+
 
 __title__ = 'transliterate.contrib.languages.uk.translit_language_pack'
 __author__ = 'Timofey Pchelintsev'
@@ -6,12 +9,10 @@ __copyright__ = '2014-2015 Timofey Pchelintsev'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('UkrainianLanguagePack',)
 
-from transliterate.base import TranslitLanguagePack, registry
-from transliterate.contrib.languages.uk import data
 
 class UkrainianLanguagePack(TranslitLanguagePack):
-    """
-    Language pack for Ukrainian language.
+    """Language pack for Ukrainian language.
+
     See `http://en.wikipedia.org/wiki/Ukrainian_alphabet` for details.
     """
     language_code = "uk"

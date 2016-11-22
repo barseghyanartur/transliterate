@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 
-__title__ = 'transliterate.contrib.languages.el.translit_language_pack'
-__author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2015 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('GreekLanguagePack',)
-
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.el import data
 
+__title__ = 'transliterate.contrib.languages.el.translit_language_pack'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('GreekLanguagePack',)
+
+
 class GreekLanguagePack(TranslitLanguagePack):
-    """
-    Language pack for Greek language. See
-    `http://en.wikipedia.org/wiki/Greek_alphabet` for details.
+    """Language pack for Greek language.
+
+    See `http://en.wikipedia.org/wiki/Greek_alphabet` for details.
     """
     language_code = "el"
     language_name = "Greek"

@@ -5,19 +5,21 @@ __author__ = 'Artur Barseghyan'
 __copyright__ = '2013-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = (
-    'get_setting', 'set_setting', 'settings', 'reset_to_defaults_settings'
+    'get_setting',
+    'set_setting',
+    'settings',
+    'reset_to_defaults_settings'
 )
 
+
 class Settings(object):
-    """
-    Settings registry.
-    """
+    """Settings registry."""
+
     def __init__(self):
         self._settings = {}
 
     def set(self, name, value):
-        """
-        Override default settings.
+        """Override default settings.
 
         :param str name:
         :param mixed value:
@@ -25,8 +27,7 @@ class Settings(object):
         self._settings[name] = value
 
     def get(self, name, default=None):
-        """
-        Gets a variable from local settings.
+        """Get a variable from local settings.
 
         :param str name:
         :param mixed default: Default value.
@@ -40,10 +41,9 @@ class Settings(object):
             return default
 
     def reset_to_defaults(self):
-        """
-        Resets settings to defaults.
-        """
+        """Reset settings to defaults."""
         self._settings = {}
+
 
 settings = Settings()
 

@@ -1,0 +1,2 @@
+reset
+pycodestyle src/transliterate/

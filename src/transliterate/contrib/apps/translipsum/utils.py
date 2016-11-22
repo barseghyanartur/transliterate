@@ -1,19 +1,19 @@
-__title__ = 'transliterate.contrib.apps.translipsum.utils'
-__author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2015 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('Generator',)
-
-import re
 import random
+import re
 
-from six import PY3
-from six import text_type
+from six import PY3, text_type
 
 if not PY3:
     from string import translate, maketrans, punctuation
 else:
     from string import punctuation
+
+__title__ = 'transliterate.contrib.apps.translipsum.utils'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('Generator',)
+
 
 FACTORY = """
     Sed dictum in tellus non iaculis. Aenean ac interdum ipsum. Etiam tempor
@@ -132,18 +132,29 @@ FACTORY = """
 
 # Splits words
 if not PY3:
-    split_words = lambda f: list(
-        set(translate(f.lower(),
-                      maketrans(punctuation, ' ' * len(punctuation))).split())
-    )
+    def split_words(f):
+        """Split words."""
+        return list(
+            set(
+                translate(
+                    f.lower(),
+                    maketrans(punctuation, ' ' * len(punctuation))
+                ).split()
+            )
+        )
+
 else:
-    split_words = lambda f: list(
-        set(f.lower().translate(str.maketrans("", "", punctuation)).split())
-    )
+    def split_words(f):
+        """Split words."""
+        return list(
+            set(
+                f.lower().translate(str.maketrans("", "", punctuation)).split()
+            )
+        )
+
 
 def split(delimiters, value, max_split=0):
-    """
-    Splits the value given by delimiters provided.
+    """Split the value given by delimiters provided.
 
     :param str delimiters:
     :param str value:
@@ -154,26 +165,34 @@ def split(delimiters, value, max_split=0):
     pattern = '|'.join(map(re.escape, delimiters))
     return re.split(pattern, value, max_split)
 
-# Split sentences
-split_sentences = lambda f: split('!;?.', f)
+
+def split_sentences(f):
+    """Split sentences."""
+    return split('!;?.', f)
+
 
 WORDS = split_words(FACTORY)
 SENTENCES = split_sentences(FACTORY)
 
+
 class Generator(object):
-    """
-    Fallback lorem ipsum generator for Python 3.
-    """
+    """Fallback lorem ipsum generator for Python 3."""
+
     def __init__(self, *args, **kwargs):
         pass
 
     def generate_word(self):
+        """Generate word."""
         return WORDS[random.randint(0, len(WORDS) - 1)]
 
     def generate_sentence(self):
-        return text_type(SENTENCES[random.randint(0, len(SENTENCES) - 1)] + '.')
+        """Generate sentence."""
+        return text_type(
+            SENTENCES[random.randint(0, len(SENTENCES) - 1)] + '.'
+        )
 
     def generate_paragraph(self, num_sentences=4):
+        """Generate paragraph."""
         buffer = []
         for i in range(0, 4):
             buffer.append(self.generate_sentence())

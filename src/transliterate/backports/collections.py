@@ -4,6 +4,7 @@ from itertools import repeat, ifilter
 
 from six import print_
 
+
 class Counter(dict):
     '''Dict subclass for counting hashable objects.  Sometimes called a bag
     or multiset.  Elements are stored as dictionary keys and their counts

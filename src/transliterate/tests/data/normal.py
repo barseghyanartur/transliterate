@@ -25,9 +25,11 @@ test_34_latin_to_latin_mapping = (
     u"zbgdeailxkhnjmpswtrcqv&ofZBGDEAILXKHNJMPSWTRCQOFV",
 )
 
-test_34_latin_to_latin_characters = u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+test_34_latin_to_latin_characters = u"abgdezilxkhmjnpsvtrcqw&of" \
+                                    u"ABGDEZILXKHMJNPSVTRCQOFW"
 
-test_34_latin_to_latin_reversed_characters = u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+test_34_latin_to_latin_reversed_characters = u"abgdezilxkhmjnpsvtrcqw&of" \
+                                             u"ABGDEZILXKHMJNPSVTRCQOFW"
 
 test_34_latin_to_latin_text = u"Lorem ipsum dolor sit amet 123453254593485938"
 

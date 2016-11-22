@@ -1,9 +1,9 @@
 TODOs
-==========================
+=====
 Based on MoSCoW principle
 
 Must haves
---------------------------
+----------
 - Prediction/auto-suggest feature.
 - Make the API documentation really obvious. Explain in detail what is ``mapping``,
   ``pre_processor_mapping`` and ``reversed_specific_mapping``, as well as other
@@ -24,11 +24,11 @@ Must haves
   """
 
 Should haves
---------------------------
+------------
 - Japaneese support.
 
 Could haves
---------------------------
+-----------
 
 Would haves
---------------------------
+-----------
