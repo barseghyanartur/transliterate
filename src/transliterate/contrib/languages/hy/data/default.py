@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
 
+__title__ = 'transliterate.contrib.languages.hy.data.default'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = (
+    'mapping',
+    'reversed_specific_mapping',
+    'reversed_specific_pre_processor_mapping',
+    'pre_processor_mapping',
+)
+
 mapping = (
-        u"abgdezilxkhmjnpsvtrcq&ofABGDEZILXKHMJNPSVTRCQOF",
-        u"աբգդեզիլխկհմյնպսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՍՎՏՐՑՔՕՖ",
-    )
+    u"abgdezilxkhmjnpsvtrcq&ofABGDEZILXKHMJNPSVTRCQOF",
+    u"աբգդեզիլխկհմյնպսվտրցքևօֆԱԲԳԴԵԶԻԼԽԿՀՄՅՆՊՍՎՏՐՑՔՕՖ",
+)
 reversed_specific_mapping = (
     u"ռՌ",
     u"rR"

@@ -48,7 +48,6 @@ class HindiLanguagePack(TranslitLanguagePack):
         u"c": u"सी",
         u"j": u"जे",
         u"q": u"क्यू",
-        u"z": u"जड़",
     }
     detectable = True
 

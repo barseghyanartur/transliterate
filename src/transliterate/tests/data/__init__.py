@@ -1,9 +1,4 @@
-from transliterate.helpers import PY32
-
-if PY32:
-    from transliterate.tests.data.python32 import *
-else:
-    from transliterate.tests.data.normal import *
+from .default import *
 
 __title__ = 'transliterate.tests.data'
 __author__ = 'Artur Barseghyan'
