@@ -13,7 +13,9 @@ __all__ = ('GreekLanguagePack',)
 class GreekLanguagePack(TranslitLanguagePack):
     """Language pack for Greek language.
 
-    See `http://en.wikipedia.org/wiki/Greek_alphabet` for details.
+    See `http://en.wikipedia.org/wiki/Greek_alphabet` and
+    `https://en.wikipedia.org/wiki/Romanization_of_Greek#Modern_Greek`
+    for details.
     """
     language_code = "el"
     language_name = "Greek"
