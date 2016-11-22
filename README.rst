@@ -1,6 +1,6 @@
-==================================
+=============
 transliterate
-==================================
+=============
 Bi-directional transliterator for Python. Transliterates (unicode) strings
 according to the rules specified in the language packs (source script <->
 target script).
@@ -12,6 +12,8 @@ order):
 - Bulgarian (beta)
 - Georgian
 - Greek
+- Macedonian (alpha)
+- Mongolian (alpha)
 - Russian
 - Ukrainian (beta)
 
@@ -23,35 +25,35 @@ There are also a number of useful tools included, such as:
 - Slugify function for non-latin texts.
 
 Prerequisites
-==================================
-- Python 2.6.8+, 2.7.+, 3.2.+, 3.3.+
+=============
+- Python 2.6.8+, 2.7.+, 3.3.+
 
 Installation
-==================================
+============
 Install with latest stable version from PyPI.
 
-.. code-block:: none
+.. code-block:: sh
 
     $ pip install transliterate
 
 or install the latest stable version from bitbucket:
 
-.. code-block:: none
+.. code-block:: sh
 
     $ pip install -e hg+https://bitbucket.org/barseghyanartur/transliterate@stable#egg=transliterate
 
 or install the latest stable version from github:
 
-.. code-block:: none
+.. code-block:: sh
 
     $ pip install -e git+http://github.org/barseghyanartur/transliterate@stable#egg=transliterate
 
 That's all. See the `Usage and examples` section for more.
 
 Usage and examples
-==================================
+==================
 Simple usage
-----------------------------------
+------------
 Required imports
 
 .. code-block:: python
@@ -192,7 +194,7 @@ Testing the decorator
 Registering a custom language pack
 ----------------------------------
 Basics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~
 Make sure to call the `autodiscover` function before registering your own
 language packs if you want to use the bundled language packs along with your
 own custom ones.
@@ -241,12 +243,12 @@ if language pack didn't exist in the registry, it will be just registered.
 Forced language packs can't be replaced or unregistered.
 
 API in depth
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
 There are 7 class properties that you could/should be using in your language
 pack, of which 4 are various sorts of mappings.
 
 Mappings
-++++++++++++++++++++++++++++++++++
+++++++++
 
 - ``mapping`` (tuple): A tuple of two strings, that simply represent the 
   mapping of characters from the source language to the target language. For
@@ -299,8 +301,8 @@ Mappings
             u"PS": u"Ψ",
         }
 
-- ``reversed_specific_pre_processor_mapping``: Same as ``pre_processor_mapping``,
-  but used in reversed translations.
+- ``reversed_specific_pre_processor_mapping``: Same as
+  ``pre_processor_mapping``, but used in reversed translations.
 
   Example (taken from the Armenian language pack)
 
@@ -312,7 +314,7 @@ Mappings
         }
 
 Additional
-++++++++++++++++++++++++++++++++++
+++++++++++
 - ``character_ranges`` (tuple): A tuple of character ranges (unicode table).
   Used in language detection. Works only if ``detectable`` property is set
   to True. Be aware, that language (or shall I better be saying - script) 
@@ -322,9 +324,10 @@ Additional
   for automatic language detection.
 
 Using the lorem ipsum generator
-----------------------------------
-Note, that due to incompatibility of the original `lorem-ipsum-generator` package with Python 3, when used
-with Python 3 `transliterate` uses its' own simplified fallback lorem ipsum generator (which still does the job).
+-------------------------------
+Note, that due to incompatibility of the original `lorem-ipsum-generator`
+package with Python 3, when used with Python 3 `transliterate` uses its' own
+simplified fallback lorem ipsum generator (which still does the job).
 
 Required imports
 
@@ -372,7 +375,7 @@ Generating sentense in Russian (Cyrillic)
     # Output: Рисус cонсеcтетуер, фусcе qуис лаореет ат ерос пэдэ фелис магна.
 
 Language detection
-----------------------------------
+------------------
 Required imports
 
 .. code-block:: python
@@ -412,7 +415,7 @@ Detect Russian (Cyrillic) text
     # Output: ru
 
 Slugify
-----------------------------------
+-------
 Required imports
 
 .. code-block:: python
@@ -452,18 +455,19 @@ Slugify Russian (Cyrillic) text
     # Output: lorem-ipsum-dolor-sit-amet
 
 Missing a language pack?
-==================================
-Missing a language pack for your own language? Contribute to the project by making one and it will appear in a new
-version (which will be released very quickly).
+========================
+Missing a language pack for your own language? Contribute to the project by
+making one and it will appear in a new version (which will be released very
+quickly).
 
 License
-==================================
+=======
 GPL 2.0/LGPL 2.1
 
 Support
-==================================
+=======
 For any issues contact me at the e-mail given in the `Author` section.
 
 Author
-==================================
+======
 Artur Barseghyan <artur.barseghyan@gmail.com>

@@ -1,0 +1,16 @@
+
+Documentation
+=============
+Contents:
+
+.. toctree::
+   :maxdepth: 20
+
+   transliterate
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

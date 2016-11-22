@@ -3,7 +3,9 @@
 .gitignore~
 .travis.yml~
 .hg/
+.hgtags
 .tox
+.coverage
 
 example/db/
 example/tmp/
@@ -12,4 +14,3 @@ builddocs/
 builddocs.zip
 dist/
 src/transliterate.egg-info
-

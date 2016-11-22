@@ -1,29 +1,31 @@
 # -*- coding: utf-8 -*-
 
+from transliterate.base import TranslitLanguagePack, registry
+
 __title__ = 'transliterate.contrib.languages.hi.translit_language_pack'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = '2013-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('HindiLanguagePack',)
 
-from transliterate.base import TranslitLanguagePack, registry
 
 class HindiLanguagePack(TranslitLanguagePack):
-    """
-    Language pack for Hindi language. See http://en.wikipedia.org/wiki/Hindi for details.
+    """Language pack for Hindi language.
+
+    See `http://en.wikipedia.org/wiki/Hindi` for details.
     """
     language_code = "hi"
     language_name = "Hindi"
-    character_ranges = ((0x0900, 0x097f),) # Fill this in
+    character_ranges = ((0x0900, 0x097f),)  # Fill this in
     mapping = (
-        u"aeof", #AEOF
+        u"aeof",  # AEOF
         u"अइओफ",
         # ae of
     )
-    #reversed_specific_mapping = (
-    #    u"θΘ",
-    #    u"uU"
-    #)
+    # reversed_specific_mapping = (
+    #     u"θΘ",
+    #     u"uU"
+    # )
     pre_processor_mapping = {
         u"b": u"बी",
         u"g": u"जी",
@@ -51,4 +53,4 @@ class HindiLanguagePack(TranslitLanguagePack):
     detectable = True
 
 
-#registry.register(HindiLanguagePack)
+# registry.register(HindiLanguagePack)

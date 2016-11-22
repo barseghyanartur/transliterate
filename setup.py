@@ -7,10 +7,9 @@ try:
 except:
     readme = ''
 
-version = '1.7.3'
+version = '1.8.1'
 
 install_requires = [
-    #'six>=1.1.0,<=1.4.1',
     'six>=1.1.0'
 ]
 
@@ -23,16 +22,15 @@ except:
     pass
 
 setup(
-    name = 'transliterate',
-    version = version,
-    description = ("Bi-directional transliterator for Python"),
-    long_description = readme,
-    classifiers = [
+    name='transliterate',
+    version=version,
+    description=("Bi-directional transliterator for Python"),
+    long_description=readme,
+    classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -43,12 +41,12 @@ setup(
         "Natural Language :: Russian",
         "Natural Language :: Ukranian",
     ],
-    keywords = 'translit, transliteration',
-    author = 'Artur Barseghyan',
-    author_email = 'artur.barseghyan@gmail.com',
-    url = 'https://github.com/barseghyanartur/transliterate',
-    package_dir = {'':'src'},
-    packages = find_packages(where='./src'),
-    license = 'GPL 2.0/LGPL 2.1',
-    install_requires = install_requires
+    keywords='translit, transliteration',
+    author='Artur Barseghyan',
+    author_email='artur.barseghyan@gmail.com',
+    url='https://github.com/barseghyanartur/transliterate',
+    package_dir={'': 'src'},
+    packages=find_packages(where='./src'),
+    license='GPL 2.0/LGPL 2.1',
+    install_requires=install_requires
 )

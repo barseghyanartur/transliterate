@@ -4,10 +4,12 @@ mapping = (
     "abvgdezijklmnoprstufh'y'ABVGDEZIJKLMNOPRSTUFH'Y'",
     "абвгдезийклмнопрстуфхъыьАБВГДЕЗИЙКЛМНОПРСТУФХЪЫЬ",
 )
+
 reversed_specific_mapping = (
     "ёэЁЭъьЪЬ",
     "eeEE''''"
 )
+
 pre_processor_mapping = {
     "zh": "ж",
     "ts": "ц",

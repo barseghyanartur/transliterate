@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 
-__title__ = 'transliterate.contrib.languages.ka.translit_language_pack'
-__author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('GeorgianLanguagePack',)
-
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.ka import data
 
+__title__ = 'transliterate.contrib.languages.ka.translit_language_pack'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2015 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('GeorgianLanguagePack',)
+
+
 class GeorgianLanguagePack(TranslitLanguagePack):
-    """
-    Language pack for Georgian language. See http://en.wikipedia.org/wiki/Georgian_alphabet for details.
+    """Language pack for Georgian language.
+
+    See `http://en.wikipedia.org/wiki/Georgian_alphabet for details.
     """
     language_code = "ka"
     language_name = "Georgian"
