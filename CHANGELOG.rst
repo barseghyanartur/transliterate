@@ -3,9 +3,11 @@ Release history
 ===============
 1.8.2
 -----
-2016-11-22
+yyyy-mm-dd (not released yet)
 
 - Clean up.
+- pep8 fixes.
+- Minor fixes in Greek language pack.
 
 1.8.1
 -----
