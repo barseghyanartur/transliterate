@@ -1,10 +1,11 @@
 ===============
 Release history
 ===============
-1.8.2
------
+1.9
+---
 yyyy-mm-dd (not released yet)
 
+- Dropping Python 3.2 support.
 - Clean up.
 - pep8 fixes.
 - Minor fixes in Greek language pack.

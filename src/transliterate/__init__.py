@@ -7,7 +7,7 @@ from .utils import (
 )
 
 __title__ = 'transliterate'
-__version__ = '1.8.2'
+__version__ = '1.9'
 __build__ = 0x00001b
 __author__ = 'Artur Barseghyan'
 __copyright__ = '2013-2016 Artur Barseghyan'

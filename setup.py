@@ -7,7 +7,7 @@ try:
 except:
     readme = ''
 
-version = '1.8.2'
+version = '1.9'
 
 install_requires = [
     'six>=1.1.0'
@@ -24,7 +24,7 @@ except:
 setup(
     name='transliterate',
     version=version,
-    description=("Bi-directional transliterator for Python"),
+    description="Bi-directional transliterator for Python",
     long_description=readme,
     classifiers=[
         "Programming Language :: Python",
@@ -35,8 +35,8 @@ setup(
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Development Status :: 4 - Beta",
-        #"Natural Language :: Armenian",
-        #"Natural Language :: Georgian",
+        # "Natural Language :: Armenian",
+        # "Natural Language :: Georgian",
         "Natural Language :: Greek",
         "Natural Language :: Russian",
         "Natural Language :: Ukranian",
