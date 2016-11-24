@@ -9,6 +9,7 @@ yyyy-mm-dd (not released yet)
 - Clean up.
 - pep8 fixes.
 - Minor fixes in Greek language pack.
+- Dedicated shell in example project.
 
 1.8.1
 -----

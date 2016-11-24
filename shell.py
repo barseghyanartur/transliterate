@@ -5,7 +5,8 @@ import sys
 
 def main():
     sys.path.insert(0, os.path.abspath('src'))
-    import ipdb; ipdb.set_trace()
+    from IPython import start_ipython
+    start_ipython(argv=[])
 
 
 if __name__ == '__main__':
