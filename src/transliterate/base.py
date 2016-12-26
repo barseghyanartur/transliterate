@@ -119,17 +119,20 @@ class TranslitLanguagePack(object):
             assert self.language_code is not None
             assert self.language_name is not None
             assert self.mapping
-        except Exception as e:
+        except AssertionError:
             raise ImproperlyConfigured(
                 "You should define ``language_code``, ``language_name`` and "
                 "``mapping`` properties in your subclassed "
-                "``TranslitLanguagePack`` class.")
+                "``TranslitLanguagePack`` class."
+            )
+
         super(TranslitLanguagePack, self).__init__()
 
         # Creating a translation table from the mapping set.
         self.translation_table = {}
-        [self.translation_table.update({ord(a): ord(b)})
-         for a, b in zip(*self.mapping)]
+
+        for key, val in zip(*self.mapping):
+            self.translation_table.update({ord(key): ord(val)})
 
         # Creating a reversed translation table.
         self.reversed_translation_table = dict(
@@ -152,8 +155,10 @@ class TranslitLanguagePack(object):
 
         if self.reversed_specific_mapping:
             self.reversed_specific_translation_table = {}
-            [self.reversed_specific_translation_table.update({ord(a): ord(b)})
-             for a, b in zip(*self.reversed_specific_mapping)]
+            for key, val in zip(*self.reversed_specific_mapping):
+                self.reversed_specific_translation_table.update(
+                    {ord(key): ord(val)}
+                )
 
         if self.reversed_specific_pre_processor_mapping:
             self.reversed_specific_pre_processor_mapping_keys = \
@@ -278,6 +283,7 @@ class TranslitLanguagePack(object):
                     return True
         return False
 
+    @classmethod
     def suggest(value, reversed=False, limit=None):
         """Suggest possible variants (some sort of auto-complete).
 
@@ -287,6 +293,7 @@ class TranslitLanguagePack(object):
         """
         # TODO
 
+    @classmethod
     def detect(text, num_words=None):
         """Detect the language.
 
@@ -323,8 +330,9 @@ class TranslitRegistry(object):
         """
         if not issubclass(cls, TranslitLanguagePack):
             raise InvalidRegistryItemType(
-                "Invalid item type `{0}` for registry "
-                "`{1}`".format(cls, self.__class__)
+                "Invalid item type `%s` for registry `%s`",
+                cls,
+                self.__class__
             )
 
         # If item has not been forced yet, add/replace its' value in the
@@ -355,8 +363,9 @@ class TranslitRegistry(object):
         """
         if not issubclass(cls, TranslitLanguagePack):
             raise InvalidRegistryItemType(
-                "Invalid item type `{0}` for registry "
-                "`{1}`".format(cls, self.__class__)
+                "Invalid item type `%s` for registry `%s`",
+                cls,
+                self.__class__
             )
 
         # Only non-forced items are allowed to be unregistered.

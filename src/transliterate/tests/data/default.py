@@ -33,7 +33,7 @@ test_34_latin_to_latin_reversed_characters = u"abgdezilxkhmjnpsvtrcqw&of" \
 
 test_34_latin_to_latin_text = u"Lorem ipsum dolor sit amet 123453254593485938"
 
-__title__ = 'transliterate.tests.data.normal'
+__title__ = 'transliterate.tests.data.default'
 __author__ = 'Artur Barseghyan'
 __copyright__ = '2013-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'

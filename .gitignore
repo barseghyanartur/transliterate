@@ -6,6 +6,9 @@
 .hgtags
 .tox
 .coverage
+/htmlcov/
+*.py,cover
+/.cache/
 
 example/db/
 example/tmp/

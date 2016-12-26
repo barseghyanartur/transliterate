@@ -6,6 +6,9 @@ syntax: regexp
 \.travis.yml~
 \.tox
 \.coverage
+\.cache/
+^htmlcov/
+\.py,cover
 
 ^example/db/
 ^example/tmp/

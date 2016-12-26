@@ -1,32 +1,37 @@
+import logging
 import six
 
-from six import print_
-
-from transliterate.tests.defaults import PRINT_INFO
+from .defaults import LOG_INFO
 
 __title__ = 'transliterate.tests.helpers'
 __author__ = 'Artur Barseghyan'
 __copyright__ = '2013-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = (
+    'log_info',
+    'py2only',
+)
+
+LOGGER = logging.getLogger(__name__)
 
 
-def print_info(func):
+def log_info(func):
     """Print some useful info."""
-    if not PRINT_INFO:
+    if not LOG_INFO:
         return func
 
     def inner(self, *args, **kwargs):
         result = func(self, *args, **kwargs)
 
-        print_('\n{0}'.format(func.__name__))
-        print_('============================')
-        print_('""" {0} """'.format(func.__doc__.strip()))
-        print_('----------------------------')
+        LOGGER.debug('\n%s', func.__name__)
+        LOGGER.debug('============================')
+        LOGGER.debug('""" %s """', func.__doc__.strip())
+        LOGGER.debug('----------------------------')
         if result is not None:
             try:
-                print_(result)
-            except Exception as err:
-                print_(result.encode('utf8'))
+                LOGGER.debug(result)
+            except Exception:
+                LOGGER.debug(result.encode('utf8'))
 
         return result
     return inner
