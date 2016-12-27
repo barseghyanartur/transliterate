@@ -194,6 +194,6 @@ class Generator(object):
     def generate_paragraph(self, num_sentences=4):
         """Generate paragraph."""
         _buffer = []
-        for i in range(0, 4):
-            buffer.append(self.generate_sentence())
+        for val in range(0, 4):
+            _buffer.append(self.generate_sentence())
         return ''.join(_buffer)

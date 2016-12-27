@@ -3,13 +3,14 @@ Release history
 ===============
 1.9
 ---
-yyyy-mm-dd (not released yet)
+2016-12-27
 
-- Dropping Python 3.2 support.
+- Dropping Python 3.2 and Python 3.3 support.
 - Clean up.
 - pep8 fixes.
 - Minor fixes in Greek language pack.
 - Dedicated shell in example project.
+- Tested again PyPy.
 
 1.8.1
 -----
