@@ -26,7 +26,7 @@ There are also a number of useful tools included, such as:
 
 Prerequisites
 =============
-- Python 2.6.8+, 2.7.+, 3.3.+
+- Python >=2.7, >=3.4, PyPy
 
 Installation
 ============
@@ -34,19 +34,19 @@ Install with latest stable version from PyPI.
 
 .. code-block:: sh
 
-    $ pip install transliterate
+    pip install transliterate
 
 or install the latest stable version from bitbucket:
 
 .. code-block:: sh
 
-    $ pip install -e hg+https://bitbucket.org/barseghyanartur/transliterate@stable#egg=transliterate
+    pip install https://bitbucket.org/barseghyanartur/transliterate/get/stable.tar.gz
 
 or install the latest stable version from github:
 
 .. code-block:: sh
 
-    $ pip install -e git+http://github.org/barseghyanartur/transliterate@stable#egg=transliterate
+    pip install https://github.org/barseghyanartur/transliterate/archive/stable.tar.gz
 
 That's all. See the `Usage and examples` section for more.
 
@@ -70,7 +70,7 @@ Transliteration to Armenian
 
 .. code-block:: python
 
-    print translit(text, 'hy')
+    print(translit(text, 'hy'))
 
     # Output: Լօրեմ իպսում դօլօր սիտ ամետ
 
@@ -78,7 +78,7 @@ Transliteration to Georgian
 
 .. code-block:: python
 
-    print translit(text, 'ka')
+    print(translit(text, 'ka'))
 
     # Output: Ⴊორემ იფსუმ დოლორ სით ამეთ
 
@@ -86,7 +86,7 @@ Transliteration to Greek
 
 .. code-block:: python
 
-    print translit(text, 'el')
+    print(translit(text, 'el'))
 
     # Output: Λορεμ ιψθμ δολορ σιτ αμετ
 
@@ -94,7 +94,7 @@ Transliteration to Russian
 
 .. code-block:: python
 
-    print translit(text, 'ru')
+    print(translit(text, 'ru'))
 
     # Output: Лорем ипсум долор сит амет
 
@@ -102,7 +102,7 @@ List of available (registered) languages
 
 .. code-block:: python
 
-    print get_available_language_codes()
+    print(get_available_language_codes())
 
     # Output: ['el', 'hy', 'ka', 'ru']
 
@@ -116,7 +116,7 @@ Reversed transliteration from Armenian
 
 .. code-block:: python
 
-    print translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", 'hy', reversed=True)
+    print(translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", 'hy', reversed=True))
 
     # Output: Lorem ipsum dolor sit amet
 
@@ -124,7 +124,7 @@ Reversed transliteration from Armenian with ``language_code`` argument left out
 
 .. code-block:: python
 
-    print translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", reversed=True)
+    print(translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", reversed=True))
 
     # Output: Lorem ipsum dolor sit amet
 
@@ -132,7 +132,7 @@ Reversed transliteration from Georgian
 
 .. code-block:: python
 
-    print translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", 'ka', reversed=True)
+    print(translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", 'ka', reversed=True))
 
     # Output: Lorem ipsum dolor sit amet
 
@@ -140,7 +140,7 @@ Reversed transliteration from Georgian with ``language_code`` argument left out
 
 .. code-block:: python
 
-    print translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", reversed=True)
+    print(translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", reversed=True))
 
     # Output: Lorem ipsum dolor sit amet
 
@@ -148,7 +148,7 @@ Reversed transliteration from Greek
 
 .. code-block:: python
 
-    print translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", 'el', reversed=True)
+    print(translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", 'el', reversed=True))
 
     # Output: Lorem ipsum dolor sit amet
 
@@ -156,7 +156,7 @@ Reversed transliteration from Greek with ``language_code`` argument left out
 
 .. code-block:: python
 
-    print translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", reversed=True)
+    print(translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", reversed=True))
 
     # Output: Lorem ipsum dolor sit amet
 
@@ -164,7 +164,7 @@ Reversed transliteration from Russian (Cyrillic)
 
 .. code-block:: python
 
-    print translit(u"Лорем ипсум долор сит амет", 'ru', reversed=True)
+    print(translit(u"Лорем ипсум долор сит амет", 'ru', reversed=True))
 
     # Output: Lorеm ipsum dolor sit amеt
 
@@ -173,7 +173,7 @@ argument left out
 
 .. code-block:: python
 
-    print translit(u"Лорем ипсум долор сит амет", reversed=True)
+    print(translit(u"Лорем ипсум долор сит амет", reversed=True))
 
     # Output: Lorem ipsum dolor sit amet
 
@@ -187,7 +187,7 @@ Testing the decorator
     def decorator_test(text):
         return text
 
-    print decorator_test(u"Lorem ipsum dolor sit amet")
+    print(decorator_test(u"Lorem ipsum dolor sit amet"))
 
     # Output: Լօրեմ իպսում դօլօր սիտ ամետ
 
@@ -220,11 +220,11 @@ Then the custom language pack part comes.
 
     registry.register(ExampleLanguagePack)
 
-    print get_available_language_codes()
+    print(get_available_language_codes())
 
     # Output: ['el', 'hy', 'ka', 'ru', 'example']
 
-    print translit(text, 'example')
+    print(translit(text, 'example'))
 
     # Output: Lor5m 9psum 4olor s9t 1m5t
 
@@ -340,7 +340,7 @@ Generating paragraphs in Armenian
 .. code-block:: python
 
     g_am = TranslipsumGenerator(language_code='hy')
-    print g_am.generate_paragraph()
+    print(g_am.generate_paragraph())
 
     # Output: Մագնա տրիստիքուե ֆաուցիբուս ֆամես նետուս նետուս օրցի մաուրիս,
     # սուսցիպիտ. Դապիբուս րիսուս սեդ ադիպիսցինգ դիցտում. Ֆերմենտում ուրնա
@@ -352,7 +352,7 @@ Generating sentense in Georgian
 .. code-block:: python
 
     g_ka = TranslipsumGenerator(language_code='ka')
-    print g_ka.generate_sentence()
+    print(g_ka.generate_sentence())
 
     # Output: Ⴄგეთ ყუამ არcუ ვულფუთათე რუთრუმ აუcთორ.
 
@@ -361,7 +361,7 @@ Generating sentense in Greek
 .. code-block:: python
 
     g_el = TranslipsumGenerator(language_code='el')
-    print g_el.generate_sentence()
+    print(g_el.generate_sentence())
 
     # Output: Νεc cρασ αμετ, ελιτ vεστιβθλθμ εθ, αενεαν ναμ, τελλθσ vαριθσ.
 
@@ -370,7 +370,7 @@ Generating sentense in Russian (Cyrillic)
 .. code-block:: python
 
     g_ru = TranslipsumGenerator(language_code='ru')
-    print g_ru.generate_sentence()
+    print(g_ru.generate_sentence())
 
     # Output: Рисус cонсеcтетуер, фусcе qуис лаореет ат ерос пэдэ фелис магна.
 
@@ -466,7 +466,7 @@ GPL 2.0/LGPL 2.1
 
 Support
 =======
-For any issues contact me at the e-mail given in the `Author` section.
+For any issues contact me at the e-mail given in the `Author`_ section.
 
 Author
 ======
