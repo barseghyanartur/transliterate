@@ -4,18 +4,10 @@ transliterate.tests.data package
 Submodules
 ----------
 
-transliterate.tests.data.normal module
---------------------------------------
+transliterate.tests.data.default module
+---------------------------------------
 
-.. automodule:: transliterate.tests.data.normal
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-transliterate.tests.data.python32 module
-----------------------------------------
-
-.. automodule:: transliterate.tests.data.python32
+.. automodule:: transliterate.tests.data.default
     :members:
     :undoc-members:
     :show-inheritance:

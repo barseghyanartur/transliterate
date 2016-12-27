@@ -1,13 +1,13 @@
-transliterate.contrib.languages.ka.data package
+transliterate.contrib.languages.l1.data package
 ===============================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.ka.data.default module
+transliterate.contrib.languages.l1.data.default module
 ------------------------------------------------------
 
-.. automodule:: transliterate.contrib.languages.ka.data.default
+.. automodule:: transliterate.contrib.languages.l1.data.default
     :members:
     :undoc-members:
     :show-inheritance:
@@ -16,7 +16,7 @@ transliterate.contrib.languages.ka.data.default module
 Module contents
 ---------------
 
-.. automodule:: transliterate.contrib.languages.ka.data
+.. automodule:: transliterate.contrib.languages.l1.data
     :members:
     :undoc-members:
     :show-inheritance:

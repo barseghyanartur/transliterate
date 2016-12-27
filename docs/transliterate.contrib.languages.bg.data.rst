@@ -4,18 +4,10 @@ transliterate.contrib.languages.bg.data package
 Submodules
 ----------
 
-transliterate.contrib.languages.bg.data.python32 module
--------------------------------------------------------
+transliterate.contrib.languages.bg.data.default module
+------------------------------------------------------
 
-.. automodule:: transliterate.contrib.languages.bg.data.python32
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-transliterate.contrib.languages.bg.data.standard module
--------------------------------------------------------
-
-.. automodule:: transliterate.contrib.languages.bg.data.standard
+.. automodule:: transliterate.contrib.languages.bg.data.default
     :members:
     :undoc-members:
     :show-inheritance:

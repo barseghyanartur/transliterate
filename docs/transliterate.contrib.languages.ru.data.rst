@@ -4,18 +4,10 @@ transliterate.contrib.languages.ru.data package
 Submodules
 ----------
 
-transliterate.contrib.languages.ru.data.python32 module
--------------------------------------------------------
+transliterate.contrib.languages.ru.data.default module
+------------------------------------------------------
 
-.. automodule:: transliterate.contrib.languages.ru.data.python32
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-transliterate.contrib.languages.ru.data.standard module
--------------------------------------------------------
-
-.. automodule:: transliterate.contrib.languages.ru.data.standard
+.. automodule:: transliterate.contrib.languages.ru.data.default
     :members:
     :undoc-members:
     :show-inheritance:
