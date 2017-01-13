@@ -9,6 +9,7 @@ syntax: regexp
 \.cache/
 ^htmlcov/
 \.py,cover
+\.idea/
 
 ^example/db/
 ^example/tmp/

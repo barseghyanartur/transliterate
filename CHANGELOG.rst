@@ -1,6 +1,12 @@
 ===============
 Release history
 ===============
+1.10
+---
+2017-01-13
+
+- Added Serbian language pack.
+
 1.9
 ---
 2016-12-27

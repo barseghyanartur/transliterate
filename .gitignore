@@ -9,6 +9,7 @@
 /htmlcov/
 *.py,cover
 /.cache/
+/.idea/
 
 example/db/
 example/tmp/
