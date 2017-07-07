@@ -1,2 +1,3 @@
 [MASTER]
 ignore=
+disable=C, F, I, R, W

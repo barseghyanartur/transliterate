@@ -7,7 +7,6 @@ mapping = (
 
 reversed_specific_mapping = (
     u"",
-    u""
 )
 
 pre_processor_mapping = {

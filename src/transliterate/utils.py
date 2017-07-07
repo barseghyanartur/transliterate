@@ -3,7 +3,6 @@ import logging
 import re
 import unicodedata
 
-
 from .base import registry
 from .conf import get_setting
 from .discover import autodiscover
@@ -21,7 +20,8 @@ __copyright__ = '2013-2017 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = (
     'detect_language',
-    'get_available_languages',
+    'get_available_language_codes',
+    'get_available_language_packs',
     'slugify',
     'suggest',
     'translit',
