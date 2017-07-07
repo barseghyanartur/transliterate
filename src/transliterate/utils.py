@@ -1,11 +1,8 @@
+from collections import Counter
 import logging
 import re
 import unicodedata
 
-try:
-    from collections import Counter
-except ImportError:
-    from transliterate.backports.collections import Counter
 
 from .base import registry
 from .conf import get_setting
@@ -13,21 +10,21 @@ from .discover import autodiscover
 from .exceptions import (
     LanguageCodeError,
     LanguageDetectionError,
-    LanguagePackNotFound
+    LanguagePackNotFound,
 )
 
 LOGGER = logging.getLogger(__file__)
 
 __title__ = 'transliterate.utils'
 __author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2016 Artur Barseghyan'
+__copyright__ = '2013-2017 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = (
-    'translit',
-    'get_available_languages',
-    'suggest',
     'detect_language',
+    'get_available_languages',
     'slugify',
+    'suggest',
+    'translit',
 )
 
 

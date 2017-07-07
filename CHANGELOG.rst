@@ -3,9 +3,10 @@ Release history
 ===============
 1.10
 ---
-2017-01-13
+2017-07-07
 
 - Added Serbian language pack.
+- Drop Python 2.6 support.
 
 1.9
 ---

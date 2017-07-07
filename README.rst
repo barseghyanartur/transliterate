@@ -36,19 +36,19 @@ Install with latest stable version from PyPI.
 
     pip install transliterate
 
-or install the latest stable version from bitbucket:
+or install the latest stable version from BitBucket:
 
 .. code-block:: sh
 
     pip install https://bitbucket.org/barseghyanartur/transliterate/get/stable.tar.gz
 
-or install the latest stable version from github:
+or install the latest stable version from GitHub:
 
 .. code-block:: sh
 
     pip install https://github.org/barseghyanartur/transliterate/archive/stable.tar.gz
 
-That's all. See the `Usage and examples` section for more.
+That's all. See the `Usage and examples`_ section for more.
 
 Usage and examples
 ==================
@@ -195,7 +195,7 @@ Registering a custom language pack
 ----------------------------------
 Basics
 ~~~~~~
-Make sure to call the `autodiscover` function before registering your own
+Make sure to call the ``autodiscover`` function before registering your own
 language packs if you want to use the bundled language packs along with your
 own custom ones.
 

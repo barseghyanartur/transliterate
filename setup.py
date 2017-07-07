@@ -13,6 +13,15 @@ install_requires = [
     'six>=1.1.0'
 ]
 
+tests_require = [
+    'factory_boy',
+    'fake-factory',
+    'pytest',
+    'pytest-django',
+    'pytest-cov',
+    'tox'
+]
+
 try:
     PY2 = sys.version_info[0] == 2
     PY3 = sys.version_info[0] == 3
@@ -49,5 +58,7 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages(where='./src'),
     license='GPL 2.0/LGPL 2.1',
-    install_requires=install_requires
+    install_requires=install_requires,
+    tests_require=tests_require,
+    include_package_data=True,
 )

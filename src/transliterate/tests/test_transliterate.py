@@ -5,23 +5,23 @@ import logging
 import unittest
 
 from .. import (
+    defaults,
+    detect_language,
     get_available_language_codes,
     get_available_language_packs,
-    translit,
-    detect_language,
     slugify,
-    defaults
+    translit,
 )
 from ..base import TranslitLanguagePack, registry
 from ..conf import (
-    set_setting,
     get_setting,
-    reset_to_defaults_settings
+    reset_to_defaults_settings,
+    set_setting,
 )
 from ..contrib.apps.translipsum import TranslipsumGenerator
 from ..decorators import (
     transliterate_function,
-    transliterate_method
+    transliterate_method,
 )
 from ..discover import autodiscover
 
@@ -31,7 +31,7 @@ from .helpers import log_info
 
 __title__ = 'transliterate.tests.test_transliterate'
 __author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2016 Artur Barseghyan'
+__copyright__ = '2013-2017 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('TransliterateTest',)
 
@@ -60,7 +60,18 @@ class TransliterateTest(unittest.TestCase):
         """Test ``autodiscover`` and ``get_available_language_codes``."""
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'l1', 'ru', 'uk', 'bg', 'mk', 'mn']
+        c = [
+            'bg',
+            'el',
+            'hy',
+            'ka',
+            'l1',
+            'mk',
+            'mn',
+            'ru',
+            'sr',
+            'uk',
+        ]
         c.sort()
         self.assertEqual(res, c)
         return res

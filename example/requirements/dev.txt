@@ -1,2 +1,4 @@
-pycodestyle
-pylint
+-r code_style.txt
+-r common.txt
+-r docs.txt
+-r test.txt
