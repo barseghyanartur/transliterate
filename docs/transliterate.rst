@@ -6,71 +6,70 @@ Subpackages
 
 .. toctree::
 
-    transliterate.backports
     transliterate.contrib
     transliterate.tests
 
 Submodules
 ----------
 
-transliterate.base module
--------------------------
+transliterate\.base module
+--------------------------
 
 .. automodule:: transliterate.base
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.conf module
--------------------------
+transliterate\.conf module
+--------------------------
 
 .. automodule:: transliterate.conf
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.decorators module
--------------------------------
+transliterate\.decorators module
+--------------------------------
 
 .. automodule:: transliterate.decorators
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.defaults module
------------------------------
+transliterate\.defaults module
+------------------------------
 
 .. automodule:: transliterate.defaults
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.discover module
------------------------------
+transliterate\.discover module
+------------------------------
 
 .. automodule:: transliterate.discover
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.exceptions module
--------------------------------
+transliterate\.exceptions module
+--------------------------------
 
 .. automodule:: transliterate.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.helpers module
-----------------------------
+transliterate\.helpers module
+-----------------------------
 
 .. automodule:: transliterate.helpers
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.utils module
---------------------------
+transliterate\.utils module
+---------------------------
 
 .. automodule:: transliterate.utils
     :members:

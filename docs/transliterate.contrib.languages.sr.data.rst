@@ -1,13 +1,13 @@
-transliterate\.contrib\.languages\.l1\.data package
+transliterate\.contrib\.languages\.sr\.data package
 ===================================================
 
 Submodules
 ----------
 
-transliterate\.contrib\.languages\.l1\.data\.default module
+transliterate\.contrib\.languages\.sr\.data\.default module
 -----------------------------------------------------------
 
-.. automodule:: transliterate.contrib.languages.l1.data.default
+.. automodule:: transliterate.contrib.languages.sr.data.default
     :members:
     :undoc-members:
     :show-inheritance:
@@ -16,7 +16,7 @@ transliterate\.contrib\.languages\.l1\.data\.default module
 Module contents
 ---------------
 
-.. automodule:: transliterate.contrib.languages.l1.data
+.. automodule:: transliterate.contrib.languages.sr.data
     :members:
     :undoc-members:
     :show-inheritance:

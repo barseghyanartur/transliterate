@@ -1,5 +1,5 @@
-transliterate.contrib package
-=============================
+transliterate\.contrib package
+==============================
 
 Subpackages
 -----------

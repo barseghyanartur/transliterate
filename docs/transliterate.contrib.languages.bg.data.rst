@@ -1,11 +1,11 @@
-transliterate.contrib.languages.bg.data package
-===============================================
+transliterate\.contrib\.languages\.bg\.data package
+===================================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.bg.data.default module
-------------------------------------------------------
+transliterate\.contrib\.languages\.bg\.data\.default module
+-----------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.bg.data.default
     :members:

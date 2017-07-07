@@ -1,11 +1,11 @@
-transliterate.contrib.languages.he package
-==========================================
+transliterate\.contrib\.languages\.he package
+=============================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.he.translit_language_pack module
-----------------------------------------------------------------
+transliterate\.contrib\.languages\.he\.translit\_language\_pack module
+----------------------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.he.translit_language_pack
     :members:

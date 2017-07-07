@@ -1,11 +1,11 @@
-transliterate.contrib.languages.mk.data package
-===============================================
+transliterate\.contrib\.languages\.mk\.data package
+===================================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.mk.data.default module
-------------------------------------------------------
+transliterate\.contrib\.languages\.mk\.data\.default module
+-----------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.mk.data.default
     :members:

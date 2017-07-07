@@ -1,5 +1,5 @@
-transliterate.contrib.languages.bg package
-==========================================
+transliterate\.contrib\.languages\.bg package
+=============================================
 
 Subpackages
 -----------
@@ -11,8 +11,8 @@ Subpackages
 Submodules
 ----------
 
-transliterate.contrib.languages.bg.translit_language_pack module
-----------------------------------------------------------------
+transliterate\.contrib\.languages\.bg\.translit\_language\_pack module
+----------------------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.bg.translit_language_pack
     :members:

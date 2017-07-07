@@ -1,5 +1,5 @@
-transliterate.contrib.languages.mk package
-==========================================
+transliterate\.contrib\.languages\.mk package
+=============================================
 
 Subpackages
 -----------
@@ -11,8 +11,8 @@ Subpackages
 Submodules
 ----------
 
-transliterate.contrib.languages.mk.translit_language_pack module
-----------------------------------------------------------------
+transliterate\.contrib\.languages\.mk\.translit\_language\_pack module
+----------------------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.mk.translit_language_pack
     :members:

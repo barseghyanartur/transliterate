@@ -1,11 +1,11 @@
-transliterate.tests.data package
-================================
+transliterate\.tests\.data package
+==================================
 
 Submodules
 ----------
 
-transliterate.tests.data.default module
----------------------------------------
+transliterate\.tests\.data\.default module
+------------------------------------------
 
 .. automodule:: transliterate.tests.data.default
     :members:

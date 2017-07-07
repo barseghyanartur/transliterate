@@ -1,11 +1,11 @@
-transliterate.contrib.languages.ka.data package
-===============================================
+transliterate\.contrib\.languages\.ka\.data package
+===================================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.ka.data.default module
-------------------------------------------------------
+transliterate\.contrib\.languages\.ka\.data\.default module
+-----------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.ka.data.default
     :members:

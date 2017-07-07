@@ -1,5 +1,5 @@
-transliterate.tests package
-===========================
+transliterate\.tests package
+============================
 
 Subpackages
 -----------
@@ -11,32 +11,32 @@ Subpackages
 Submodules
 ----------
 
-transliterate.tests.base module
--------------------------------
+transliterate\.tests\.base module
+---------------------------------
 
 .. automodule:: transliterate.tests.base
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.tests.defaults module
------------------------------------
+transliterate\.tests\.defaults module
+-------------------------------------
 
 .. automodule:: transliterate.tests.defaults
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.tests.helpers module
-----------------------------------
+transliterate\.tests\.helpers module
+------------------------------------
 
 .. automodule:: transliterate.tests.helpers
     :members:
     :undoc-members:
     :show-inheritance:
 
-transliterate.tests.test_transliterate module
----------------------------------------------
+transliterate\.tests\.test\_transliterate module
+------------------------------------------------
 
 .. automodule:: transliterate.tests.test_transliterate
     :members:

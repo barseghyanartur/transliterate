@@ -1,5 +1,5 @@
-transliterate.contrib.apps package
-==================================
+transliterate\.contrib\.apps package
+====================================
 
 Subpackages
 -----------

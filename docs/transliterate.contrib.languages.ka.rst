@@ -1,5 +1,5 @@
-transliterate.contrib.languages.ka package
-==========================================
+transliterate\.contrib\.languages\.ka package
+=============================================
 
 Subpackages
 -----------
@@ -11,8 +11,8 @@ Subpackages
 Submodules
 ----------
 
-transliterate.contrib.languages.ka.translit_language_pack module
-----------------------------------------------------------------
+transliterate\.contrib\.languages\.ka\.translit\_language\_pack module
+----------------------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.ka.translit_language_pack
     :members:

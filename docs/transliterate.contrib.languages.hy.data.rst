@@ -1,11 +1,11 @@
-transliterate.contrib.languages.hy.data package
-===============================================
+transliterate\.contrib\.languages\.hy\.data package
+===================================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.hy.data.default module
-------------------------------------------------------
+transliterate\.contrib\.languages\.hy\.data\.default module
+-----------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.hy.data.default
     :members:

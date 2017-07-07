@@ -1,4 +1,4 @@
-transliterate\.contrib\.languages\.uk package
+transliterate\.contrib\.languages\.sr package
 =============================================
 
 Subpackages
@@ -6,15 +6,15 @@ Subpackages
 
 .. toctree::
 
-    transliterate.contrib.languages.uk.data
+    transliterate.contrib.languages.sr.data
 
 Submodules
 ----------
 
-transliterate\.contrib\.languages\.uk\.translit\_language\_pack module
+transliterate\.contrib\.languages\.sr\.translit\_language\_pack module
 ----------------------------------------------------------------------
 
-.. automodule:: transliterate.contrib.languages.uk.translit_language_pack
+.. automodule:: transliterate.contrib.languages.sr.translit_language_pack
     :members:
     :undoc-members:
     :show-inheritance:
@@ -23,7 +23,7 @@ transliterate\.contrib\.languages\.uk\.translit\_language\_pack module
 Module contents
 ---------------
 
-.. automodule:: transliterate.contrib.languages.uk
+.. automodule:: transliterate.contrib.languages.sr
     :members:
     :undoc-members:
     :show-inheritance:

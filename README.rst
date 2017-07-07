@@ -72,7 +72,7 @@ Transliteration to Armenian
 
     print(translit(text, 'hy'))
 
-    # Output: Լօրեմ իպսում դօլօր սիտ ամետ
+    # Լօրեմ իպսում դօլօր սիտ ամետ
 
 Transliteration to Georgian
 
@@ -80,7 +80,7 @@ Transliteration to Georgian
 
     print(translit(text, 'ka'))
 
-    # Output: Ⴊორემ იფსუმ დოლორ სით ამეთ
+    # Ⴊორემ იფსუმ დოლორ სით ამეთ
 
 Transliteration to Greek
 
@@ -88,7 +88,7 @@ Transliteration to Greek
 
     print(translit(text, 'el'))
 
-    # Output: Λορεμ ιψθμ δολορ σιτ αμετ
+    # Λορεμ ιψθμ δολορ σιτ αμετ
 
 Transliteration to Russian
 
@@ -96,7 +96,7 @@ Transliteration to Russian
 
     print(translit(text, 'ru'))
 
-    # Output: Лорем ипсум долор сит амет
+    # Лорем ипсум долор сит амет
 
 List of available (registered) languages
 
@@ -104,7 +104,7 @@ List of available (registered) languages
 
     print(get_available_language_codes())
 
-    # Output: ['el', 'hy', 'ka', 'ru']
+    # ['el', 'hy', 'ka', 'ru']
 
 Reversed transliterations are transliterations made from target language to
 source language (in terms they are defined in language packs). In case of
@@ -118,7 +118,7 @@ Reversed transliteration from Armenian
 
     print(translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", 'hy', reversed=True))
 
-    # Output: Lorem ipsum dolor sit amet
+    # Lorem ipsum dolor sit amet
 
 Reversed transliteration from Armenian with ``language_code`` argument left out
 
@@ -126,7 +126,7 @@ Reversed transliteration from Armenian with ``language_code`` argument left out
 
     print(translit(u"Լօրեմ իպսում դօլօր սիտ ամետ", reversed=True))
 
-    # Output: Lorem ipsum dolor sit amet
+    # Lorem ipsum dolor sit amet
 
 Reversed transliteration from Georgian
 
@@ -134,7 +134,7 @@ Reversed transliteration from Georgian
 
     print(translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", 'ka', reversed=True))
 
-    # Output: Lorem ipsum dolor sit amet
+    # Lorem ipsum dolor sit amet
 
 Reversed transliteration from Georgian with ``language_code`` argument left out
 
@@ -142,7 +142,7 @@ Reversed transliteration from Georgian with ``language_code`` argument left out
 
     print(translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", reversed=True))
 
-    # Output: Lorem ipsum dolor sit amet
+    # Lorem ipsum dolor sit amet
 
 Reversed transliteration from Greek
 
@@ -150,7 +150,7 @@ Reversed transliteration from Greek
 
     print(translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", 'el', reversed=True))
 
-    # Output: Lorem ipsum dolor sit amet
+    # Lorem ipsum dolor sit amet
 
 Reversed transliteration from Greek with ``language_code`` argument left out
 
@@ -158,7 +158,7 @@ Reversed transliteration from Greek with ``language_code`` argument left out
 
     print(translit(u"Λορεμ ιψθμ δολορ σιτ αμετ", reversed=True))
 
-    # Output: Lorem ipsum dolor sit amet
+    # Lorem ipsum dolor sit amet
 
 Reversed transliteration from Russian (Cyrillic)
 
@@ -166,7 +166,7 @@ Reversed transliteration from Russian (Cyrillic)
 
     print(translit(u"Лорем ипсум долор сит амет", 'ru', reversed=True))
 
-    # Output: Lorеm ipsum dolor sit amеt
+    # Lorеm ipsum dolor sit amеt
 
 Reversed transliteration from Russian (Cyrillic) with ``language_code``
 argument left out
@@ -175,7 +175,7 @@ argument left out
 
     print(translit(u"Лорем ипсум долор сит амет", reversed=True))
 
-    # Output: Lorem ipsum dolor sit amet
+    # Lorem ipsum dolor sit amet
 
 Testing the decorator
 
@@ -189,7 +189,7 @@ Testing the decorator
 
     print(decorator_test(u"Lorem ipsum dolor sit amet"))
 
-    # Output: Լօրեմ իպսում դօլօր սիտ ամետ
+    # Լօրեմ իպսում դօլօր սիտ ամետ
 
 Registering a custom language pack
 ----------------------------------
@@ -222,11 +222,11 @@ Then the custom language pack part comes.
 
     print(get_available_language_codes())
 
-    # Output: ['el', 'hy', 'ka', 'ru', 'example']
+    # ['el', 'hy', 'ka', 'ru', 'example']
 
     print(translit(text, 'example'))
 
-    # Output: Lor5m 9psum 4olor s9t 1m5t
+    # Lor5m 9psum 4olor s9t 1m5t
 
 It's possible to replace existing language packs with your own ones. By
 default, existing language packs are not force-installed.
@@ -342,7 +342,7 @@ Generating paragraphs in Armenian
     g_am = TranslipsumGenerator(language_code='hy')
     print(g_am.generate_paragraph())
 
-    # Output: Մագնա տրիստիքուե ֆաուցիբուս ֆամես նետուս նետուս օրցի մաուրիս,
+    # Մագնա տրիստիքուե ֆաուցիբուս ֆամես նետուս նետուս օրցի մաուրիս,
     # սուսցիպիտ. Դապիբուս րիսուս սեդ ադիպիսցինգ դիցտում. Ֆերմենտում ուրնա
     # նատօքուե ատ. Uլտրիցես եգետ, տացիտի. Լիտօրա ցլասս ցօնուբիա պօսուերե
     # մալեսուադա ին իպսում իդ պեր վե.
@@ -354,7 +354,7 @@ Generating sentense in Georgian
     g_ka = TranslipsumGenerator(language_code='ka')
     print(g_ka.generate_sentence())
 
-    # Output: Ⴄგეთ ყუამ არcუ ვულფუთათე რუთრუმ აუcთორ.
+    # Ⴄგეთ ყუამ არcუ ვულფუთათე რუთრუმ აუcთორ.
 
 Generating sentense in Greek
 
@@ -363,7 +363,7 @@ Generating sentense in Greek
     g_el = TranslipsumGenerator(language_code='el')
     print(g_el.generate_sentence())
 
-    # Output: Νεc cρασ αμετ, ελιτ vεστιβθλθμ εθ, αενεαν ναμ, τελλθσ vαριθσ.
+    # Νεc cρασ αμετ, ελιτ vεστιβθλθμ εθ, αενεαν ναμ, τελλθσ vαριθσ.
 
 Generating sentense in Russian (Cyrillic)
 
@@ -372,7 +372,7 @@ Generating sentense in Russian (Cyrillic)
     g_ru = TranslipsumGenerator(language_code='ru')
     print(g_ru.generate_sentence())
 
-    # Output: Рисус cонсеcтетуер, фусcе qуис лаореет ат ерос пэдэ фелис магна.
+    # Рисус cонсеcтетуер, фусcе qуис лаореет ат ерос пэдэ фелис магна.
 
 Language detection
 ------------------
@@ -388,7 +388,7 @@ Detect Armenian text
 
     detect_language(u'Լօրեմ իպսում դօլօր սիտ ամետ')
 
-    # Output: hy
+    # hy
 
 Detect Georgian text
 
@@ -396,7 +396,7 @@ Detect Georgian text
 
     detect_language(u'Ⴊორემ იფსუმ დოლორ სით ამეთ')
 
-    # Output: ka
+    # ka
 
 Detect Greek text
 
@@ -404,7 +404,7 @@ Detect Greek text
 
     detect_language(u'Λορεμ ιψθμ δολορ σιτ αμετ')
 
-    # Output: el
+    # el
 
 Detect Russian (Cyrillic) text
 
@@ -412,7 +412,7 @@ Detect Russian (Cyrillic) text
 
     detect_language(u'Лорем ипсум долор сит амет')
 
-    # Output: ru
+    # ru
 
 Slugify
 -------
@@ -428,7 +428,7 @@ Slugify Armenian text
 
     slugify(u'Լօրեմ իպսում դօլօր սիտ ամետ')
 
-    # Output: lorem-ipsum-dolor-sit-amet
+    # lorem-ipsum-dolor-sit-amet
 
 Slugify Georgian text
 
@@ -436,7 +436,7 @@ Slugify Georgian text
 
     slugify(u'Ⴊორემ იფსუმ დოლორ სით ამეთ')
 
-    # Output: lorem-ipsum-dolor-sit-amet
+    # lorem-ipsum-dolor-sit-amet
 
 Slugify Greek text
 
@@ -444,7 +444,7 @@ Slugify Greek text
 
     slugify(u'Λορεμ ιψθμ δολορ σιτ αμετ')
 
-    # Output: lorem-ipsum-dolor-sit-amet
+    # lorem-ipsum-dolor-sit-amet
 
 Slugify Russian (Cyrillic) text
 
@@ -452,7 +452,7 @@ Slugify Russian (Cyrillic) text
 
     slugify(u'Лорем ипсум долор сит амет')
 
-    # Output: lorem-ipsum-dolor-sit-amet
+    # lorem-ipsum-dolor-sit-amet
 
 Missing a language pack?
 ========================

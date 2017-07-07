@@ -1,11 +1,11 @@
-transliterate.contrib.languages.ru.data package
-===============================================
+transliterate\.contrib\.languages\.ru\.data package
+===================================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.ru.data.default module
-------------------------------------------------------
+transliterate\.contrib\.languages\.ru\.data\.default module
+-----------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.ru.data.default
     :members:

@@ -1,11 +1,11 @@
-transliterate.contrib.apps.translipsum package
-==============================================
+transliterate\.contrib\.apps\.translipsum package
+=================================================
 
 Submodules
 ----------
 
-transliterate.contrib.apps.translipsum.utils module
----------------------------------------------------
+transliterate\.contrib\.apps\.translipsum\.utils module
+-------------------------------------------------------
 
 .. automodule:: transliterate.contrib.apps.translipsum.utils
     :members:

@@ -1,5 +1,5 @@
-transliterate.contrib.languages package
-=======================================
+transliterate\.contrib\.languages package
+=========================================
 
 Subpackages
 -----------
@@ -16,6 +16,7 @@ Subpackages
     transliterate.contrib.languages.mk
     transliterate.contrib.languages.mn
     transliterate.contrib.languages.ru
+    transliterate.contrib.languages.sr
     transliterate.contrib.languages.uk
 
 Module contents

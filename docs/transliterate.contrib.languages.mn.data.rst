@@ -1,11 +1,11 @@
-transliterate.contrib.languages.mn.data package
-===============================================
+transliterate\.contrib\.languages\.mn\.data package
+===================================================
 
 Submodules
 ----------
 
-transliterate.contrib.languages.mn.data.default module
-------------------------------------------------------
+transliterate\.contrib\.languages\.mn\.data\.default module
+-----------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.mn.data.default
     :members:

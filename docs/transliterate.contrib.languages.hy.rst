@@ -1,5 +1,5 @@
-transliterate.contrib.languages.hy package
-==========================================
+transliterate\.contrib\.languages\.hy package
+=============================================
 
 Subpackages
 -----------
@@ -11,8 +11,8 @@ Subpackages
 Submodules
 ----------
 
-transliterate.contrib.languages.hy.translit_language_pack module
-----------------------------------------------------------------
+transliterate\.contrib\.languages\.hy\.translit\_language\_pack module
+----------------------------------------------------------------------
 
 .. automodule:: transliterate.contrib.languages.hy.translit_language_pack
     :members:
