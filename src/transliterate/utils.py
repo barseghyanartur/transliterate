@@ -12,7 +12,7 @@ from .exceptions import (
     LanguagePackNotFound,
 )
 
-LOGGER = logging.getLogger(__file__)
+LOGGER = logging.getLogger(__name__)
 
 __title__ = 'transliterate.utils'
 __author__ = 'Artur Barseghyan'
