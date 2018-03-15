@@ -15,6 +15,7 @@ order):
 - Macedonian (alpha)
 - Mongolian (alpha)
 - Russian
+- Serbian (pre-alpha)
 - Ukrainian (beta)
 
 There are also a number of useful tools included, such as:
