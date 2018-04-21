@@ -61,7 +61,18 @@ class TransliterateTest(unittest.TestCase):
         """Test ``autodiscover`` and ``get_available_language_codes``."""
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'l1', 'ru', 'uk', 'bg', 'mk', 'mn', 'sr']
+        c = [
+            'bg',
+            'el',
+            'hy',
+            'ka',
+            'l1',
+            'mk',
+            'mn',
+            'ru',
+            'sr',
+            'uk',
+        ]
         c.sort()
         self.assertEqual(res, c)
         return res
