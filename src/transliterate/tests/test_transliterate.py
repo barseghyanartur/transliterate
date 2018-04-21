@@ -53,6 +53,7 @@ class TransliterateTest(unittest.TestCase):
         self.greek_text = data.greek_text
         self.hebrew_text = data.hebrew_text
         self.mongolian_cyrillic_text = data.mongolian_cyrillic_text
+        self.serbian_cyrillic_text = data.serbian_cyrillic_text
         # reset_to_defaults_settings()
 
     @log_info
@@ -60,7 +61,7 @@ class TransliterateTest(unittest.TestCase):
         """Test ``autodiscover`` and ``get_available_language_codes``."""
         res = get_available_language_codes()
         res.sort()
-        c = ['el', 'hy', 'ka', 'l1', 'ru', 'uk', 'bg', 'mk', 'mn']
+        c = ['el', 'hy', 'ka', 'l1', 'ru', 'uk', 'bg', 'mk', 'mn', 'sr']
         c.sort()
         self.assertEqual(res, c)
         return res
@@ -174,6 +175,13 @@ class TransliterateTest(unittest.TestCase):
     def test_11_translit_mongolian_cyrillic_to_latin(self):
         """Test transliteration from Mongolian Cyrillic to Latin."""
         res = translit(self.mongolian_cyrillic_text, 'mn', reversed=True)
+        self.assertEqual(res, self.latin_text)
+        return res
+
+    @log_info
+    def test_11_translit_serbian_cyrillic_to_latin(self):
+        """Test transliteration from Serbian Cyrillic to Latin."""
+        res = translit(self.serbian_cyrillic_text, 'sr', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
@@ -403,6 +411,16 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
+    def __test_25_language_detection_serbian_cyrillic(self):
+        """Test language detection.
+
+        Detecting Serbian (Cyrillic).
+        """
+        res = detect_language(self.serbian_cyrillic_text)
+        self.assertEqual(res, 'sr')
+        return res
+
+    @log_info
     def test_26_slugify_armenian(self):
         """Test slugify from Armenian."""
         res = slugify(self.armenian_text)
@@ -455,6 +473,13 @@ class TransliterateTest(unittest.TestCase):
     def test_30_slugify_mongolian_cyrillic(self):
         """Test slugify from Mongolian Cyrillic."""
         res = slugify(self.mongolian_cyrillic_text, language_code='mn')
+        self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
+        return res
+
+    @log_info
+    def test_30_slugify_serbian_cyrillic(self):
+        """Test slugify from Serbian Cyrillic."""
+        res = slugify(self.serbian_cyrillic_text, language_code='sr')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 

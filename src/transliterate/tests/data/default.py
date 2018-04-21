@@ -9,6 +9,7 @@ georgian_text = u'Ⴊორემ იფსუმ დოლორ სით ა�
 greek_text = u'Λορεμ ιψυμ δολορ σιτ αμετ'
 hebrew_text = u'Lורeמ יpסuמ דולור סית אמeת'
 mongolian_cyrillic_text = u'Лорэм ипсүм долор сит амэт'
+serbian_cyrillic_text = u'Лорем ипсум долор сит амет'
 
 test_15_register_custom_language_pack_mapping = (
     u"abcdefghij",
