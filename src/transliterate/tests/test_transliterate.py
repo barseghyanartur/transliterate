@@ -134,6 +134,13 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
+    def test_06_translit_latin_to_serbian_cyrillic(self):
+        """Test transliteration from Latin to Serbian Cyrillic."""
+        res = translit(self.latin_text, 'sr')
+        self.assertEqual(res, self.serbian_cyrillic_text)
+        return res
+
+    @log_info
     def test_07_translit_armenian_to_latin(self):
         """Test transliteration from Armenian to Latin."""
         res = translit(self.armenian_text, 'hy', reversed=True)
@@ -335,6 +342,17 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
+    def test_20_translipsum_generator_serbian_cyrillic(self):
+        """Test the translipsum generator.
+
+        Generating lorem ipsum sentence in Serbian Cyrillic.
+        """
+        g_bg = TranslipsumGenerator(language_code='sr')
+        res = g_bg.generate_sentence()
+        assert res
+        return res
+
+    @log_info
     def test_21_language_detection_armenian(self):
         """Test language detection.
 
@@ -514,14 +532,15 @@ class TransliterateTest(unittest.TestCase):
         """Test automatic reversed translit.
 
         Test automatic reversed translit (from target script to source script)
-        for Armenian, Georgian, Greek and Russian (Cyrillic).
+        for Armenian, Georgian, Greek, Russian (Cyrillic) and Serbian (Cyrillic).
         """
         res = []
         texts = [
             self.armenian_text,
             self.georgian_text,
             self.greek_text,
-            self.cyrillic_text
+            self.cyrillic_text,
+            self.serbian_cyrillic_text
         ]
 
         for text in texts:
