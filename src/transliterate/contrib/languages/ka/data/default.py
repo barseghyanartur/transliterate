@@ -26,4 +26,3 @@ pre_processor_mapping = {
     u"Z'": u"ძ",
 
 }
-

@@ -1,8 +1,14 @@
 ===============
 Release history
 ===============
+1.10.1
+------
+(not yet released)
+
+- Fixes in Georgian language pack.
+
 1.10
----
+----
 2017-07-07
 
 - Added Serbian language pack.
