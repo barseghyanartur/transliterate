@@ -10,6 +10,8 @@ greek_text = u'Λορεμ ιψυμ δολορ σιτ αμετ'
 hebrew_text = u'Lורeמ יpסuמ דולור סית אמeת'
 mongolian_cyrillic_text = u'Лорэм ипсүм долор сит амэт'
 serbian_cyrillic_text = u'Лорем ипсум долор сит амет'
+pangram_serbian_cyrillic_text = 'Фијуче ветар у шибљу, леди пасаже и куће иза њих и гунђа у оџацима'
+pangram_serbian_latin_text = 'Fijuče vetar u šiblju, ledi pasaže i kuće iza njih i gunđa u odžacima'
 
 test_15_register_custom_language_pack_mapping = (
     u"abcdefghij",
