@@ -151,7 +151,7 @@ class TransliterateTest(unittest.TestCase):
     def test_08_translit_georgian_to_latin(self):
         """Test transliteration from Georgian to Latin."""
         res = translit(self.georgian_text, 'ka', reversed=True)
-        self.assertEqual(res, self.latin_text)
+        self.assertEqual(res.capitalize(), self.latin_text)
         return res
 
     @log_info
@@ -545,7 +545,7 @@ class TransliterateTest(unittest.TestCase):
 
         for text in texts:
             r = translit(text, reversed=True)
-            self.assertEqual(r, self.latin_text)
+            self.assertEqual(r.capitalize(), self.latin_text)
             res.append(r)
 
         return res
