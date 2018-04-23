@@ -17,7 +17,7 @@ class GeorgianLanguagePack(TranslitLanguagePack):
     """
     language_code = "ka"
     language_name = "Georgian"
-    character_ranges = ((0x10D0, 0x10F0))
+    character_ranges = ((0x10D0, 0x10F0),)
     mapping = data.mapping
     pre_processor_mapping = data.pre_processor_mapping
     detectable = True
