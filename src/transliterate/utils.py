@@ -72,7 +72,10 @@ def translit(value, language_code=None, reversed=False, strict=False):
         )
 
     language_pack = cls()
-    return language_pack.translit(value, reversed=reversed, strict=strict)
+    if language_code == "ka":
+        return language_pack.translit(value, reversed=reversed, strict=strict).capitalize()
+    else:
+        return language_pack.translit(value, reversed=reversed, strict=strict)
 
 
 def suggest(value, language_code=None, reversed=False, limit=None):
