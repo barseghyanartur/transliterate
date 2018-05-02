@@ -3,9 +3,11 @@ Release history
 ===============
 1.10.1
 ------
-(not yet released)
+2018-05-02
 
-- Fixes in Georgian language pack.
+- Fixes and improvements in Georgian language pack. Removed historical
+  asomtavruli (an old Georgian script which is no longer used) support.
+- Improvements in Serbian language pack.
 
 1.10
 ----
