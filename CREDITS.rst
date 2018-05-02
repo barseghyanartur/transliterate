@@ -6,6 +6,12 @@ Authors
 
 Contributors
 ------------
+- `Nodar Okroshiashvili
+  <https://github.com/barseghyanartur/transliterate/commits?author=Okroshiashvili>`_
+  for his contributions to the Georgian language pack.
+- `kelsa-pi
+  <https://github.com/barseghyanartur/transliterate/commits?author=kelsa-pi>`_
+  for his contributions to the Serbian language pack.
 - Timofey Pchelintsev for making the Ukrainian language pack.
 - hajdbo for idea of lowering the six version requirement by avoiding usage
   of ``PY2`` imports.
