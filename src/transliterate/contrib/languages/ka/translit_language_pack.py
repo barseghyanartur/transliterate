@@ -22,5 +22,23 @@ class GeorgianLanguagePack(TranslitLanguagePack):
     pre_processor_mapping = data.pre_processor_mapping
     detectable = True
 
+    def translit(self,
+                 value,
+                 reversed=False,
+                 strict=False,
+                 fail_silently=True):
+
+        # Georgian language knows no capitals. Therefore, we convert
+        # everything to lowercase.
+        value = value.lower()
+
+        # Continue the standard way
+        return super(GeorgianLanguagePack, self).translit(
+            value=value,
+            reversed=reversed,
+            strict=strict,
+            fail_silently=fail_silently
+        )
+
 
 registry.register(GeorgianLanguagePack)

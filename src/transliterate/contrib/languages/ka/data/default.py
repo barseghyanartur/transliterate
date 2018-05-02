@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
 mapping = (
-    u"abgdevztiklmnoprsufqycxjhwABGDEVIKLMNOPUFQYXH",
-    u"აბგდევზთიკლმნოპრსუფქყცხჯჰწაბგდევიკლმნოპუფქყხჰ",
+    u"abgdevztiklmnoprsufqycxjhw",
+    u"აბგდევზთიკლმნოპრსუფქყცხჯჰწ",
 )
-
-
-
 
 pre_processor_mapping = {
     u"zh": u"ჟ",
@@ -14,15 +11,14 @@ pre_processor_mapping = {
     u"gh": u"ღ",
     u"sh": u"შ",
     u"ch": u"ჩ",
-    u"W": u"ჭ",
+    u"w": u"ჭ",
     u"ch'": u"ჭ",
     u"dz": u"ძ",
     u"ts": u"წ",
     u"kh": u"ხ",
-    u"R'": u"ღ",
-    u"S'": u"შ",
-    u"J'": u"ჟ",
-    u"C'": u"ჩ",
-    u"Z'": u"ძ",
-
+    u"r'": u"ღ",
+    u"s'": u"შ",
+    u"j'": u"ჟ",
+    u"c'": u"ჩ",
+    u"z'": u"ძ",
 }
