@@ -54,6 +54,8 @@ class TransliterateTest(unittest.TestCase):
         self.hebrew_text = data.hebrew_text
         self.mongolian_cyrillic_text = data.mongolian_cyrillic_text
         self.serbian_cyrillic_text = data.serbian_cyrillic_text
+        self.pangram_serbian_cyrillic_text = data.pangram_serbian_cyrillic_text
+        self.pangram_serbian_latin_text = data.pangram_serbian_latin_text
         # reset_to_defaults_settings()
 
     @log_info
@@ -151,7 +153,7 @@ class TransliterateTest(unittest.TestCase):
     def test_08_translit_georgian_to_latin(self):
         """Test transliteration from Georgian to Latin."""
         res = translit(self.georgian_text, 'ka', reversed=True)
-        self.assertEqual(res, self.latin_text)
+        self.assertEqual(res.capitalize(), self.latin_text)
         return res
 
     @log_info
@@ -545,7 +547,7 @@ class TransliterateTest(unittest.TestCase):
 
         for text in texts:
             r = translit(text, reversed=True)
-            self.assertEqual(r, self.latin_text)
+            self.assertEqual(r.capitalize(), self.latin_text)
             res.append(r)
 
         return res
@@ -645,6 +647,20 @@ class TransliterateTest(unittest.TestCase):
                         translit(letter, language_pack.language_code)
                     )
                 )
+
+    @log_info
+    def test_35_translit_serbian_latin_to_serbian_cyrillic(self):
+        """Test transliteration from Serbian Latin to Serbian Cyrillic."""
+        res = translit(self.pangram_serbian_latin_text, 'sr')
+        self.assertEqual(res, self.pangram_serbian_cyrillic_text)
+        return res
+
+    @log_info
+    def test_35_translit_serbian_cyrillic_to_serbian_latin(self):
+        """Test transliteration from Serbian Cyrillic to Serbian Latin."""
+        res = translit(self.pangram_serbian_cyrillic_text, 'sr', reversed=True)
+        self.assertEqual(res, self.pangram_serbian_latin_text)
+        return res
 
 
 if __name__ == '__main__':
