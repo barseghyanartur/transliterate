@@ -534,7 +534,8 @@ class TransliterateTest(unittest.TestCase):
         """Test automatic reversed translit.
 
         Test automatic reversed translit (from target script to source script)
-        for Armenian, Georgian, Greek, Russian (Cyrillic) and Serbian (Cyrillic).
+        for Armenian, Georgian, Greek, Russian (Cyrillic) and Serbian
+        (Cyrillic).
         """
         res = []
         texts = [

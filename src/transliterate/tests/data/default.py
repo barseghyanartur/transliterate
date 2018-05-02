@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+__title__ = 'transliterate.tests.data.default'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2017 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+
+
 latin_text = u"Lorem ipsum dolor sit amet"
 armenian_text = u'Լօրեմ իպսում դօլօր սիտ ամետ'
 cyrillic_text = u'Лорем ипсум долор сит амет'
@@ -10,8 +16,10 @@ greek_text = u'Λορεμ ιψυμ δολορ σιτ αμετ'
 hebrew_text = u'Lורeמ יpסuמ דולור סית אמeת'
 mongolian_cyrillic_text = u'Лорэм ипсүм долор сит амэт'
 serbian_cyrillic_text = u'Лорем ипсум долор сит амет'
-pangram_serbian_cyrillic_text = 'Фијуче ветар у шибљу, леди пасаже и куће иза њих и гунђа у оџацима'
-pangram_serbian_latin_text = 'Fijuče vetar u šiblju, ledi pasaže i kuće iza njih i gunđa u odžacima'
+pangram_serbian_cyrillic_text = u'Фијуче ветар у шибљу, леди пасаже и куће ' \
+                                u'иза њих и гунђа у оџацима'
+pangram_serbian_latin_text = u'Fijuče vetar u šiblju, ledi pasaže i kuće ' \
+                             u'iza njih i gunđa u odžacima'
 
 test_15_register_custom_language_pack_mapping = (
     u"abcdefghij",
@@ -35,8 +43,3 @@ test_34_latin_to_latin_reversed_characters = u"abgdezilxkhmjnpsvtrcqw&of" \
                                              u"ABGDEZILXKHMJNPSVTRCQOFW"
 
 test_34_latin_to_latin_text = u"Lorem ipsum dolor sit amet 123453254593485938"
-
-__title__ = 'transliterate.tests.data.default'
-__author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2017 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'

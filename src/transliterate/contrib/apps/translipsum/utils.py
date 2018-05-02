@@ -161,7 +161,7 @@ def split(delimiters, value, max_split=0):
     :param int max_split:
     :return list:
     """
-    value = re.sub('\s+', ' ', value)
+    value = re.sub(r'\s+', ' ', value)
     pattern = '|'.join(map(re.escape, delimiters))
     return re.split(pattern, value, max_split)
 
