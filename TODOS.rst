@@ -21,7 +21,6 @@ Must haves
     although "υ" would be the closest.
     It does not work to always transliterate "ps" into "ψ", because in a word
     like "ipsum" their roots dictate "υπσυμ" would be better.
-  """
 
 Should haves
 ------------
