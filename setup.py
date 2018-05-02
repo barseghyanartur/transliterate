@@ -7,7 +7,7 @@ try:
 except:
     readme = ''
 
-version = '1.10'
+version = '1.10.1'
 
 install_requires = [
     'six>=1.1.0'
