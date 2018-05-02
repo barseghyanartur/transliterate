@@ -81,7 +81,7 @@ Transliteration to Georgian
 
     print(translit(text, 'ka'))
 
-    # Ⴊორემ იფსუმ დოლორ სით ამეთ
+    # ლორემ იპსუმ დოლორ სით ამეთ
 
 Transliteration to Greek
 
@@ -133,7 +133,7 @@ Reversed transliteration from Georgian
 
 .. code-block:: python
 
-    print(translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", 'ka', reversed=True))
+    print(translit(u"ლორემ იპსუმ დოლორ სით ამეთ", 'ka', reversed=True))
 
     # Lorem ipsum dolor sit amet
 
@@ -141,7 +141,7 @@ Reversed transliteration from Georgian with ``language_code`` argument left out
 
 .. code-block:: python
 
-    print(translit(u"Ⴊორემ იფსუმ დოლორ სით ამეთ", reversed=True))
+    print(translit(u"ლორემ იპსუმ დოლორ სით ამეთ", reversed=True))
 
     # Lorem ipsum dolor sit amet
 
@@ -355,7 +355,7 @@ Generating sentense in Georgian
     g_ka = TranslipsumGenerator(language_code='ka')
     print(g_ka.generate_sentence())
 
-    # Ⴄგეთ ყუამ არcუ ვულფუთათე რუთრუმ აუcთორ.
+    # გგეთ ყუამ არსუ ვულფუთათე რუთრუმ აუთორ.
 
 Generating sentense in Greek
 
@@ -395,7 +395,7 @@ Detect Georgian text
 
 .. code-block:: python
 
-    detect_language(u'Ⴊორემ იფსუმ დოლორ სით ამეთ')
+    detect_language(u'ლორემ იპსუმ დოლორ სით ამეთ')
 
     # ka
 
@@ -435,7 +435,7 @@ Slugify Georgian text
 
 .. code-block:: python
 
-    slugify(u'Ⴊორემ იფსუმ დოლორ სით ამეთ')
+    slugify(u'ლორემ იპსუმ დოლორ სით ამეთ')
 
     # lorem-ipsum-dolor-sit-amet
 
