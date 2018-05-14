@@ -47,7 +47,7 @@ or install the latest stable version from GitHub:
 
 .. code-block:: sh
 
-    pip install https://github.org/barseghyanartur/transliterate/archive/stable.tar.gz
+    pip install https://github.com/barseghyanartur/transliterate/archive/stable.tar.gz
 
 That's all. See the `Usage and examples`_ section for more.
 
