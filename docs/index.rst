@@ -47,7 +47,7 @@ or install the latest stable version from GitHub:
 
 .. code-block:: sh
 
-    pip install https://github.org/barseghyanartur/transliterate/archive/stable.tar.gz
+    pip install https://github.com/barseghyanartur/transliterate/archive/stable.tar.gz
 
 That's all. See the `Usage and examples`_ section for more.
 
@@ -190,6 +190,24 @@ Testing the decorator
 
     print(decorator_test(u"Lorem ipsum dolor sit amet"))
 
+    # Լօրեմ իպսում դօլօր սիտ ամետ
+
+Working with large amounts of data
+----------------------------------
+If you know which language pack shall be used for transliteration, especially
+when working with large amounts of data, it makes sense to get the
+transliteration function in the following way:
+
+.. code-block:: python
+
+    from transliterate import get_translit_function
+
+    translit_hy = get_translit_function('hy')
+
+    print(translit_hy(u"Լօրեմ իպսում դօլօր սիտ ամետ", reversed=True))
+    # Lorem ipsum dolor sit amet
+
+    print(translit_hy(u"Lorem ipsum dolor sit amet"))
     # Լօրեմ իպսում դօլօր սիտ ամետ
 
 Registering a custom language pack

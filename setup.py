@@ -7,7 +7,7 @@ try:
 except:
     readme = ''
 
-version = '1.10.1'
+version = '1.10.2'
 
 install_requires = [
     'six>=1.1.0'
@@ -41,6 +41,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",

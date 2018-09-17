@@ -192,6 +192,24 @@ Testing the decorator
 
     # Լօրեմ իպսում դօլօր սիտ ամետ
 
+Working with large amounts of data
+----------------------------------
+If you know which language pack shall be used for transliteration, especially
+when working with large amounts of data, it makes sense to get the
+transliteration function in the following way:
+
+.. code-block:: python
+
+    from transliterate import get_translit_function
+
+    translit_hy = get_translit_function('hy')
+
+    print(translit_hy(u"Լօրեմ իպսում դօլօր սիտ ամետ", reversed=True))
+    # Lorem ipsum dolor sit amet
+
+    print(translit_hy(u"Lorem ipsum dolor sit amet"))
+    # Լօրեմ իպսում դօլօր սիտ ամետ
+
 Registering a custom language pack
 ----------------------------------
 Basics

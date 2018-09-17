@@ -9,6 +9,7 @@ from .. import (
     detect_language,
     get_available_language_codes,
     get_available_language_packs,
+    get_translit_function,
     slugify,
     translit,
 )
@@ -513,6 +514,19 @@ class TransliterateTest(unittest.TestCase):
         res = slugify(self.serbian_cyrillic_text, language_code='sr')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
+
+    @log_info
+    def test_31b_get_translit_function(self):
+        """Test transliteration using get_translit_function."""
+        translit_function = get_translit_function('hy')
+
+        # Test Latin to Armenian
+        res = translit_function(self.latin_text)
+        self.assertEqual(res, self.armenian_text)
+
+        # Test Armenian to Latin
+        res = translit_function(self.armenian_text, reversed=True)
+        self.assertEqual(res, self.latin_text)
 
     @log_info
     def test_31_override_settings(self):

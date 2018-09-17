@@ -1,6 +1,13 @@
 ===============
 Release history
 ===============
+1.10.2
+------
+2018-09-17
+
+- Add ``get_translit_function`` for speed-ups when looping through a large
+  set of strings.
+
 1.10.1
 ------
 2018-05-02

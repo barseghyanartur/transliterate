@@ -22,6 +22,7 @@ __all__ = (
     'detect_language',
     'get_available_language_codes',
     'get_available_language_packs',
+    'get_translit_function',
     'slugify',
     'suggest',
     'translit',
@@ -38,6 +39,24 @@ def ensure_autodiscover():
     # Running autodiscover if registry is empty
     if not registry.registry:
         autodiscover()
+
+
+def get_translit_function(language_code):
+    """Return translit function for the language given.
+
+    :param str language_code:
+    :return callable:
+    """
+    ensure_autodiscover()
+
+    cls = registry.get(language_code)
+    if cls is None:
+        raise LanguagePackNotFound(
+            _("Language pack for code %s is not found." % language_code)
+        )
+
+    language_pack = cls()
+    return language_pack.translit
 
 
 def translit(value, language_code=None, reversed=False, strict=False):
