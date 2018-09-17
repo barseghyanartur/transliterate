@@ -19,3 +19,4 @@
 /dist/
 /src/transliterate.egg-info
 /.eggs/
+/jupyter/.ipynb_checkpoints/
