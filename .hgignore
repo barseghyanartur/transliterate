@@ -20,3 +20,4 @@ syntax: regexp
 ^src/transliterate\.egg-info
 ^\.eggs/
 ^\jupyter/\.ipynb_checkpoints/
+^\.pytest_cache/
