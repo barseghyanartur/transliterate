@@ -6,7 +6,7 @@ from transliterate.contrib.languages.mn import data
 __title__ = 'transliterate.contrib.languages.mn.translit_language_pack'
 __author__ = 'Enkhbold Bataa'
 __copyright__ = '2016 Enkhbold Bataa'
-__license__ = 'GPL 2.0/LGPL 2.1'
+__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('MongolianLanguagePack',)
 
 

@@ -1,33 +1,56 @@
 language: python
 
-# Python versions
-python:
-  - "2.6"
-  - "2.7"
-  - "3.3"
+matrix:
+  fast_finish: true
+  include:
+  - env: TOX_ENV=py27
+    python: 2.7
+  - env: TOX_ENV=py34
+    python: 3.4
+  - env: TOX_ENV=py35
+    python: 3.5
+  - env: TOX_ENV=py36
+    python: 3.6
+  - env: TOX_ENV=py37
+    python: 3.7
+  - env: TOX_ENV=pypy
+    python: pypy
+install: pip install -r example/requirements/test.txt
 
-# Environments
-env:
-  - SIXMIN=true
-  - SIXMIN=false
+before_script:
+  - sleep 10
 
-# Command to install dependencies
-install: 
-  - python setup.py install
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == true ]]; then pip uninstall six -y; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == true ]]; then pip install six==1.1.0; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == false ]]; then pip uninstall six -y; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == false ]]; then pip install six==1.4.1; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == true ]]; then pip uninstall six -y; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == true ]]; then pip install six==1.1.0; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == false ]]; then pip uninstall six -y; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == false ]]; then pip install six==1.4.1; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == true ]]; then pip uninstall six -y; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == true ]]; then pip install six==1.1.0; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == false ]]; then pip uninstall six -y; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == false ]]; then pip install six==1.4.1; fi
+script: tox -e $TOX_ENV
 
-# Command to run tests
-script: 
-  - python src/transliterate/tests/__init__.py
-
+#language: python
+#
+## Python versions
+#python:
+#  - "2.6"
+#  - "2.7"
+#  - "3.3"
+#
+## Environments
+#env:
+#  - SIXMIN=true
+#  - SIXMIN=false
+#
+## Command to install dependencies
+#install:
+#  - python setup.py install
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == true ]]; then pip uninstall six -y; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == true ]]; then pip install six==1.1.0; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == false ]]; then pip uninstall six -y; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' && $SIXMIN == false ]]; then pip install six==1.4.1; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == true ]]; then pip uninstall six -y; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == true ]]; then pip install six==1.1.0; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == false ]]; then pip uninstall six -y; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' && $SIXMIN == false ]]; then pip install six==1.4.1; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == true ]]; then pip uninstall six -y; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == true ]]; then pip install six==1.1.0; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == false ]]; then pip uninstall six -y; fi
+#  - if [[ $TRAVIS_PYTHON_VERSION == '3.3' && $SIXMIN == false ]]; then pip install six==1.4.1; fi
+#
+## Command to run tests
+#script:
+#  - python src/transliterate/tests/__init__.py

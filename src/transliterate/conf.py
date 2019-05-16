@@ -3,7 +3,7 @@ from transliterate import defaults
 __title__ = 'transliterate.conf'
 __author__ = 'Artur Barseghyan'
 __copyright__ = '2013-2018 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
+__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = (
     'get_setting',
     'reset_to_defaults_settings',

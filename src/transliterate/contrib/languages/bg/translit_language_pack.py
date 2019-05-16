@@ -6,7 +6,7 @@ from transliterate.contrib.languages.bg import data
 __title__ = 'transliterate.contrib.languages.bg.translit_language_pack'
 __author__ = 'Petar Chakarov'
 __copyright__ = '2014-2015 Petar Chakarov'
-__license__ = 'GPL 2.0/LGPL 2.1'
+__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('BulgarianLanguagePack',)
 
 

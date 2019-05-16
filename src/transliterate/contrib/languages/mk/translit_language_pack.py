@@ -6,7 +6,7 @@ from transliterate.contrib.languages.mk import data
 __title__ = 'transliterate.contrib.languages.mk.translit_language_pack'
 __author__ = 'Igor Stamatovski'
 __copyright__ = '2016 Igor Stamatovski'
-__license__ = 'GPL 2.0/LGPL 2.1'
+__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('MacedonianLanguagePack',)
 
 

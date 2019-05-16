@@ -3,7 +3,7 @@
 __title__ = 'transliterate.tests.data.default'
 __author__ = 'Artur Barseghyan'
 __copyright__ = '2013-2018 Artur Barseghyan'
-__license__ = 'GPL 2.0/LGPL 2.1'
+__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 
 
 latin_text = u"Lorem ipsum dolor sit amet"

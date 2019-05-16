@@ -6,7 +6,7 @@ from transliterate.contrib.languages.l1 import data
 __title__ = 'transliterate.contrib.languages.l1.translit_language_pack'
 __author__ = 'Marco Pattaro'
 __copyright__ = '2016-2017 Marco Pattaro'
-__license__ = 'GPL 2.0/LGPL 2.1'
+__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('Latin1SupplementLanguagePack',)
 
 
