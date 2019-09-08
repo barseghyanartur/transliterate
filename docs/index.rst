@@ -5,6 +5,26 @@ Bi-directional transliterator for Python. Transliterates (unicode) strings
 according to the rules specified in the language packs (source script <->
 target script).
 
+.. image:: https://img.shields.io/pypi/v/transliterate.svg
+   :target: https://pypi.python.org/pypi/transliterate
+   :alt: PyPI Version
+
+.. image:: https://img.shields.io/pypi/pyversions/transliterate.svg
+    :target: https://pypi.python.org/pypi/transliterate/
+    :alt: Supported Python versions
+
+.. image:: https://img.shields.io/travis/barseghyanartur/transliterate/master.svg
+   :target: http://travis-ci.org/barseghyanartur/transliterate
+   :alt: Build Status
+
+.. image:: https://img.shields.io/badge/license-GPL--2.0--only%20OR%20LGPL--2.1--or--later-blue.svg
+   :target: https://github.com/barseghyanartur/transliterate/#License
+   :alt: GPL-2.0-only OR LGPL-2.1-or-later
+
+.. image:: https://coveralls.io/repos/github/barseghyanartur/transliterate/badge.svg?branch=master
+    :target: https://coveralls.io/github/barseghyanartur/transliterate?branch=master
+    :alt: Coverage
+
 Comes with language packs for the following languages (listed in alphabetical
 order):
 
@@ -510,7 +530,7 @@ Keep the following hierarchy.
 
 License
 =======
-GPL 2.0/LGPL 2.1
+GPL-2.0-only OR LGPL-2.1-or-later
 
 Support
 =======

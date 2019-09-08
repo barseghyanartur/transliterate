@@ -24,6 +24,10 @@ before_script:
 
 script: tox -e $TOX_ENV
 
+after_success:
+  - pip install coveralls
+  - coveralls
+
 #language: python
 #
 ## Python versions
