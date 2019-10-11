@@ -24,5 +24,7 @@ pre_processor_mapping = {
     u"Sh": u"Ш",
     u"Sht": u"Щ",
     u"Yu": u"Ю",
-    u"Ya": u"Я"
+    u"Ya": u"Я",
+    u"Q": u"Я", # Bulgarians typers often use "Q" for "Я". Example: KNQZ => КНЯЗ
+    u"q": u"Я", # Bulgarians typers often use "q" for "я". Example: pepelqshka => пепеляшка   
 }
