@@ -13,14 +13,7 @@ reversed_specific_mapping = (
 pre_processor_mapping = {}
 
 reversed_specific_pre_processor_mapping = {
-    u"цьо": u"cio",
-    u"Цьо": u"Cio",
-    u"ньо": u"nio",
-    u"Ньо": u"Nio",
-    u"сьo": u"sio",
-    u"Сьo": u"Sio",
-    u"зьo": u"zio",
-    u"Зьo": u"Zio",
+    u"ьо": u"io",
     #REVISIT: handle ю,я,є after vovel better
     u"бє": u"biе",
     u"бю": u"biu",
@@ -47,7 +40,7 @@ reversed_specific_pre_processor_mapping = {
     u"Гю": u"Hiu",
     u"Гя": u"Hiа",
     u"дє": u"diе",
-    u"дю": u"дiu",
+    u"дю": u"diu",
     u"дя": u"diа",
     u"Дє": u"Diе",
     u"Дю": u"Diu",
@@ -155,6 +148,9 @@ reversed_specific_pre_processor_mapping = {
     u"Ць": u"Ć",
     u"ль": u"l",
     u"Ль": u"L",
+    #REVISIT: if correct
+    u"ли": u"ly",
+    u"Ли": u"Ly",
     u"нь": u"ń",
     u"Нь": u"Ń",
     u"сь": u"ś",
