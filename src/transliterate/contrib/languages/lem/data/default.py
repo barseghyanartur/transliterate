@@ -13,6 +13,8 @@ reversed_specific_mapping = (
 pre_processor_mapping = {}
 
 reversed_specific_pre_processor_mapping = {
+    u"льо": u"lo",
+    u"Льо": u"Lo",
     u"ьо": u"io",
     #REVISIT: handle ю,я,є after vovel better
     u"бє": u"biе",
