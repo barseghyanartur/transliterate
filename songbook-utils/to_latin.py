@@ -1,4 +1,5 @@
 import os
+import re
 from pathlib import Path
 from transliterate.discover import autodiscover
 from transliterate import translit, get_available_language_codes
@@ -20,3 +21,12 @@ for root, _, files in os.walk(root_dir):
                 trans = translit(data, 'lem', reversed=True)
                 with open (outfile, 'w') as of:
                     of.write(trans)
+
+for root, _, files in os.walk(out_root):
+    for file in files:
+        if file.endswith(".tex"):
+            infile = os.path.join(root, file)
+            with open (infile, 'r') as f:
+                first_line = f.readline()
+                title = re.findall(r'\\subsection{(.*?)}', first_line)
+                print(title)
