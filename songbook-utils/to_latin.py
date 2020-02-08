@@ -22,7 +22,9 @@ for root, _, files in os.walk(root_dir):
                 with open (outfile, 'w') as of:
                     of.write(trans)
 
+songs = []
 for root, _, files in os.walk(out_root):
+    rel_path = os.path.relpath(root, out_root)
     for file in files:
         if file.endswith(".tex"):
             infile = os.path.join(root, file)
@@ -30,3 +32,14 @@ for root, _, files in os.walk(out_root):
                 first_line = f.readline()
                 title = re.findall(r'\\subsection{(.*?)}', first_line)
                 print(title)
+                if title != []:
+                    songs.append({'title' : title[0],
+                                  'path' : os.path.join(rel_path, file)})
+sorted = sorted(songs, key=lambda k: k['title'].lower()) 
+print(sorted)
+
+latin_file = out_root = os.path.join('generated', 'latin.tex')
+with open(latin_file, 'w') as lf:
+    lf.write('\\section{Pisni}\n')
+    for song in sorted:
+        lf.write('\\input{{{}}}\n'.format(song['path'].replace('.tex', '')))
