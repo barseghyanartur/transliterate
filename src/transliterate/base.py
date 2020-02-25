@@ -102,6 +102,7 @@ class TranslitLanguagePack(object):
     mapping = None
     reversed_specific_mapping = None
 
+    reversed_pre_processor_mapping = None  # Added
     reversed_pre_processor_mapping_keys = []
 
     reversed_specific_pre_processor_mapping = None
@@ -141,14 +142,18 @@ class TranslitLanguagePack(object):
 
         # If any pre-processor rules defined, reversing them for later use.
         if self.pre_processor_mapping:
-            self.reversed_pre_processor_mapping = dict(
-                zip(
-                    self.pre_processor_mapping.values(),
-                    self.pre_processor_mapping.keys())
-                )
             self.pre_processor_mapping_keys = self.pre_processor_mapping.keys()
+            # If no `reversed_pre_processor_mapping` is defined, construct
+            # from `pre_processor_mapping`.
+            if not self.reversed_pre_processor_mapping:
+                self.reversed_pre_processor_mapping = dict(
+                    zip(
+                        self.pre_processor_mapping.values(),
+                        self.pre_processor_mapping.keys()
+                    )
+                )
             self.reversed_pre_processor_mapping_keys = \
-                self.pre_processor_mapping.values()
+                self.reversed_pre_processor_mapping.keys()
 
         else:
             self.reversed_pre_processor_mapping = None
