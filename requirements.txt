@@ -1,6 +1,6 @@
 factory_boy==2.7.0
 fake-factory==0.7.2
-Pillow==3.4.2
+Pillow==6.2.0
 pytest==3.0.2
 pytest-cov==2.2.1
 tox==2.1.1
