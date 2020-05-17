@@ -5,7 +5,7 @@ from transliterate.discover import autodiscover
 from transliterate import translit, get_available_language_codes
 autodiscover()
 
-root_dir = os.path.join('/', 'home', 'petro', 'dev', 'priv', 'lem-spiwnyk')
+root_dir = os.path.join('/', 'home', 'petro', 'dev', 'lem', 'spiwnyk')
 out_root = os.path.join('generated')
 
 for root, _, files in os.walk(root_dir):
@@ -35,11 +35,18 @@ for root, _, files in os.walk(out_root):
                 if title != []:
                     songs.append({'title' : title[0],
                                   'path' : os.path.join(rel_path, file)})
-sorted = sorted(songs, key=lambda k: k['title'].lower()) 
-print(sorted)
+
+alphabet = 'aąbcćdeęfghijklłmnńoóprsśtuvwyŷzzżź`- '
+alphabet_dict = dict([(x, alphabet.index(x)) for x in alphabet])
+
+def _order(song):
+    return [alphabet_dict[c] for c in song['title'].lower().replace('(', '').replace(')', '').replace(',', '').replace('*', '').replace('!', '')]
+
+sorted_list = sorted(songs, key=lambda k: _order(k))
+print(sorted_list)
 
 latin_file = out_root = os.path.join('generated', 'latin.tex')
 with open(latin_file, 'w') as lf:
     lf.write('\\section{Pisni}\n')
-    for song in sorted:
+    for song in sorted_list:
         lf.write('\\input{{{}}}\n'.format(song['path'].replace('.tex', '')))
