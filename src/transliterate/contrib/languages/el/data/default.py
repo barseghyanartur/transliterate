@@ -43,8 +43,6 @@ pre_processor_mapping = {
     u"eu": u"ευ",
     u"Ou": u"Ου",
     u"ou": u"ου",
-    u"Oy": u"Ου",
-    u"oy": u"ου",
     u"U": u"Υ",
     u"u": u"υ",
     u"Yi": u"Υι",
