@@ -17,7 +17,10 @@ matrix:
     python: 3.7
   - env: TOX_ENV=pypy
     python: pypy
-install: pip install -r example/requirements/test.txt
+install:
+  - pip install --upgrade pip setuptools wheel setuptools_scm build
+  - pip install -r example/requirements/test.txt
+  - python3 -m build -nwx .
 
 before_script:
   - sleep 10
