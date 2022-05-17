@@ -1,5 +1,60 @@
 [build-system]
-requires = ["setuptools>=42.1", "wheel", "setuptools_scm[toml]>=3.4.3"]
+requires = ["setuptools>=61.2.0", "wheel", "setuptools_scm[toml]>=3.4.3"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "transliterate"
+authors = [{name = "Artur Barseghyan", email = "artur.barseghyan@gmail.com"}]
+license = {text = "GPL-2.0-only OR LGPL-2.1-or-later"}
+description = "Bi-directional transliterator for Python"
+keywords = ["translit", "transliteration"]
+readme = "README.rst"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.4",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Natural Language :: Bulgarian",
+    "Natural Language :: Greek",
+    "Natural Language :: Macedonian",
+    "Natural Language :: Russian",
+    "Natural Language :: Serbian",
+    "Natural Language :: Ukrainian",
+]
+dependencies = [
+    "six>=1.1.0",
+    'lorem-ipsum-generator==0.3; python_version < "3.1.0"',
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/barseghyanartur/transliterate"
+
+[project.optional-dependencies]
+test = [
+    "factory_boy",
+    "fake-factory",
+    "pytest",
+    "pytest-django",
+    "pytest-cov",
+    "tox",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["./src"]
+namespaces = false
+
 [tool.setuptools_scm]
+
+[tool.distutils.bdist_wheel]
+universal = 1
