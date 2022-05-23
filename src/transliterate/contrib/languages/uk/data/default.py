@@ -9,16 +9,16 @@ reversed_specific_mapping = (
     u"''"
 )
 pre_processor_mapping = {
-    u"ye": u"є",
+    u"ie": u"є",
     u"zh": u"ж",
-    u"yi": u"ї",
+    u"i": u"ї",
     u"kh": u"х",
     u"ts": u"ц",
     u"ch": u"ч",
     u"sh": u"ш",
     u"shch": u"щ",
-    u"ju": u"ю",
-    u"ja": u"я",
+    u"iu": u"ю",
+    u"ia": u"я",
     u"Ye": u"Є",
     u"Zh": u"Ж",
     u"Yi": u"Ї",
@@ -27,6 +27,6 @@ pre_processor_mapping = {
     u"Ch": u"Ч",
     u"Sh": u"Ш",
     u"Shch": u"Щ",
-    u"Ju": u"Ю",
-    u"Ja": u"Я"
+    u"Yu": u"Ю",
+    u"Ya": u"Я"
 }
