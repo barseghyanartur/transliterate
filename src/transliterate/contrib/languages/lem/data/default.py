@@ -5,7 +5,7 @@ mapping = (
     u"абвґгдезійклмнопрстуфциыжАБВҐГДЕЗІЙКЛМНОПРСТУФЦИЫЖ",
 )
 
-reversed_specific_mapping = ( 
+reversed_specific_mapping = (
     u"",
     u""
 )
