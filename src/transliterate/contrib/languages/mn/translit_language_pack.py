@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+"""
+With contributions of Enkhbold Bataa.
+"""
+
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.mn import data
 
-__title__ = 'transliterate.contrib.languages.mn.translit_language_pack'
-__author__ = 'Enkhbold Bataa'
-__copyright__ = '2016 Enkhbold Bataa'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('MongolianLanguagePack',)
 

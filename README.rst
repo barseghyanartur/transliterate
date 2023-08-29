@@ -1,6 +1,12 @@
 =============
 transliterate
 =============
+
+.. Internal references
+
+.. _Contributors: https://github.com/barseghyanartur/transliterate/graphs/contributors
+.. _Read the Docs: http://transliterate.readthedocs.io/
+
 Bi-directional transliterator for Python. Transliterates (unicode) strings
 according to the rules specified in the language packs (source script <->
 target script).
@@ -536,6 +542,6 @@ Support
 =======
 For any issues contact me at the e-mail given in the `Author`_ section.
 
-Author
-======
-Artur Barseghyan <artur.barseghyan@gmail.com>
+Authors
+=======
+Artur Barseghyan <artur.barseghyan@gmail.com> and all respective `Contributors`_.

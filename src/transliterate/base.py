@@ -3,16 +3,13 @@
 import re
 import unicodedata
 
-import six
-
 from .exceptions import (
     ImproperlyConfigured,
     InvalidRegistryItemType
 )
 
-__title__ = 'transliterate.base'
 __author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2018 Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = (
     'registry',
@@ -193,9 +190,6 @@ class TranslitLanguagePack(object):
         :param bool fail_silently:
         :return str:
         """
-        if not six.PY3:
-            value = unicode(value)
-
         if reversed:
             # Handling reversed specific translations (one side only).
             if self.reversed_specific_mapping:

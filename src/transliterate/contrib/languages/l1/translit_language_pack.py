@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+"""
+With contributions of Marco Pattaro.
+"""
+
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.l1 import data
 
-__title__ = 'transliterate.contrib.languages.l1.translit_language_pack'
-__author__ = 'Marco Pattaro'
-__copyright__ = '2016-2017 Marco Pattaro'
+__author__ = 'Artur Barseghyuan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('Latin1SupplementLanguagePack',)
 

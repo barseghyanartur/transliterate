@@ -1,7 +1,5 @@
 import os
 
-from six import print_
-
 try:
     from importlib import import_module
 except ImportError:
@@ -10,9 +8,8 @@ except ImportError:
 from .conf import get_setting
 from .helpers import PROJECT_DIR
 
-__title__ = 'transliterate.discover'
 __author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2018 Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('autodiscover',)
 
@@ -37,9 +34,9 @@ def autodiscover():
                 )
             except ImportError as err:
                 if debug:
-                    print_(err)
+                    print(err)
             except Exception as err:
                 if debug:
-                    print_(err)
+                    print(err)
         else:
             pass

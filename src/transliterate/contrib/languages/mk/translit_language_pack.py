@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+"""
+With contributions of Igor Stamatovski.
+"""
+
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.mk import data
 
-__title__ = 'transliterate.contrib.languages.mk.translit_language_pack'
-__author__ = 'Igor Stamatovski'
-__copyright__ = '2016 Igor Stamatovski'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('MacedonianLanguagePack',)
 

@@ -7,7 +7,7 @@ try:
 except:
     readme = ''
 
-version = '1.10.2'
+version = '1.11'
 
 install_requires = [
     'six>=1.1.0'
@@ -15,20 +15,11 @@ install_requires = [
 
 tests_require = [
     'factory_boy',
-    'fake-factory',
+    'faker',
     'pytest',
-    'pytest-django',
     'pytest-cov',
     'tox'
 ]
-
-try:
-    PY2 = sys.version_info[0] == 2
-    PY3 = sys.version_info[0] == 3
-    if PY2:
-        install_requires.append('lorem-ipsum-generator==0.3')
-except:
-    pass
 
 setup(
     name='transliterate',
@@ -37,11 +28,11 @@ setup(
     long_description=readme,
     classifiers=[
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -54,6 +45,7 @@ setup(
         "Natural Language :: Russian",
         "Natural Language :: Serbian",
         "Natural Language :: Ukrainian",
+        "Natural Language :: Uzbek",
     ],
     keywords='translit, transliteration',
     author='Artur Barseghyan',

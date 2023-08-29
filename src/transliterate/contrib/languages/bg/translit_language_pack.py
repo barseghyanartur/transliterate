@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+"""
+With contributions of Petar Chakarov.
+"""
+
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.bg import data
 
-__title__ = 'transliterate.contrib.languages.bg.translit_language_pack'
-__author__ = 'Petar Chakarov'
-__copyright__ = '2014-2015 Petar Chakarov'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('BulgarianLanguagePack',)
 

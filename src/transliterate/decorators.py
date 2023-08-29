@@ -1,10 +1,7 @@
-import six
-
 from .utils import translit
 
-__title__ = 'transliterate.decorators'
 __author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2018 Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = (
     'transliterate_function',
@@ -21,10 +18,7 @@ class TransliterateFunction(object):
 
     def __call__(self, func):
         def inner(*args, **kwargs):
-            if not six.PY3:
-                value = unicode(func(*args, **kwargs))
-            else:
-                value = func(*args, **kwargs)
+            value = func(*args, **kwargs)
 
             return translit(value,
                             language_code=self.language_code,
@@ -44,10 +38,7 @@ class TransliterateMethod(object):
 
     def __call__(self, func):
         def inner(this, *args, **kwargs):
-            if not six.PY3:
-                value = unicode(func(this, *args, **kwargs))
-            else:
-                value = func(this, *args, **kwargs)
+            value = func(this, *args, **kwargs)
 
             return translit(value,
                             language_code=self.language_code,

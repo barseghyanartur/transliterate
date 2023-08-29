@@ -1,15 +1,8 @@
-from six import PY3
-
 from transliterate.utils import translit
+from transliterate.contrib.apps.translipsum.utils import Generator
 
-if PY3:
-    from transliterate.contrib.apps.translipsum.utils import Generator
-else:
-    from lipsum import Generator
-
-__title__ = 'transliterate.contrib.apps.translipsum.__init__'
 __author__ = 'Artur Barseghyan'
-__copyright__ = '2013-2018 Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('TranslipsumGenerator',)
 

@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
+
+"""
+With contributions of Timofey Pchelintsev.
+"""
+
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.uk import data
 
 
-__title__ = 'transliterate.contrib.languages.uk.translit_language_pack'
-__author__ = 'Timofey Pchelintsev'
-__copyright__ = '2014-2015 Timofey Pchelintsev'
+__author__ = 'Artur Barseghyan'
+__copyright__ = '2013-2023 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('UkrainianLanguagePack',)
 
