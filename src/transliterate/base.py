@@ -1,14 +1,9 @@
-# -*- coding: utf-8 -*-
-
 import re
 import unicodedata
+from collections.abc import Collection, Mapping, MutableMapping
+from typing import Sequence
 
-import six
-
-from .exceptions import (
-    ImproperlyConfigured,
-    InvalidRegistryItemType
-)
+from .exceptions import ImproperlyConfigured, InvalidRegistryItemType
 
 __title__ = 'transliterate.base'
 __author__ = 'Artur Barseghyan'
@@ -20,7 +15,7 @@ __all__ = (
 )
 
 
-class TranslitLanguagePack(object):
+class TranslitLanguagePack:
     """Base language pack.
 
     The attributes below shall be defined in every language pack.
@@ -96,26 +91,26 @@ class TranslitLanguagePack(object):
     Note, that in Python 3 you won't be using u prefix before the strings.
     """
 
-    language_code = None
-    language_name = None
-    character_ranges = None
-    mapping = None
-    reversed_specific_mapping = None
+    language_code: str
+    language_name: str
+    character_ranges: Sequence[tuple[int, int]]
+    mapping: tuple[str, str]
+    reversed_specific_mapping: tuple[str, str] | None = None
 
-    reversed_pre_processor_mapping = None  # Added
-    reversed_pre_processor_mapping_keys = []
+    reversed_pre_processor_mapping: MutableMapping[str, str] | None = None  # Added
+    reversed_pre_processor_mapping_keys: Collection[str]
 
-    reversed_specific_pre_processor_mapping = None
-    reversed_specific_pre_processor_mapping_keys = []
+    reversed_specific_pre_processor_mapping: MutableMapping[str, str] | None = None
+    reversed_specific_pre_processor_mapping_keys: Collection[str]
 
-    pre_processor_mapping = None
-    pre_processor_mapping_keys = []
+    pre_processor_mapping: MutableMapping[str, str] | None = None
+    pre_processor_mapping_keys: Collection[str]
 
-    detectable = False
-    characters = None
-    reversed_characters = None
+    detectable: bool = False
+    characters: Collection[str] | None = None
+    reversed_characters: Collection[str] | None = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         try:
             assert self.language_code is not None
             assert self.language_name is not None
@@ -127,7 +122,7 @@ class TranslitLanguagePack(object):
                 "``TranslitLanguagePack`` class."
             )
 
-        super(TranslitLanguagePack, self).__init__()
+        super().__init__()
 
         # Creating a translation table from the mapping set.
         self.translation_table = {}
@@ -170,19 +165,24 @@ class TranslitLanguagePack(object):
                 self.reversed_specific_pre_processor_mapping.keys()
 
         self._characters = '[^]'
+        self._reversed_characters = '[^]'
 
         if self.characters is not None:
             self._characters = '[^{0}]'.format(
                 '\\'.join(list(self.characters))
             )
 
-        self._reversed_characters = '[^]'
         if self.reversed_characters is not None:
             self._reversed_characters = \
-                '[^{0}]'.format('\\'.join(list(self.characters)))
+                '[^{0}]'.format('\\'.join(list(self.reversed_characters)))
 
-    def translit(self, value, reversed=False, strict=False,
-                 fail_silently=True):
+    def translit(
+        self,
+        value: str,
+        reversed: bool = False,
+        strict: bool = False,
+        fail_silently: bool = True
+    ) -> str:
         """Transliterate the given value according to the rules.
 
         Rules are set in the transliteration pack.
@@ -193,9 +193,6 @@ class TranslitLanguagePack(object):
         :param bool fail_silently:
         :return str:
         """
-        if not six.PY3:
-            value = unicode(value)
-
         if reversed:
             # Handling reversed specific translations (one side only).
             if self.reversed_specific_mapping:
@@ -232,7 +229,7 @@ class TranslitLanguagePack(object):
 
         return res
 
-    def _make_strict(self, value, reversed=False, fail_silently=True):
+    def _make_strict(self, value: str, reversed: bool = False, fail_silently: bool = True) -> str:
         """Strip out unnecessary characters from the string.
 
         :param string value:
@@ -248,7 +245,7 @@ class TranslitLanguagePack(object):
             else:
                 raise err
 
-    def make_strict(self, value, reversed=False):
+    def make_strict(self, value: str, reversed: bool = False) -> str:
         """Strip out unnecessary characters from the string.
 
         :param string value:
@@ -262,25 +259,24 @@ class TranslitLanguagePack(object):
             else:
                 # Make strict based on the ``character_ranges`` specified.
                 pass
+        elif self.characters:
+            # Make strict based on the ``characters``.
+            value = re.sub(self._characters, '', value)
         else:
-            if self.characters:
-                # Make strict based on the ``characters``.
-                value = re.sub(self._characters, '', value)
-            else:
-                # Make strict based on the ``character_ranges`` specified.
-                pass
+            # Make strict based on the ``character_ranges`` specified.
+            pass
 
         return value
 
     @classmethod
-    def contains(cls, character):
+    def contains(cls, character: str) -> bool:
         """Check if given character belongs to the language pack.
 
         :return bool:
         """
         if cls.character_ranges:
-            char_num = unicodedata.normalize('NFC', character)
-            char_num = ord(char_num)
+            normalized_char = unicodedata.normalize('NFC', character)
+            char_num = ord(normalized_char)
             for character_range in cls.character_ranges:
                 range_lower = character_range[0]
                 range_upper = character_range[1]
@@ -289,7 +285,7 @@ class TranslitLanguagePack(object):
         return False
 
     @classmethod
-    def suggest(value, reversed=False, limit=None):
+    def suggest(cls, value: str, reversed: bool = False, limit: int | None = None) -> list[str]:
         """Suggest possible variants (some sort of auto-complete).
 
         :param str value:
@@ -297,9 +293,10 @@ class TranslitLanguagePack(object):
         :return list:
         """
         # TODO
+        raise NotImplementedError
 
     @classmethod
-    def detect(text, num_words=None):
+    def detect(text, num_words: int | None = None) -> bool:
         """Detect the language.
 
         Heavy language detection, which is activated for languages that are
@@ -310,21 +307,24 @@ class TranslitLanguagePack(object):
         :return bool: True if detected and False otherwise.
         """
         # TODO
+        raise NotImplementedError
 
 
-class TranslitRegistry(object):
+class TranslitRegistry:
     """Language pack registry."""
+    _registry: dict[str, type[TranslitLanguagePack]]
+    _forced: list[str]
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._registry = {}
         self._forced = []
 
     @property
-    def registry(self):
+    def registry(self) -> Mapping[str, type[TranslitLanguagePack]]:
         """Registry."""
         return self._registry
 
-    def register(self, cls, force=False):
+    def register(self, cls: type[TranslitLanguagePack], force: bool = False) -> bool:
         """Register the language pack in the registry.
 
         :param transliterate.base.LanguagePack cls: Subclass of
@@ -351,15 +351,14 @@ class TranslitRegistry(object):
             else:
                 return False
 
+        elif cls.language_code in self._registry:
+            return False
+
         else:
+            self._registry[cls.language_code] = cls
+            return True
 
-            if cls.language_code in self._registry:
-                return False
-            else:
-                self._registry[cls.language_code] = cls
-                return True
-
-    def unregister(self, cls):
+    def unregister(self, cls: type[TranslitLanguagePack]) -> bool:
         """Un-registers an item from registry.
 
         :param transliterate.base.LanguagePack cls: Subclass of
@@ -382,7 +381,11 @@ class TranslitRegistry(object):
         else:
             return False
 
-    def get(self, language_code, default=None):
+    def get(
+        self,
+        language_code: str,
+        default: type[TranslitLanguagePack] | None = None
+    ) -> type[TranslitLanguagePack] | None:
         """Get the given language pack from the registry.
 
         :param str language_code:

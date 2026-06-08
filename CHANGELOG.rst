@@ -1,6 +1,13 @@
 ===============
 Release history
 ===============
+Unreleased
+------
+2026-*-*
+
+- Drop support for Python <3.10.
+- Migrate all configuration to pyproject.toml.
+
 1.10.2
 ------
 2018-09-17

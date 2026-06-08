@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from transliterate.base import TranslitLanguagePack, registry
+from transliterate.base import TranslitLanguagePack
 
 __title__ = 'transliterate.contrib.languages.hi.translit_language_pack'
 __author__ = 'Artur Barseghyan'
@@ -18,8 +16,8 @@ class HindiLanguagePack(TranslitLanguagePack):
     language_name = "Hindi"
     character_ranges = ((0x0900, 0x097f),)  # Fill this in
     mapping = (
-        u"aeof",  # AEOF
-        u"अइओफ",
+        "aeof",  # AEOF
+        "अइओफ",
         # ae of
     )
     # reversed_specific_mapping = (
@@ -27,27 +25,27 @@ class HindiLanguagePack(TranslitLanguagePack):
     #     u"uU"
     # )
     pre_processor_mapping = {
-        u"b": u"बी",
-        u"g": u"जी",
-        u"d": u"डी",
-        u"z": u"जड़",
-        u"h": u"एच",
-        u"i": u"आई",
-        u"l": u"अल",
-        u"m": u"ऍम",
-        u"n": u"अन",
-        u"x": u"अक्स",
-        u"k": u"के",
-        u"p": u"पी",
-        u"r": u"आर",
-        u"s": u"एस",
-        u"t": u"टी",
-        u"y": u"वाय",
-        u"w": u"डब्लू",
-        u"u": u"यू",
-        u"c": u"सी",
-        u"j": u"जे",
-        u"q": u"क्यू",
+        "b": "बी",
+        "g": "जी",
+        "d": "डी",
+        "z": "जड़",
+        "h": "एच",
+        "i": "आई",
+        "l": "अल",
+        "m": "ऍम",
+        "n": "अन",
+        "x": "अक्स",
+        "k": "के",
+        "p": "पी",
+        "r": "आर",
+        "s": "एस",
+        "t": "टी",
+        "y": "वाय",
+        "w": "डब्लू",
+        "u": "यू",
+        "c": "सी",
+        "j": "जे",
+        "q": "क्यू",
     }
     detectable = True
 

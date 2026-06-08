@@ -1,9 +1,10 @@
-from collections import Counter
 import logging
 import re
 import unicodedata
+from collections import Counter
+from typing import Literal, Protocol, overload
 
-from .base import registry
+from .base import TranslitLanguagePack, registry
 from .conf import get_setting
 from .discover import autodiscover
 from .exceptions import (
@@ -29,19 +30,30 @@ __all__ = (
 )
 
 
-def _(val):
+def _(val: str) -> str:
     """Fake translation wrapper."""
     return val
 
 
-def ensure_autodiscover():
+def ensure_autodiscover() -> None:
     """Ensure autodiscover."""
     # Running autodiscover if registry is empty
     if not registry.registry:
         autodiscover()
 
 
-def get_translit_function(language_code):
+class TranslitFunction(Protocol):
+    def __call__(
+        self,
+        value: str,
+        reversed: bool = False,
+        strict: bool = False,
+        fail_silently: bool = True
+    ) -> str:
+        ...
+
+
+def get_translit_function(language_code: str) -> TranslitFunction:
     """Return translit function for the language given.
 
     :param str language_code:
@@ -59,7 +71,12 @@ def get_translit_function(language_code):
     return language_pack.translit
 
 
-def translit(value, language_code=None, reversed=False, strict=False):
+def translit(
+    value: str,
+    language_code: str | None = None,
+    reversed: bool = False,
+    strict: bool = False
+) -> str:
     """Transliterate the text for the language given.
 
     Language code is optional in case of reversed translations (from some
@@ -94,7 +111,12 @@ def translit(value, language_code=None, reversed=False, strict=False):
     return language_pack.translit(value, reversed=reversed, strict=strict)
 
 
-def suggest(value, language_code=None, reversed=False, limit=None):
+def suggest(
+    value: str,
+    language_code: str | None = None,
+    reversed: bool = False,
+    limit: int | None = None
+) -> list[str]:
     """Suggest possible variants.
 
     :param str value:
@@ -123,7 +145,7 @@ def suggest(value, language_code=None, reversed=False, limit=None):
     return language_pack.suggest(value, reversed=reversed, limit=limit)
 
 
-def get_available_language_codes():
+def get_available_language_codes() -> list[str]:
     """Get list of language codes for registered language packs.
 
     :return list:
@@ -133,7 +155,7 @@ def get_available_language_codes():
     return [key for (key, val) in registry.registry.items()]
 
 
-def get_available_language_packs():
+def get_available_language_packs() -> list[type[TranslitLanguagePack]]:
     """Get list of registered language packs.
 
     :return list:
@@ -143,7 +165,7 @@ def get_available_language_packs():
     return [val for (key, val) in registry.registry.items()]
 
 
-def get_language_pack(language_code):
+def get_language_pack(language_code: str) -> type[TranslitLanguagePack] | None:
     """Get registered language pack by language code given.
 
     :param str language_code:
@@ -154,12 +176,12 @@ def get_language_pack(language_code):
 
 
 # Strips numbers from unicode string.
-def strip_numbers(text):
+def strip_numbers(text: str) -> str:
     """Strip numbers from text."""
     return ''.join(filter(lambda u: not u.isdigit(), text))
 
 
-def extract_most_common_words(text, num_words=None):
+def extract_most_common_words(text: str, num_words: int | None = None) -> list[tuple[str, int]]:
     """Extract most common words.
 
     :param unicode text:
@@ -170,15 +192,33 @@ def extract_most_common_words(text, num_words=None):
         num_words = get_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS')
 
     text = strip_numbers(text)
-    counter = Counter()
+    counter = Counter[str]()
     for word in text.split(' '):
         if len(word) > 1:
             counter[word] += 1
     return counter.most_common(num_words)
 
 
-def detect_language(text, num_words=None, fail_silently=True,
-                    heavy_check=False):
+@overload
+def detect_language(
+    text: str,
+    num_words: int | None = None,
+    fail_silently: Literal[False] = ...,
+    heavy_check: bool = False
+) -> str: ...
+@overload
+def detect_language(
+    text: str,
+    num_words: int | None = None,
+    fail_silently: bool = True,
+    heavy_check: bool = False
+) -> str | None: ...
+def detect_language(
+    text: str,
+    num_words: int | None = None,
+    fail_silently: bool = True,
+    heavy_check: bool = False
+) -> str | None:
     """Detect the language from the value given.
 
     Detect the language from the value given based on ranges defined in active
@@ -200,7 +240,7 @@ def detect_language(text, num_words=None, fail_silently=True,
 
     most_common_words = extract_most_common_words(text, num_words=num_words)
 
-    counter = Counter()
+    counter = Counter[str]()
 
     available_language_packs = get_available_language_packs()
 
@@ -221,8 +261,10 @@ def detect_language(text, num_words=None, fail_silently=True,
             _("""Can't detect language for the text "%s" given.""") % text
         )
 
+    return None
 
-def slugify(text, language_code=None):
+
+def slugify(text: str, language_code: str | None = None) -> str | None:
     """Slugify the given text.
 
     If no ``language_code`` is given, auto-detect the language code from
@@ -241,3 +283,4 @@ def slugify(text, language_code=None):
                           .decode('ascii')
         slug = re.sub(r'[^\w\s-]', '', slug).strip().lower()
         return re.sub(r'[-\s]+', '-', slug)
+    return None

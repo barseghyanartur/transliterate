@@ -1,4 +1,4 @@
-import six
+from typing import Callable, Concatenate, ParamSpec, TypeVar
 
 from .utils import translit
 
@@ -12,19 +12,22 @@ __all__ = (
 )
 
 
-class TransliterateFunction(object):
+P = ParamSpec('P')
+
+
+class TransliterateFunction:
     """Function decorator."""
 
-    def __init__(self, language_code, reversed=False):
+    language_code: str
+    reversed: bool
+
+    def __init__(self, language_code: str, reversed: bool = False) -> None:
         self.language_code = language_code
         self.reversed = reversed
 
-    def __call__(self, func):
-        def inner(*args, **kwargs):
-            if not six.PY3:
-                value = unicode(func(*args, **kwargs))
-            else:
-                value = func(*args, **kwargs)
+    def __call__(self, func: Callable[P, str]) -> Callable[P, str]:
+        def inner(*args: P.args, **kwargs: P.kwargs) -> str:
+            value = func(*args, **kwargs)
 
             return translit(value,
                             language_code=self.language_code,
@@ -35,19 +38,19 @@ class TransliterateFunction(object):
 transliterate_function = TransliterateFunction
 
 
-class TransliterateMethod(object):
+T = TypeVar('T')
+
+
+class TransliterateMethod:
     """Method decorator."""
 
-    def __init__(self, language_code, reversed=False):
+    def __init__(self, language_code: str, reversed: bool = False) -> None:
         self.language_code = language_code
         self.reversed = reversed
 
-    def __call__(self, func):
-        def inner(this, *args, **kwargs):
-            if not six.PY3:
-                value = unicode(func(this, *args, **kwargs))
-            else:
-                value = func(this, *args, **kwargs)
+    def __call__(self, func: Callable[Concatenate[T, P], str]) -> Callable[Concatenate[T, P], str]:
+        def inner(this: T, *args: P.args, **kwargs: P.kwargs) -> str:
+            value = func(this, *args, **kwargs)
 
             return translit(value,
                             language_code=self.language_code,

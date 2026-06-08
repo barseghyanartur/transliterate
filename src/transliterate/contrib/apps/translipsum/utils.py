@@ -1,12 +1,7 @@
 import random
 import re
-
-from six import PY3, text_type
-
-if not PY3:
-    from string import translate, maketrans, punctuation
-else:
-    from string import punctuation
+from string import punctuation
+from typing import Any
 
 __title__ = 'transliterate.contrib.apps.translipsum.utils'
 __author__ = 'Artur Barseghyan'
@@ -131,29 +126,16 @@ FACTORY = """
     """
 
 # Splits words
-if not PY3:
-    def split_words(f):
-        """Split words."""
-        return list(
-            set(
-                translate(
-                    f.lower(),
-                    maketrans(punctuation, ' ' * len(punctuation))
-                ).split()
-            )
+def split_words(f: str) -> list[str]:
+    """Split words."""
+    return list(
+        set(
+            f.lower().translate(str.maketrans("", "", punctuation)).split()
         )
-
-else:
-    def split_words(f):
-        """Split words."""
-        return list(
-            set(
-                f.lower().translate(str.maketrans("", "", punctuation)).split()
-            )
-        )
+    )
 
 
-def split(delimiters, value, max_split=0):
+def split(delimiters: str, value: str, max_split: int = 0) -> list[str]:
     """Split the value given by delimiters provided.
 
     :param str delimiters:
@@ -163,10 +145,10 @@ def split(delimiters, value, max_split=0):
     """
     value = re.sub(r'\s+', ' ', value)
     pattern = '|'.join(map(re.escape, delimiters))
-    return re.split(pattern, value, max_split)
+    return re.split(pattern, value, maxsplit=max_split)
 
 
-def split_sentences(f):
+def split_sentences(f: str) -> list[str]:
     """Split sentences."""
     return split('!;?.', f)
 
@@ -175,23 +157,21 @@ WORDS = split_words(FACTORY)
 SENTENCES = split_sentences(FACTORY)
 
 
-class Generator(object):
+class Generator:
     """Fallback lorem ipsum generator for Python 3."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:  # noqa: ANN401
         pass
 
-    def generate_word(self):
+    def generate_word(self) -> str:
         """Generate word."""
         return WORDS[random.randint(0, len(WORDS) - 1)]
 
-    def generate_sentence(self):
+    def generate_sentence(self) ->  str:
         """Generate sentence."""
-        return text_type(
-            SENTENCES[random.randint(0, len(SENTENCES) - 1)] + '.'
-        )
+        return SENTENCES[random.randint(0, len(SENTENCES) - 1)] + '.'
 
-    def generate_paragraph(self, num_sentences=4):
+    def generate_paragraph(self, num_sentences: int = 4) -> str:
         """Generate paragraph."""
         _buffer = []
         for val in range(0, 4):

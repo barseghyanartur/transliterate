@@ -1,55 +1,54 @@
-# -*- coding: utf-8 -*-
-
 mapping = (
-    u"abvgdjziklmnoprstuufhewABVGDJZIKLMNOPRSTUUFHEW",
-    u"абвгджзиклмнопрстуүфхэвАБВГДЖЗИКЛМНОПРСТУҮФХЭВ",
+    "abvgdjziklmnoprstuufhewABVGDJZIKLMNOPRSTUUFHEW",
+    "абвгджзиклмнопрстуүфхэвАБВГДЖЗИКЛМНОПРСТУҮФХЭВ",
 )
 reversed_specific_mapping = (
-    u"ъьЪЬйЙөӨуУүҮ",
-    u"iiIIiIoOuUuU"
+    "ъьЪЬйЙөӨуУүҮ",
+    "iiIIiIoOuUuU"
 )
 pre_processor_mapping = {
-    u"ii": u"ы",
-    u"II": u"Ы",
-    u"ye": u"е",
-    u"YE": u"Е",
-    u"yo": u"ё",
-    u"Yo": u"Ё",
-    u"YO": u"Ё",
-    u"ts": u"ц",
-    u"TS": u"Ц",
-    u"ch": u"ч",
-    u"CH": u"Ч",
-    u"sh": u"ш",
-    u"SH": u"Ш",
-    u"yu": u"ю",
-    u"Yu": u"Юу",
-    u"YU": u"Ю",
-    u"ya": u"я",
-    u"YA": u"Я",
-    u"ai": u"ай",
-    u"Ai": u"Ай",
-    u"AI": u"АЙ",
-    u"ei": u"эй",
-    u"Ei": u"Эй",
-    u"EI": u"ЭЙ",
-    u"ii": u"ий",
-    u"Ii": u"Ий",
-    u"II": u"ИЙ",
-    u"oi": u"ой",
-    u"Oi": u"Ой",
-    u"OI": u"ОЙ",
-    u"ui": u"уй",
-    u"Ui": u"Уй",
-    u"UI": u"УЙ",
-    u"KH": u"Х",
-    u"kh": u"х"
+    "ii": "ы",
+    "II": "Ы",
+    "ye": "е",
+    "YE": "Е",
+    "yo": "ё",
+    "Yo": "Ё",
+    "YO": "Ё",
+    "ts": "ц",
+    "TS": "Ц",
+    "ch": "ч",
+    "CH": "Ч",
+    "sh": "ш",
+    "SH": "Ш",
+    "yu": "ю",
+    "Yu": "Юу",
+    "YU": "Ю",
+    "ya": "я",
+    "YA": "Я",
+    "ai": "ай",
+    "Ai": "Ай",
+    "AI": "АЙ",
+    "ei": "эй",
+    "Ei": "Эй",
+    "EI": "ЭЙ",
+    # TODO: There are two values for both "ii" and "II" in the map (see the beginning). Figure out which should remain.
+    "ii": "ий",  # noqa: F601
+    "Ii": "Ий",
+    "II": "ИЙ",  # noqa: F601
+    "oi": "ой",
+    "Oi": "Ой",
+    "OI": "ОЙ",
+    "ui": "уй",
+    "Ui": "Уй",
+    "UI": "УЙ",
+    "KH": "Х",
+    "kh": "х"
 }
 reversed_specific_pre_processor_mapping = {
-    u"щ": u"sh",
-    u"Щ": u"SH",
-    u"ю": u"yu",
-    u"Ю": u"Yu",
-    u"Ч": u"Ch",
-    u"x": u"h"
+    "щ": "sh",
+    "Щ": "SH",
+    "ю": "yu",
+    "Ю": "Yu",
+    "Ч": "Ch",
+    "x": "h"
 }

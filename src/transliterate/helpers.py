@@ -1,5 +1,4 @@
 import os
-import sys
 
 __title__ = 'transliterate.helpers'
 __author__ = 'Artur Barseghyan'
@@ -8,16 +7,10 @@ __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = (
     'PROJECT_DIR',
     'project_dir',
-    'PY32',
 )
 
-try:
-    PY32 = (sys.version_info[0] == 3 and sys.version_info[1] == 2)
-except Exception as err:
-    PY32 = False
 
-
-def project_dir(base):
+def project_dir(base: str | list[str] | tuple[str]) -> str:
     """Project dir."""
     return os.path.abspath(
         os.path.join(

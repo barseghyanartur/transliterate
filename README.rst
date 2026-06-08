@@ -47,7 +47,7 @@ There are also a number of useful tools included, such as:
 
 Prerequisites
 =============
-- Python >=2.7, >=3.4, PyPy
+- Python >=3.10, PyPy
 
 Installation
 ============

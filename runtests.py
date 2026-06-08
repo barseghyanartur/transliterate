@@ -5,7 +5,7 @@ import sys
 import pytest
 
 
-def main():
+def main() -> int | pytest.ExitCode:
     sys.path.insert(0, os.path.abspath('src'))
     return pytest.main()
 

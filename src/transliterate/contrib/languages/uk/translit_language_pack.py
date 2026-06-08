@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.uk import data
-
 
 __title__ = 'transliterate.contrib.languages.uk.translit_language_pack'
 __author__ = 'Timofey Pchelintsev'

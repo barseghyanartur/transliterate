@@ -1,7 +1,0 @@
--r common.txt
-
-docutils
-Jinja2
-MarkupSafe
-Sphinx
-sphinx-rtd-theme

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import
+# ruff: noqa: PLC0415
 
 import logging
 import unittest
@@ -16,7 +15,6 @@ from .. import (
 from ..base import TranslitLanguagePack, registry
 from ..conf import (
     get_setting,
-    reset_to_defaults_settings,
     set_setting,
 )
 from ..contrib.apps.translipsum import TranslipsumGenerator
@@ -24,11 +22,8 @@ from ..decorators import (
     transliterate_function,
     transliterate_method,
 )
-from ..discover import autodiscover
-
 from . import data
 from .helpers import log_info
-
 
 __title__ = 'transliterate.tests.test_transliterate'
 __author__ = 'Artur Barseghyan'
@@ -43,7 +38,7 @@ LOGGER = logging.getLogger(__name__)
 class TransliterateTest(unittest.TestCase):
     """Test ``transliterate.utils.translit``."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up."""
         self.latin_text = data.latin_text
         self.armenian_text = data.armenian_text
@@ -60,7 +55,7 @@ class TransliterateTest(unittest.TestCase):
         # reset_to_defaults_settings()
 
     @log_info
-    def test_01_get_available_language_codes(self):
+    def test_01_get_available_language_codes(self) -> list[str]:
         """Test ``autodiscover`` and ``get_available_language_codes``."""
         res = get_available_language_codes()
         res.sort()
@@ -81,147 +76,147 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_02_translit_latin_to_armenian(self):
+    def test_02_translit_latin_to_armenian(self) -> str:
         """Test transliteration from Latin to Armenian."""
         res = translit(self.latin_text, 'hy')
         self.assertEqual(res, self.armenian_text)
         return res
 
     @log_info
-    def test_03_translit_latin_to_georgian(self):
+    def test_03_translit_latin_to_georgian(self) -> str:
         """Test transliteration from Latin to Georgian."""
         res = translit(self.latin_text, 'ka')
         self.assertEqual(res, self.georgian_text)
         return res
 
     @log_info
-    def test_04_translit_latin_to_greek(self):
+    def test_04_translit_latin_to_greek(self) -> str:
         """Test transliteration from Latin to Greek."""
         res = translit(self.latin_text, 'el')
         self.assertEqual(res, self.greek_text)
         return res
 
     @log_info
-    def __test_05_translit_latin_to_hebrew(self):
+    def __test_05_translit_latin_to_hebrew(self) -> str:
         """Test transliteration from Latin to Hebrew."""
         res = translit(self.latin_text, 'he')
         self.assertEqual(res, self.hebrew_text)
         return res
 
     @log_info
-    def test_06_translit_latin_to_cyrillic(self):
+    def test_06_translit_latin_to_cyrillic(self) -> str:
         """Test transliteration from Latin to Cyrillic."""
         res = translit(self.latin_text, 'ru')
         self.assertEqual(res, self.cyrillic_text)
         return res
 
     @log_info
-    def test_06_translit_latin_to_ukrainian_cyrillic(self):
+    def test_06_translit_latin_to_ukrainian_cyrillic(self) -> str:
         """Test transliteration from Latin to Ukrainian Cyrillic."""
         res = translit(self.latin_text, 'uk')
         self.assertEqual(res, self.ukrainian_cyrillic_text)
         return res
 
     @log_info
-    def test_06_translit_latin_to_bulgarian_cyrillic(self):
+    def test_06_translit_latin_to_bulgarian_cyrillic(self) -> str:
         """Test transliteration from Latin to Bulgarian Cyrillic."""
         res = translit(self.latin_text, 'bg')
         self.assertEqual(res, self.bulgarian_cyrillic_text)
         return res
 
     @log_info
-    def test_06_translit_latin_to_mongolian_cyrillic(self):
+    def test_06_translit_latin_to_mongolian_cyrillic(self) -> str:
         """Test transliteration from Latin to Mongolian Cyrillic."""
         res = translit(self.latin_text, 'mn')
         self.assertEqual(res, self.mongolian_cyrillic_text)
         return res
 
     @log_info
-    def test_06_translit_latin_to_serbian_cyrillic(self):
+    def test_06_translit_latin_to_serbian_cyrillic(self) -> str:
         """Test transliteration from Latin to Serbian Cyrillic."""
         res = translit(self.latin_text, 'sr')
         self.assertEqual(res, self.serbian_cyrillic_text)
         return res
 
     @log_info
-    def test_07_translit_armenian_to_latin(self):
+    def test_07_translit_armenian_to_latin(self) -> str:
         """Test transliteration from Armenian to Latin."""
         res = translit(self.armenian_text, 'hy', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def test_08_translit_georgian_to_latin(self):
+    def test_08_translit_georgian_to_latin(self) -> str:
         """Test transliteration from Georgian to Latin."""
         res = translit(self.georgian_text, 'ka', reversed=True)
         self.assertEqual(res.capitalize(), self.latin_text)
         return res
 
     @log_info
-    def test_09_translit_greek_to_latin(self):
+    def test_09_translit_greek_to_latin(self) -> str:
         """Test transliteration from Greek to Latin."""
         res = translit(self.greek_text, 'el', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def __test_10_translit_hebrew_to_latin(self):
+    def __test_10_translit_hebrew_to_latin(self)-> str:
         """Test transliteration from Hebrew to Latin."""
         res = translit(self.hebrew_text, 'he', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def test_11_translit_cyrillic_to_latin(self):
+    def test_11_translit_cyrillic_to_latin(self) -> str:
         """Test transliteration from Cyrillic to Latin."""
         res = translit(self.cyrillic_text, 'ru', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def test_11_translit_ukrainian_cyrillic_to_latin(self):
+    def test_11_translit_ukrainian_cyrillic_to_latin(self) -> str:
         """Test transliteration from Ukrainian Cyrillic to Latin."""
         res = translit(self.ukrainian_cyrillic_text, 'uk', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def test_11_translit_bulgarian_cyrillic_to_latin(self):
+    def test_11_translit_bulgarian_cyrillic_to_latin(self) -> str:
         """Test transliteration from Bulgarian Cyrillic to Latin."""
         res = translit(self.bulgarian_cyrillic_text, 'bg', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def test_11_translit_mongolian_cyrillic_to_latin(self):
+    def test_11_translit_mongolian_cyrillic_to_latin(self) -> str:
         """Test transliteration from Mongolian Cyrillic to Latin."""
         res = translit(self.mongolian_cyrillic_text, 'mn', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def test_11_translit_serbian_cyrillic_to_latin(self):
+    def test_11_translit_serbian_cyrillic_to_latin(self) -> str:
         """Test transliteration from Serbian Cyrillic to Latin."""
         res = translit(self.serbian_cyrillic_text, 'sr', reversed=True)
         self.assertEqual(res, self.latin_text)
         return res
 
     @log_info
-    def test_12_function_decorator(self):
+    def test_12_function_decorator(self) -> None:
         """Test the function decorator from Latin to Armenian."""
         @transliterate_function(language_code='hy')
-        def decorator_test_armenian(text):
+        def decorator_test_armenian(text: str) -> str:
             return text
 
         res = decorator_test_armenian(self.latin_text)
         self.assertEqual(res, self.armenian_text)
 
     @log_info
-    def test_13_method_decorator(self):
+    def test_13_method_decorator(self) -> str:
         """Test the method decorator from Latin to Cyrillic."""
-        class DecoratorTest(object):
+        class DecoratorTest:
             @transliterate_method(language_code='ru')
-            def decorator_test_russian(self, text):
+            def decorator_test_russian(self, text: str) ->  str:
                 return text
 
         res = DecoratorTest().decorator_test_russian(self.latin_text)
@@ -229,10 +224,10 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_14_function_decorator(self):
+    def test_14_function_decorator(self) -> str:
         """Test the function decorator (reversed) from Armenian to Latin."""
         @transliterate_function(language_code='hy', reversed=True)
-        def decorator_test_armenian_reversed(text):
+        def decorator_test_armenian_reversed(text: str) -> str:
             return text
 
         res = decorator_test_armenian_reversed(self.armenian_text)
@@ -240,7 +235,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_15_register_custom_language_pack(self):
+    def test_15_register_custom_language_pack(self) -> str:
         """Test registering of a custom language pack."""
         class ExampleLanguagePack(TranslitLanguagePack):
             """Example language pack."""
@@ -257,7 +252,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_16_translipsum_generator_armenian(self):
+    def test_16_translipsum_generator_armenian(self) -> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum paragraphs in Armenian.
@@ -268,7 +263,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_17_translipsum_generator_georgian(self):
+    def test_17_translipsum_generator_georgian(self) -> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum sentence in Georgian.
@@ -279,7 +274,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_18_translipsum_generator_greek(self):
+    def test_18_translipsum_generator_greek(self) -> str:
         """Test the translipsum generator
 
         Generating lorem ipsum sentence in Greek.
@@ -290,7 +285,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def __test_19_translipsum_generator_hebrew(self):
+    def __test_19_translipsum_generator_hebrew(self)-> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum sentence in Hebrew.
@@ -301,7 +296,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_20_translipsum_generator_cyrillic(self):
+    def test_20_translipsum_generator_cyrillic(self) -> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum sentence in Cyrillic.
@@ -312,7 +307,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_20_translipsum_generator_ukrainian_cyrillic(self):
+    def test_20_translipsum_generator_ukrainian_cyrillic(self) -> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum sentence in Ukrainian Cyrillic.
@@ -323,7 +318,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_20_translipsum_generator_bulgarian_cyrillic(self):
+    def test_20_translipsum_generator_bulgarian_cyrillic(self) -> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum sentence in Bulgarian Cyrillic.
@@ -334,7 +329,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_20_translipsum_generator_mongolian_cyrillic(self):
+    def test_20_translipsum_generator_mongolian_cyrillic(self) -> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum sentence in Mongolian Cyrillic.
@@ -345,7 +340,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_20_translipsum_generator_serbian_cyrillic(self):
+    def test_20_translipsum_generator_serbian_cyrillic(self) -> str:
         """Test the translipsum generator.
 
         Generating lorem ipsum sentence in Serbian Cyrillic.
@@ -356,7 +351,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_21_language_detection_armenian(self):
+    def test_21_language_detection_armenian(self) -> str:
         """Test language detection.
 
         Detecting Armenian."""
@@ -365,7 +360,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_22_language_detection_georgian(self):
+    def test_22_language_detection_georgian(self) -> str:
         """Test language detection.
 
         Detecting Georgian.
@@ -375,7 +370,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_23_language_detection_greek(self):
+    def test_23_language_detection_greek(self) -> str:
         """Test language detection.
 
         Detecting Greek.
@@ -385,7 +380,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def __test_24_language_detection_hebrew(self):
+    def __test_24_language_detection_hebrew(self)-> str:
         """Test language detection.
 
         Detecting Hebrew.
@@ -395,7 +390,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_25_language_detection_cyrillic(self):
+    def test_25_language_detection_cyrillic(self) -> str:
         """Test language detection.
 
         Detecting Russian (Cyrillic).
@@ -405,7 +400,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_25_false_language_detection_cyrillic(self):
+    def test_25_false_language_detection_cyrillic(self) -> str:
         """Test language detection.
 
         Detecting is not Russian (Cyrillic).
@@ -415,7 +410,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def __test_25_language_detection_ukrainian_cyrillic(self):
+    def __test_25_language_detection_ukrainian_cyrillic(self)-> str:
         """Testing language detection.
 
         Detecting Ukrainian (Cyrillic)."""
@@ -424,7 +419,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def __test_25_language_detection_bulgarian_cyrillic(self):
+    def __test_25_language_detection_bulgarian_cyrillic(self)-> str:
         """Test language detection.
 
         Detecting Bulgarian (Cyrillic)."""
@@ -433,7 +428,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def __test_25_language_detection_mongolian_cyrillic(self):
+    def __test_25_language_detection_mongolian_cyrillic(self)-> str:
         """Test language detection.
 
         Detecting Mongolian (Cyrillic).
@@ -443,7 +438,7 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def __test_25_language_detection_serbian_cyrillic(self):
+    def __test_25_language_detection_serbian_cyrillic(self)-> str:
         """Test language detection.
 
         Detecting Serbian (Cyrillic).
@@ -453,70 +448,70 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_26_slugify_armenian(self):
+    def test_26_slugify_armenian(self) -> str | None:
         """Test slugify from Armenian."""
         res = slugify(self.armenian_text)
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_27_slugify_georgian(self):
+    def test_27_slugify_georgian(self) -> str | None:
         """Test slugify from Georgian."""
         res = slugify(self.georgian_text)
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_28_slugify_greek(self):
+    def test_28_slugify_greek(self) -> str | None:
         """Test slugify from Greek."""
         res = slugify(self.greek_text)
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def __test_29_slugify_hebrew(self):
+    def __test_29_slugify_hebrew(self)-> str | None:
         """Test slugify from Hebrew."""
         res = slugify(self.hebrew_text)
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_30_slugify_cyrillic(self):
+    def test_30_slugify_cyrillic(self) -> str | None:
         """Test slugify from Cyrillic."""
         res = slugify(self.cyrillic_text)
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_30_slugify_ukrainian_cyrillic(self):
+    def test_30_slugify_ukrainian_cyrillic(self) -> str | None:
         """Test slugify from Ukrainian Cyrillic."""
         res = slugify(self.ukrainian_cyrillic_text, language_code='uk')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_30_slugify_bulgarian_cyrillic(self):
+    def test_30_slugify_bulgarian_cyrillic(self) -> str | None:
         """Test slugify from Bulgarian Cyrillic."""
         res = slugify(self.bulgarian_cyrillic_text, language_code='bg')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_30_slugify_mongolian_cyrillic(self):
+    def test_30_slugify_mongolian_cyrillic(self) -> str | None:
         """Test slugify from Mongolian Cyrillic."""
         res = slugify(self.mongolian_cyrillic_text, language_code='mn')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_30_slugify_serbian_cyrillic(self):
+    def test_30_slugify_serbian_cyrillic(self) -> str | None:
         """Test slugify from Serbian Cyrillic."""
         res = slugify(self.serbian_cyrillic_text, language_code='sr')
         self.assertEqual(res, 'lorem-ipsum-dolor-sit-amet')
         return res
 
     @log_info
-    def test_31b_get_translit_function(self):
+    def test_31b_get_translit_function(self) -> None:
         """Test transliteration using get_translit_function."""
         translit_function = get_translit_function('hy')
 
@@ -529,9 +524,9 @@ class TransliterateTest(unittest.TestCase):
         self.assertEqual(res, self.latin_text)
 
     @log_info
-    def test_31_override_settings(self):
+    def test_31_override_settings(self) -> int | None:
         """Testing settings override."""
-        def override_settings():
+        def override_settings() -> int | None:
             return get_setting('LANGUAGE_DETECTION_MAX_NUM_KEYWORDS')
 
         self.assertEqual(defaults.LANGUAGE_DETECTION_MAX_NUM_KEYWORDS,
@@ -544,14 +539,14 @@ class TransliterateTest(unittest.TestCase):
         return override_settings()
 
     @log_info
-    def test_32_auto_translit_reversed(self):
+    def test_32_auto_translit_reversed(self) -> list[str]:
         """Test automatic reversed translit.
 
         Test automatic reversed translit (from target script to source script)
         for Armenian, Georgian, Greek, Russian (Cyrillic) and Serbian
         (Cyrillic).
         """
-        res = []
+        res = list()
         texts = [
             self.armenian_text,
             self.georgian_text,
@@ -568,10 +563,10 @@ class TransliterateTest(unittest.TestCase):
         return res
 
     @log_info
-    def test_33_register_unregister(self):
+    def test_33_register_unregister(self) -> None:
         """Testing register/un-register."""
         from transliterate.contrib.languages.hy.translit_language_pack import (
-            ArmenianLanguagePack
+            ArmenianLanguagePack,
         )
 
         class A(TranslitLanguagePack):
@@ -607,7 +602,7 @@ class TransliterateTest(unittest.TestCase):
         )
 
     @log_info
-    def __test_34_latin_to_latin(self):
+    def __test_34_latin_to_latin(self) -> None:
         """Test latin to latin."""
 
         class LatinToLatinLanguagePack(TranslitLanguagePack):
@@ -628,10 +623,10 @@ class TransliterateTest(unittest.TestCase):
 
         text = data.test_34_latin_to_latin_text
         pack = LatinToLatinLanguagePack()
-        res = pack.translit(text, strict=True, fail_silently=False)
+        pack.translit(text, strict=True, fail_silently=False)
 
     @log_info
-    def __test_29_mappings(self):
+    def __test_29_mappings(self) -> None:
         """Test mappings."""
         for language_pack in get_available_language_packs():
             LOGGER.debug(
@@ -664,14 +659,14 @@ class TransliterateTest(unittest.TestCase):
                 )
 
     @log_info
-    def test_35_translit_serbian_latin_to_serbian_cyrillic(self):
+    def test_35_translit_serbian_latin_to_serbian_cyrillic(self) -> str:
         """Test transliteration from Serbian Latin to Serbian Cyrillic."""
         res = translit(self.pangram_serbian_latin_text, 'sr')
         self.assertEqual(res, self.pangram_serbian_cyrillic_text)
         return res
 
     @log_info
-    def test_35_translit_serbian_cyrillic_to_serbian_latin(self):
+    def test_35_translit_serbian_cyrillic_to_serbian_latin(self) -> str:
         """Test transliteration from Serbian Cyrillic to Serbian Latin."""
         res = translit(self.pangram_serbian_cyrillic_text, 'sr', reversed=True)
         self.assertEqual(res, self.pangram_serbian_latin_text)

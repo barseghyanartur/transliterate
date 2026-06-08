@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # transliterate documentation build configuration file, created by
 # sphinx-quickstart on Thu Jul 11 00:21:18 2013.
@@ -11,7 +10,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
+import os
+import sys
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -23,10 +23,10 @@ try:
     release = version = transliterate.__version__
     project = transliterate.__title__
     copyright = transliterate.__copyright__
-except Exception as e:
+except Exception:
     release = version = '0.1'
-    project = u'transliterate'
-    copyright = u'2013-2014, Artur Barseghyan <artur.barseghyan@gmail.com>'
+    project = 'transliterate'
+    copyright = '2013-2014, Artur Barseghyan <artur.barseghyan@gmail.com>'
 
 # -- General configuration -----------------------------------------------------
 
@@ -196,8 +196,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'transliterate.tex', u'transliterate Documentation',
-   u'Artur Barseghyan \\textless{}artur.barseghyan@gmail.com\\textgreater{}', 'manual'),
+  ('index', 'transliterate.tex', 'transliterate Documentation',
+   'Artur Barseghyan \\textless{}artur.barseghyan@gmail.com\\textgreater{}', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -226,8 +226,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'transliterate', u'transliterate Documentation',
-     [u'Artur Barseghyan <artur.barseghyan@gmail.com>'], 1)
+    ('index', 'transliterate', 'transliterate Documentation',
+     ['Artur Barseghyan <artur.barseghyan@gmail.com>'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -240,8 +240,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'transliterate', u'transliterate Documentation',
-   u'Artur Barseghyan <artur.barseghyan@gmail.com>', 'transliterate', 'One line description of project.',
+  ('index', 'transliterate', 'transliterate Documentation',
+   'Artur Barseghyan <artur.barseghyan@gmail.com>', 'transliterate', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -262,9 +262,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = project #u'transliterate'
-epub_author = u'Artur Barseghyan <artur.barseghyan@gmail.com>'
-epub_publisher = u'Artur Barseghyan <artur.barseghyan@gmail.com>'
-epub_copyright = u'2013-2014, Artur Barseghyan <artur.barseghyan@gmail.com>'
+epub_author = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
+epub_publisher = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
+epub_copyright = '2013-2014, Artur Barseghyan <artur.barseghyan@gmail.com>'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

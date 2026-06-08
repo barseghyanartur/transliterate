@@ -1,3 +1,5 @@
+from typing import Any, TypeVar
+
 from transliterate import defaults
 
 __title__ = 'transliterate.conf'
@@ -12,13 +14,18 @@ __all__ = (
 )
 
 
-class Settings(object):
+T = TypeVar('T')
+
+
+class Settings:
     """Settings registry."""
 
-    def __init__(self):
+    _settings: dict[str, Any]
+
+    def __init__(self) -> None:
         self._settings = {}
 
-    def set(self, name, value):
+    def set(self, name: str, value: T) -> None:
         """Override default settings.
 
         :param str name:
@@ -26,7 +33,7 @@ class Settings(object):
         """
         self._settings[name] = value
 
-    def get(self, name, default=None):
+    def get(self, name: str, default: T | None = None) -> T | None:
         """Get a variable from local settings.
 
         :param str name:
@@ -40,7 +47,7 @@ class Settings(object):
         else:
             return default
 
-    def reset_to_defaults(self):
+    def reset_to_defaults(self) -> None:
         """Reset settings to defaults."""
         self._settings = {}
 

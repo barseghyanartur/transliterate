@@ -10,6 +10,9 @@ syntax: regexp
 ^htmlcov/
 \.py,cover
 \.idea/
+\.ruff_cache/
+\.mypy_cache/
+\.venv/
 
 ^example/db/
 ^example/tmp/

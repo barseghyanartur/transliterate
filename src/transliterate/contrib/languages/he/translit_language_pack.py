@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from transliterate.base import TranslitLanguagePack, registry
+from transliterate.base import TranslitLanguagePack
 
 __title__ = 'transliterate.contrib.languages.he.translit_language_pack'
 __author__ = 'Artur Barseghyan'
@@ -36,27 +34,27 @@ class HebrewLanguagePack(TranslitLanguagePack):
     language_name = "Hebrew"
     character_ranges = ((0x0530, 0x058F), (0xFB10, 0xFB1F))
     mapping = (
-        u"abgdvzhilmnsfckrt",
+        "abgdvzhilmnsfckrt",
         # trkcfsnmlihzvdgbа
-        u"אבגדוזחילמנספצקרת",
+        "אבגדוזחילמנספצקרת",
     )
     reversed_specific_mapping = (
-        u"פ",
+        "פ",
         # p
-        u"p"
+        "p"
     )
     pre_processor_mapping = {
         # lowercase
-        u"ha'": u"ה",
-        u"tt": u"ט",
-        u"ka": u"כ",
-        u"aa": u"ע",
-        u"sh": u"ש",
-        u"fs": u"ף",
-        u"cs": u"ץ",
-        u"ms": u"ם",
-        u"ns": u"ן",
-        u"ks": u"ך",
+        "ha'": "ה",
+        "tt": "ט",
+        "ka": "כ",
+        "aa": "ע",
+        "sh": "ש",
+        "fs": "ף",
+        "cs": "ץ",
+        "ms": "ם",
+        "ns": "ן",
+        "ks": "ך",
     }
     detectable = True
 

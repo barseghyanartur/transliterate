@@ -1,23 +1,23 @@
-dist: xenial
+dist: noble
 
 language: python
 
 matrix:
   fast_finish: true
   include:
-  - env: TOX_ENV=py27
-    python: 2.7
-  - env: TOX_ENV=py34
-    python: 3.4
-  - env: TOX_ENV=py35
-    python: 3.5
-  - env: TOX_ENV=py36
-    python: 3.6
-  - env: TOX_ENV=py37
-    python: 3.7
+  - env: TOX_ENV=py310
+    python: 3.10
+  - env: TOX_ENV=py311
+    python: 3.11
+  - env: TOX_ENV=py312
+    python: 3.12
+  - env: TOX_ENV=py313
+    python: 3.13
+  - env: TOX_ENV=py314
+    python: 3.14
   - env: TOX_ENV=pypy
     python: pypy
-install: pip install -r example/requirements/test.txt
+install: pip install --group test
 
 before_script:
   - sleep 10

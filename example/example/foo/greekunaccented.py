@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 This module was kindly provided by Giorgos Georgiadis <georgiad@gmail.com>, who used `transliterate` to
 get rid of accented characters in Greek but leave other characters intact.
@@ -7,13 +6,12 @@ get rid of accented characters in Greek but leave other characters intact.
 
 >>> from foo.greekunaccented import *
 >>> from transliterate import translit
->>> print translit(u'άέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ', 'el2')
+>>> print(translit(u'άέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ', 'el2'))
 αεηιιιουυυωΑΕΗΙΙΟΥΥΩ
 """
 
-from transliterate import translit
-from transliterate.discover import autodiscover
 from transliterate.base import TranslitLanguagePack, registry
+from transliterate.discover import autodiscover
 
 # First autodicover bundled language packs.
 autodiscover()
@@ -25,8 +23,8 @@ class GreekUnaccentedLanguagePack(TranslitLanguagePack):
     language_code = "el2"
     language_name = "Greek without accented characters"
     mapping = (
-        u"άέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ",
-        u"αεηιιιουυυωΑΕΗΙΙΟΥΥΩ",
+        "άέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ",
+        "αεηιιιουυυωΑΕΗΙΙΟΥΥΩ",
     )
 
 # Register

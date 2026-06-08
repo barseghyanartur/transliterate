@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 """
 Latin to Latin example.
 """
 
-from transliterate import translit
-from transliterate.discover import autodiscover
 from transliterate.base import TranslitLanguagePack, registry
+from transliterate.discover import autodiscover
 
 # First autodicover bundled language packs.
 autodiscover()
@@ -17,11 +15,11 @@ class LatinToLatinLanguagePack(TranslitLanguagePack):
     language_code = "l2l"
     language_name = "Latin to Latin"
     mapping = (
-        u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW",
-        u"zbgdeailxkhnjmpswtrcqv&ofZBGDEAILXKHNJMPSWTRCQOFV",
+        "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW",
+        "zbgdeailxkhnjmpswtrcqv&ofZBGDEAILXKHNJMPSWTRCQOFV",
     )
-    characters = u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
-    reversed_characters = u"abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+    characters = "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
+    reversed_characters = "abgdezilxkhmjnpsvtrcqw&ofABGDEZILXKHMJNPSVTRCQOFW"
 
 
 # Register

@@ -10,6 +10,9 @@
 *.py,cover
 /.cache/
 /.idea/
+/.ruff_cache/
+/.mypy_cache/
+/.venv/
 
 /example/db/
 /example/tmp/

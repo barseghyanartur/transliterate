@@ -1,0 +1,105 @@
+[project]
+name = "transliterate"
+version = "1.10.2"
+description = "Bi-directional transliterator for Python"
+readme = "README.rst"
+requires-python = ">=3.10"
+license = "GPL-2.0-only OR LGPL-2.1-or-later"
+keywords = ["translit", "transliteration"]
+authors = [
+  { name = "Artur Barseghyan", email = "artur.barseghyan@gmail.com" }
+]
+
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Development Status :: 4 - Beta",
+  # "Natural Language :: Armenian",
+  # "Natural Language :: Georgian",
+  "Natural Language :: Bulgarian",
+  "Natural Language :: Greek",
+  "Natural Language :: Macedonian",
+  "Natural Language :: Russian",
+  "Natural Language :: Serbian",
+  "Natural Language :: Ukrainian",
+]
+
+dependencies = [
+  "typing_extensions (>=4.5.0); python_version < '3.12'"
+]
+
+[build-system]
+requires = ["setuptools (>=82.0.1)"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+test = [
+  "factory_boy (>=3.0)",
+  "faker (>=40.0)",
+  "pillow (>=10.0.0)",
+  "pytest (>=9.0.3)",
+  "pytest-cov (>=7.0)",
+  "tox (>=4.5)",
+]
+
+codestyle = [
+  "ruff (>=0.15)",
+]
+
+typing = [
+  "mypy (>=2.1)",
+]
+
+docs = [
+  "sphinx (>=8.0)",
+  "sphinx-rtd-theme (>=3.0)",
+  "docutils (>=0.20)",
+  "markupsafe (>=3.0)",
+  "jinja2 (>=3.1)",
+]
+
+dev = [
+  {include-group = "docs"},
+  {include-group = "test"},
+  {include-group = "codestyle"},
+  {include-group = "typing"},
+]
+
+[tool.tox]
+env_list = ["3.10", "3.11", "3.12", "3.13", "3.14", "py"]
+
+[tool.tox.env_run_base]
+description = "Run test under {base_python}"
+dependency_groups = ["test"]
+commands = [["pytest"]]
+
+[tool.mypy]
+packages = ["transliterate"]
+
+[[tool.mypy.overrides]]
+module = [
+  "dill.*",
+]
+ignore_missing_imports = true
+
+[tool.ruff.lint]
+extend-select = [
+  "ANN",   # flake8-annotations
+  "E",     # pycodestyle error
+  "I",     # isort
+  "PL",    # pylint
+  "UP",    # pyupgrade
+  "W",     # pycodestyle warning
+]
+ignore = [
+  "UP03",    # Disable string formatting warnings to avoid pointless refactoring
+  "E501",    # Ignore long lines
+]

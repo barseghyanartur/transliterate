@@ -1,5 +1,5 @@
 import logging
-import six
+from typing import Callable, Concatenate, ParamSpec, TypeVar
 
 from .defaults import LOG_INFO
 
@@ -9,40 +9,33 @@ __copyright__ = '2013-2018 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = (
     'log_info',
-    'py2only',
 )
 
 LOGGER = logging.getLogger(__name__)
 
 
-def log_info(func):
-    """Print some useful info."""
-    if not LOG_INFO:
-        return func
+P = ParamSpec('P')
+T = TypeVar('T')
+R = TypeVar('R')
 
-    def inner(self, *args, **kwargs):
+
+def log_info(func: Callable[Concatenate[T, P], R]) -> Callable[Concatenate[T, P], None]:
+    """Print some useful info."""
+    def inner(self: T, *args: P.args, **kwargs: P.kwargs) -> None:
         result = func(self, *args, **kwargs)
+
+        if not LOG_INFO:
+            return
 
         LOGGER.debug('\n%s', func.__name__)
         LOGGER.debug('============================')
-        LOGGER.debug('""" %s """', func.__doc__.strip())
+
+        if func.__doc__:
+            LOGGER.debug('""" %s """', func.__doc__.strip())
+
         LOGGER.debug('----------------------------')
+
         if result is not None:
-            try:
-                LOGGER.debug(result)
-            except Exception:
-                LOGGER.debug(result.encode('utf8'))
+            LOGGER.debug(result)
 
-        return result
     return inner
-
-
-def py2only(func):
-    """Skip the test on Python 3."""
-    if not six.PY3:
-        return func
-
-    def dummy(self, *args, **kwargs):
-        pass
-
-    return dummy

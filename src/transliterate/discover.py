@@ -1,11 +1,5 @@
 import os
-
-from six import print_
-
-try:
-    from importlib import import_module
-except ImportError:
-    import_module = __import__
+from importlib import import_module
 
 from .conf import get_setting
 from .helpers import PROJECT_DIR
@@ -17,11 +11,15 @@ __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = ('autodiscover',)
 
 
-def autodiscover():
+def autodiscover() -> None:
     """Auto-discover the language packs in contrib/apps."""
-    languages_dir = get_setting('LANGUAGES_DIR')
-    language_pack_module_name = get_setting('LANGUAGE_PACK_MODULE_NAME')
-    debug = get_setting('DEBUG')
+    languages_dir: str | None = get_setting('LANGUAGES_DIR')
+    language_pack_module_name: str | None = get_setting('LANGUAGE_PACK_MODULE_NAME')
+
+    if languages_dir is None or language_pack_module_name is None:
+        return
+
+    debug: bool | None = get_setting('DEBUG')
 
     for app_path in os.listdir(PROJECT_DIR(languages_dir)):
         full_app_path = list(languages_dir)
@@ -37,9 +35,9 @@ def autodiscover():
                 )
             except ImportError as err:
                 if debug:
-                    print_(err)
+                    print(err)
             except Exception as err:
                 if debug:
-                    print_(err)
+                    print(err)
         else:
             pass

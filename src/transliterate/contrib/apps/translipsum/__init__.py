@@ -1,11 +1,13 @@
-from six import PY3
+import sys
+from typing import Any
 
-from transliterate.utils import translit
-
-if PY3:
-    from transliterate.contrib.apps.translipsum.utils import Generator
+if sys.version_info < (3, 12):
+    from typing_extensions import override
 else:
-    from lipsum import Generator
+    from typing import override
+
+from transliterate.contrib.apps.translipsum.utils import Generator
+from transliterate.utils import translit
 
 __title__ = 'transliterate.contrib.apps.translipsum.__init__'
 __author__ = 'Artur Barseghyan'
@@ -17,23 +19,25 @@ __all__ = ('TranslipsumGenerator',)
 class TranslipsumGenerator(Generator):
     """Lorem ipsum generator."""
 
-    def __init__(self, language_code, reversed=False, *args, **kwargs):
+    def __init__(self, language_code: str, reversed: bool = False, *args: Any, **kwargs: Any) -> None:  # noqa: ANN401
         self._language_code = language_code
         self._reversed = reversed
-        super(TranslipsumGenerator, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-    def generate_sentence(self, *args, **kwargs):
+    @override
+    def generate_sentence(self, *args: Any, **kwargs: Any) -> str:  # noqa: ANN401
         """Generate sentence."""
-        value = super(TranslipsumGenerator, self).generate_sentence(
+        value = super().generate_sentence(
             *args, **kwargs
         )
         return translit(value,
                         language_code=self._language_code,
                         reversed=self._reversed)
 
-    def generate_paragraph(self, *args, **kwargs):
+    @override
+    def generate_paragraph(self, *args: Any, **kwargs: Any) -> str:  # noqa: ANN401
         """Generate paragraph."""
-        value = super(TranslipsumGenerator, self).generate_paragraph(
+        value = super().generate_paragraph(
             *args, **kwargs
         )
         return translit(value,

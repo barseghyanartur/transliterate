@@ -1,4 +1,9 @@
-# -*- coding: utf-8 -*-
+import sys
+
+if sys.version_info < (3, 12):
+    from typing_extensions import override
+else:
+    from typing import override
 
 from transliterate.base import TranslitLanguagePack, registry
 from transliterate.contrib.languages.ka import data
@@ -22,18 +27,20 @@ class GeorgianLanguagePack(TranslitLanguagePack):
     pre_processor_mapping = data.pre_processor_mapping
     detectable = True
 
-    def translit(self,
-                 value,
-                 reversed=False,
-                 strict=False,
-                 fail_silently=True):
-
+    @override
+    def translit(
+        self,
+        value: str,
+        reversed: bool = False,
+        strict: bool = False,
+        fail_silently: bool = True
+    ) -> str:
         # Georgian language knows no capitals. Therefore, we convert
         # everything to lowercase.
         value = value.lower()
 
         # Continue the standard way
-        return super(GeorgianLanguagePack, self).translit(
+        return super().translit(
             value=value,
             reversed=reversed,
             strict=strict,
